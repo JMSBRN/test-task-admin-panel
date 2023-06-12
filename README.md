@@ -1,1 +1,1 @@
-# test-task-admin-panel
+## deploy: https://admin-panel-ten-psi.vercel.app/
