@@ -9,11 +9,11 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>Admin-Panel</title>
         <meta name="description" content="Test Task for Ivashin Yury" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/public/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
-        <div className={''}>
-            <Component {...pageProps} />
-        </div>
+        <>
+          <Component {...pageProps} />
+        </>
     </>
   );
 }
