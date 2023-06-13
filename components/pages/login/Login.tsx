@@ -5,6 +5,7 @@ import styles from './login.module.scss';
 
 const Login = () => {
   const {
+    layout,
     mainContainer,
     leftSide,
     formContainer,
@@ -19,28 +20,30 @@ const Login = () => {
   } = styles;
 
   return (
-    <div className={mainContainer}>
-      <div className={rightSide}>
-        <div className={mainTitleContainer}>
-          <div className={mainTitle}>Login to lorem ipsum</div>
-          <div className={secondTitle}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt
+    <div className={layout}>
+      <div className={mainContainer}>
+        <div className={rightSide}>
+          <div className={mainTitleContainer}>
+            <div className={mainTitle}>Login to lorem ipsum</div>
+            <div className={secondTitle}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt
+            </div>
+          </div>
+          <div className={formContainer}>
+            <Form />
           </div>
         </div>
-        <div className={formContainer}>
-          <Form />
-        </div>
-      </div>
-      <div className={leftSide}>
-       <LoginReg_Back />
-        <div className={leftSideLogoBlock}>
-          <div className={logo}>Logo</div>
-          <div className={secondTitleLeftSide}>
-           Lorem ipsum dolor sit amet,
-          </div>
-          <div className={secondTitleLeftSideLast}>
-           consectetur adipiscing elit
+        <div className={leftSide}>
+         <LoginReg_Back />
+          <div className={leftSideLogoBlock}>
+            <div className={logo}>Logo</div>
+            <div className={secondTitleLeftSide}>
+             Lorem ipsum dolor sit amet,
+            </div>
+            <div className={secondTitleLeftSideLast}>
+             consectetur adipiscing elit
+            </div>
           </div>
         </div>
       </div>
