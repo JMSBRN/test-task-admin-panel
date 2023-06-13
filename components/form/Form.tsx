@@ -7,7 +7,17 @@ const Form = () => {
     } = styles;
 
   return (
-    <form className={formStyle}>Form</form>
+    <form className={formStyle}>
+      <label>
+        Email
+       <input id="email" type="text" placeholder='Enter your email' />
+      </label>
+      <label >
+        Password
+       <input  type="text" placeholder='Enter your password' />
+      </label>
+        <input id="submit" type="submit" value="Login" />
+    </form>
   );
 };
 
