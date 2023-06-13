@@ -1,0 +1,68 @@
+@import 'mixins';
+
+.searchPageContainer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 1440px;
+    height: 900px;
+    background-color: rgb(255, 255, 255);
+}
+
+.topContainer {
+    position: absolute;
+    left: 252px;
+    width: 1188px;
+    height: 71px;
+    background-color: green;
+}
+
+.total {
+    position: relative;
+    top: 20px;
+    left: 23px;
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -1px;
+}
+
+.leftSideContainer {
+    position: absolute;
+    width: 252px;
+    height: 900px;
+    background-color: lime;
+}
+
+.logo {
+    position: relative;
+    top: 20px;
+    left: 23px;
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+}
+
+.arrowIconAndTextContainer {
+    width: 140px;
+    height: 20px;
+    position: absolute;
+    top: 170px;
+    left: 276px;
+    padding: 20px;
+    @include flex (flex-start, center, column);
+
+    & div {
+        margin-top: -8px;
+        font-weight: 300;
+        line-height: 19px;
+    }
+
+    & .arrowIconStyle {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}

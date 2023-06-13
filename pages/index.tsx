@@ -5,7 +5,7 @@ const Index = () => {
   const { push } = useRouter();
   
   useEffect(() => {
-   push('/1_1_Login');
+   push('/2_1_First_Enter');
   }, [push]);
   
   return (
