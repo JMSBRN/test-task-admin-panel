@@ -7,26 +7,29 @@ import stateMessageIcon from '../../public/welcome_images/Empty_Searches.png';
 import styles from './searchPage.module.scss';
 import welcomeMessageIcon from '../../public/welcome_images/Empty_State_1.png';
 
-const SearchPage = () => {
-  const { 
-      searchPageContainer,
-      topContainer,
-      leftSideContainer,
-      arrowIconAndTextContainer,
-      arrowIconStyle,
-      logo,
-      total,
-      elipse2M,
-      formTitle,
-      searchFormContainer,
-      centerContiner,
-      welcomeMessage,
-      resentSearches,
-      elipseKM,
-      welcomeText,
-      topSection,
-      bottomText
-     } = styles;
+interface SearchPageProps {
+  table?: React.ReactElement;
+}
+const SearchPage = ({ table }: SearchPageProps) => {
+  const {
+    searchPageContainer,
+    topContainer,
+    leftSideContainer,
+    arrowIconAndTextContainer,
+    arrowIconStyle,
+    logo,
+    total,
+    elipse2M,
+    formTitle,
+    searchFormContainer,
+    centerContiner,
+    welcomeMessage,
+    resentSearches,
+    elipseKM,
+    welcomeText,
+    topSection,
+    bottomText,
+  } = styles;
 
   return (
     <div className={searchPageContainer}>
@@ -39,37 +42,40 @@ const SearchPage = () => {
         <div className={logo}>Logo</div>
         <div className={formTitle}>Filters</div>
         <div className={searchFormContainer}>
-         <SearchForm />
+          <SearchForm />
         </div>
       </div>
       <div className={centerContiner}>
-        <div className={welcomeMessage}>
-        <Image src={welcomeMessageIcon} width={200} alt='chat messages' />
-          <div className={welcomeText}>
-          Start your people search by applying any filter in the left panel
-          </div>
-        </div>
-        <div className={resentSearches}>
-          <div className={topSection}>
-            <Image src={clockIcon} width={20} alt='clock' />
-            <span>
-              Resent searches
-            </span>
-          </div>
-          <Image src={stateMessageIcon} width={80} alt='chat messages with cursor pointer' />
-          <div className={bottomText}>
-          Your last four searches will be here for quick access
-          </div>
-        </div>
-      <div className={arrowIconAndTextContainer}>
-        <Image 
-        className={arrowIconStyle}
-        width={40} height={20}
-        src={arrowIcon}
-        alt="arrow to left like a rainbow"
-         />
-        <div className="text">Add filters to begin your search</div>
-      </div>
+        { !table ? (
+          <>
+          <div className={welcomeMessage}>
+            <Image src={welcomeMessageIcon} width={200} alt="chat messages" />
+            <div className={welcomeText}>
+              Start your people search by applying any filter in the left panel
+            </div>
+          </div><div className={resentSearches}>
+              <div className={topSection}>
+                <Image src={clockIcon} width={20} alt="clock" />
+                <span>Resent searches</span>
+              </div>
+              <Image
+                src={stateMessageIcon}
+                width={80}
+                alt="chat messages with cursor pointer" />
+              <div className={bottomText}>
+                Your last four searches will be here for quick access
+              </div>
+            </div><div className={arrowIconAndTextContainer}>
+              <Image
+                className={arrowIconStyle}
+                width={40}
+                height={20}
+                src={arrowIcon}
+                alt="arrow to left like a rainbow" />
+              <div className="text">Add filters to begin your search</div>
+            </div>
+          </>
+        ) : table || null }
       </div>
     </div>
   );
