@@ -16,7 +16,6 @@
     left: 252px;
     width: 1188px;
     height: 71px;
-    background-color: green;
 }
 
 .total {
@@ -27,12 +26,33 @@
     font-weight: 500;
     letter-spacing: -1px;
 }
+.elipse2M {
+    position: relative;
+    top: -13px;
+    left: 90px;
+    width: 80px;
+    height: 30px;
+    border-radius: 20px;
+    font-size: 14px;
+    @include flex (center, center);
+    background-color: lightgrey;
+}
+.elipseKM {
+    position: absolute;
+    top: 24px;
+    right: 25px;
+    width: 30px;
+    height: 31px;
+    border-radius: 2px;
+    font-size: 14px;
+    @include flex (center, center);
+    background-color: lightgrey;
+}
 
 .leftSideContainer {
     position: absolute;
     width: 252px;
     height: 900px;
-    background-color: lime;
 }
 
 .logo {
@@ -44,13 +64,35 @@
     letter-spacing: -1px;
     text-transform: uppercase;
 }
+.formTitle {
+    position: relative;
+    top: 70px;
+    left: 25px;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+.searchFormContainer {
+    position: relative;
+    top: 86px;
+    width: 252px;
+    height: 314px;
+    @include flex (center, center)
 
+}
+
+.centerContiner {
+    position: relative;
+    top: 70px;
+    left: 252px;
+    width: 1188px;
+    height: 830px;
+}
 .arrowIconAndTextContainer {
+    position: absolute;
+    top: 100px;
+    left: 26px;
     width: 140px;
     height: 20px;
-    position: absolute;
-    top: 170px;
-    left: 276px;
     padding: 20px;
     @include flex (flex-start, center, column);
 
@@ -64,5 +106,61 @@
         position: absolute;
         left: 0;
         top: 0;
+    }
+}
+.welcomeMessage {
+   position: absolute;
+   top: 148px;
+   left: 410px;
+   width: 368px;
+   height: 193px;
+   & img {
+    position: absolute;
+    top: -3.5px;
+    left: 82.4px;
+   }
+   & .welcomeText {
+      position: absolute;
+      bottom: 0;
+      font-size: 20px;
+      text-align: center;
+      letter-spacing: -0.2px;
+   }
+}
+.resentSearches {
+    position: absolute;
+    top: 398px;
+    left: 350px;
+    width: 488px;
+    height: 200px;
+    border-radius: 5px;
+    border: 0.5px solid grey;
+    @include flex(center, center, column);
+    & img {
+        position: absolute;
+        top: 51px;
+        left: 203px;
+    }
+    & .topSection {
+        & img {
+            position: absolute;
+            top: 9px;
+            left: 12px;
+        }
+        & span {
+            position: absolute;
+            top: 6px;
+            left: 40px;
+        }
+    }
+    & .bottomText {
+        position: absolute;
+        bottom: 0;
+        width: 200px;
+        height: 60px;
+        text-align: center;
+        font-weight: 300;
+        line-height: 19px;
+        @include flex(center, flex-start)
     }
 }

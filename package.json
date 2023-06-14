@@ -22,6 +22,7 @@
     "react-dom": "18.2.0",
     "sass": "^1.63.3",
     "sass-loader": "^13.3.2",
+    "sharp": "^0.32.1",
     "typescript": "^5.1.3"
   }
 }

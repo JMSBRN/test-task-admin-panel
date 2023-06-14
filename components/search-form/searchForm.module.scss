@@ -1,0 +1,58 @@
+@import 'mixins';
+
+.searchForm {
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+    @include flex(flex-start, center, column);
+    & input {
+        width: 201px;
+        height: 35px;
+        border-radius: 5px;
+        @include flex(flex-start, flex-start, column);
+    }
+    & select {
+        width: 201px;
+        height: 37px;
+        border-radius: 5px;
+        @include flex(center, center);
+        letter-spacing: 0.3px;
+        
+    }
+    & .jobTitle {
+        margin-top: 18px;
+        letter-spacing: -1.1px;
+        & input {
+            margin-top: 10px;
+            background-image: url('../../public//svgs/Icon_Search.svg');
+            background-repeat: no-repeat;
+            background-position: 6% 42%;
+           &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+                position: absolute;
+                left: 36px;
+                letter-spacing: 0.4px;
+              }
+        }
+        & img {
+            margin: 2px 7px 0 3px;
+        }
+    }
+    & .location {
+        margin-top: 29px;
+        & select {
+            margin-top: 12px;
+        }
+        & img {
+            margin: 3px 6px 0 -2px;
+        }
+    }
+    & .industry {
+        margin-top: 32px;
+        & select {
+            margin-top: 12px;
+        }
+        & img {
+            margin: 4px 6px 0 -2px;
+        }
+    }
+}
