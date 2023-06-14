@@ -31,7 +31,7 @@ const SearchForm = () => {
     <form className={searchForm} onSubmit={handleSubmit} >
       <label className={jobTitle}>
         <Image width={16} src={jobTitleIcon} alt="bag" />
-        Job-title
+        job-title
         <input 
         name='job-title'
         type="text"

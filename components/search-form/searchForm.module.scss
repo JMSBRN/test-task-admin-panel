@@ -21,38 +21,42 @@
     }
     & .jobTitle {
         margin-top: 18px;
-        letter-spacing: -1.1px;
+        letter-spacing: -0.7px;
+        font-weight: 600;
+        font-size: 17px;
         & input {
             margin-top: 10px;
             background-image: url('../../public//svgs/Icon_Search.svg');
             background-repeat: no-repeat;
-            background-position: 6% 42%;
+            background-position: 9% 42%;
            &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
                 position: absolute;
                 left: 36px;
-                letter-spacing: 0.4px;
+                letter-spacing: 0.9px;
               }
         }
         & img {
-            margin: 2px 7px 0 3px;
+            margin: 3px 7px 0 5px;
         }
     }
     & .location {
         margin-top: 29px;
         & select {
             margin-top: 12px;
+            letter-spacing: 0.9px;
         }
         & img {
-            margin: 3px 6px 0 -2px;
+            margin: 3px 6px 0 2px;
         }
     }
     & .industry {
         margin-top: 32px;
         & select {
             margin-top: 12px;
+            letter-spacing: 0.9px;
         }
         & img {
-            margin: 4px 6px 0 -2px;
+            margin: 4px 6px 0 2px;
         }
     }
 }
