@@ -24,7 +24,7 @@ const dataProvider: DataProvider  = {
             filter: JSON.stringify(params.filter),
         };
         
-        console.log(query);
+        // console.log(query);
         // const url = `${apiUrl}/${resource}?${stringify(query)}`;
         const url = `${apiUrl}${resource}`;
 
