@@ -18,18 +18,16 @@
     height: 71px;
 }
 
-.total {
+.totalStyle {
     position: relative;
-    top: 20px;
-    left: 25px;
+    top: 21px;
+    left: 23px;
     font-size: 28px;
     font-weight: 500;
-    letter-spacing: -2.5px;
-    font-weight: 900;
 }
 .elipse2M {
     position: relative;
-    top: -13px;
+    top: -16px;
     left: 90px;
     width: 80px;
     height: 30px;
@@ -58,24 +56,23 @@
 
 .logo {
     position: relative;
-    top: 20px;
-    left: 25px;
-    font-size: 28px;
+    top: 23px;
+    left: 22px;
+    font-size: 23px;
     font-weight: 500;
-    letter-spacing: -1px;
     font-weight: 900;
     text-transform: uppercase;
 }
 .formTitle {
     position: relative;
-    top: 70px;
+    top: 73px;
     left: 25px;
-    letter-spacing: 0.5px;
-    font-weight: 900;
+    font-size: 17px;
+    font-weight: 700;
 }
 .searchFormContainer {
     position: relative;
-    top: 86px;
+    top: 82px;
     width: 252px;
     height: 314px;
     @include flex (center, center)
@@ -93,10 +90,10 @@
     position: absolute;
     top: 101px;
     left: 25px;
-    width: 140px;
+    width: 190px;
     height: 20px;
     padding: 20px;
-    letter-spacing: -0.3px;
+    letter-spacing: -0.6px;
     @include flex (flex-start, center, column);
 
     & div {
@@ -119,8 +116,8 @@
    height: 193px;
    & img {
     position: absolute;
-    top: -3.5px;
-    left: 87px;
+    top: -3.2px;
+    left: 83px;
    }
    & .welcomeText {
       position: absolute;

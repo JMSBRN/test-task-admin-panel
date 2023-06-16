@@ -9,8 +9,9 @@ import welcomeMessageIcon from '../../public/welcome_images/Empty_State_1.png';
 
 interface SearchPageProps {
   table?: React.ReactElement;
+  total: number;
 }
-const SearchPage = ({ table }: SearchPageProps) => {
+const SearchPage = ({ table, total }: SearchPageProps) => {
   const {
     searchPageContainer,
     topContainer,
@@ -18,7 +19,7 @@ const SearchPage = ({ table }: SearchPageProps) => {
     arrowIconAndTextContainer,
     arrowIconStyle,
     logo,
-    total,
+    totalStyle,
     elipse2M,
     formTitle,
     searchFormContainer,
@@ -34,8 +35,8 @@ const SearchPage = ({ table }: SearchPageProps) => {
   return (
     <div className={searchPageContainer}>
       <div className={topContainer}>
-        <div className={total}>Total</div>
-        <div className={elipse2M}>2M</div>
+        <div className={totalStyle}>Total</div>
+        <div className={elipse2M}>{total}</div>
         <div className={elipseKM}>KM</div>
       </div>
       <div className={leftSideContainer}>
