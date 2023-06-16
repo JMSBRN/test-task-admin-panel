@@ -1,17 +1,15 @@
-import React from 'react';
-import dynamic from 'next/dynamic';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const Index = () => {
-  // const { push } = useRouter();
-  //  C
-  // useEffect(() => {
-  //  push('/2_1_First_Enter');
-  // }, [push]);
+  const { push } = useRouter();
 
-  const App = dynamic(() => import('../pages/admin'), { ssr: false });
+  useEffect(() => {
+   push('/admin');
+  }, [push]);
   
   return (
-    <App />
+   <div className="">index</div>
   );
 };
 

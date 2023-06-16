@@ -1,5 +1,4 @@
-import { DataProvider, fetchUtils } from 'react-admin';
-import simpleRestProvider from 'ra-data-simple-rest';
+import { DataProvider, Options, fetchUtils } from 'react-admin';
 import { stringify } from 'query-string';
 
 // eslint-disable-next-line max-len
@@ -8,15 +7,14 @@ const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiYWQ1NTE3LTk4MTEt
 const apiUrl = 'http://3.65.149.62/test-api/';
 
 const httpClient = fetchUtils.fetchJson;
-const jetchJson = (url: string, options:fetchUtils.Options = {}) => {
-    options.headers = new Headers({ Accept: 'application/json' });
-    options.headers.set('Authorization', `Bearer ${token}`);
-    return fetchUtils.fetchJson(url, options);
-};
+const options: Options = {
+    headers: new Headers({ 
+     'Content-Type': 'application/json',
+     'Authorization': `Bearer ${token}`
+  })
+ };
 
-const data = simpleRestProvider(apiUrl, jetchJson);
 const dataProvider: DataProvider  = {
-    ...data,
     
     getList: async (resource, params) => {
         const { page, perPage } = params.pagination;
@@ -31,7 +29,7 @@ const dataProvider: DataProvider  = {
         // const url = `${apiUrl}/${resource}?${stringify(query)}`;
         const url = `${apiUrl}${resource}`;
 
-        return httpClient(url).then(({ headers, json }) => ({
+        return httpClient(url, options).then(({ headers, json }) => ({
             data: json,
             total: parseInt(headers.get('content-range')?.split('/').pop()!, 10),
         }));

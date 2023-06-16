@@ -1,14 +1,11 @@
-import { Admin, ListGuesser, Resource } from 'react-admin';
 import React from 'react';
-import customDataProvider  from '../dataProvider';
+import dynamic from 'next/dynamic';
 
 const admin = () => {
+    const App = dynamic(() => import('../admin/Admin'), { ssr: false });
     
   return (
-    <Admin dataProvider={customDataProvider} >
-
-        <Resource name='contacts' list={ ListGuesser } />
-    </Admin>
+   <App />
   );
 };
 
