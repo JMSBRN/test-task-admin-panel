@@ -9,7 +9,7 @@ import welcomeMessageIcon from '../../public/welcome_images/Empty_State_1.png';
 
 interface SearchPageProps {
   table?: React.ReactElement;
-  total: number;
+  total?: number;
 }
 const SearchPage = ({ table, total }: SearchPageProps) => {
   const {
