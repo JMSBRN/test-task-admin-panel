@@ -1,8 +1,7 @@
 import { DataProvider, Options, fetchUtils } from 'react-admin';
 import { stringify } from 'query-string';
 
-// eslint-disable-next-line max-len
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiYWQ1NTE3LTk4MTEtNDc5Yi1iZTRiLWI5Nzk1YTQ1NmIzNSIsInRva2VuSWQiOiJjM2RlZjRhZS1mNGZmLTRmYzAtYWQ5MC1hNmRhNjhkZGJhZTUiLCJpYXQiOjE2ODY4NDEwNjcsImV4cCI6MTY4NjkyNzQ2N30.drhZSpERc5b-f8aHIWLKHxb4XV4YR3RuO7TkPo2uAGM';
+const token = process.env.API_TOKEN;
 
 const apiUrl = 'http://3.65.149.62/test-api/';
 
