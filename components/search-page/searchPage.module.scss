@@ -16,6 +16,9 @@
     left: 252px;
     width: 1188px;
     height: 71px;
+    border-top: 0.5px solid grey;
+    border-right: 0.5px solid grey;
+    border-bottom: 0.5px solid grey;
 }
 
 .totalStyle {
@@ -52,6 +55,7 @@
     position: absolute;
     width: 252px;
     height: 900px;
+    border: 0.5px solid grey;
 }
 
 .logo {
@@ -75,7 +79,9 @@
     top: 82px;
     width: 252px;
     height: 314px;
-    @include flex (center, center)
+    @include flex (center, center);
+    border-top: 0.5px solid grey;
+    border-bottom: 0.5px solid grey;
 
 }
 
