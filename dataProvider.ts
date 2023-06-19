@@ -1,7 +1,8 @@
 import { DataProvider, Options, fetchUtils } from 'react-admin';
+import { getDecryptedDataFromCookie } from './utils/secureCookiesUtils';
 import { stringify } from 'query-string';
 
-const token = process.env.API_TOKEN;
+const token = getDecryptedDataFromCookie('token');
 
 const apiUrl = 'http://3.65.149.62/test-api/';
 
@@ -9,7 +10,7 @@ const httpClient = fetchUtils.fetchJson;
 const options: Options = {
     headers: new Headers({ 
      'Content-Type': 'application/json',
-     'Authorization': `Bearer ${token}`
+     'Authorization': `Bearer ${JSON.parse(token!)}`
   })
  };
 

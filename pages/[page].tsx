@@ -1,6 +1,6 @@
 import Login from '../components/pages/login/Login';
 import React from 'react';
-import SearchPage from '../components/search-page/SearchPage';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
 const Index = () => {
@@ -10,9 +10,11 @@ const Index = () => {
     case '1_1_Login':
       return <Login />;
     case '2_1_First_Enter':
-      return <SearchPage />;
-    case '3_1_Table':
-      return <div>3_1_Table</div>;
+    const App = dynamic(() => import('../admin/Admin'), { ssr: false });
+
+    return (
+     <App />
+    );
     default:
       return <div>default</div>;
   }

@@ -7,7 +7,8 @@ const nextConfig = {
       includePaths: [path.join(__dirname, 'styles')],
     },
     env: {
-      API_TOKEN: process.env.API_TOKEN
+      LOCAL_SECRET: process.env.LOCAL_SECRET,
+      CALL_SECRET: process.env.CALL_SECRET
     }
 };
 
