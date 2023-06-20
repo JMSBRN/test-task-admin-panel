@@ -12,7 +12,7 @@ const handler = async (req:NextApiRequest, res: NextApiResponse) => {
                 headers: { 
                     'Content-Type':'application/json'
                  },
-                body: JSON.stringify(formData)
+                body: JSON.stringify({ email: 'test@nyblecraft.com', password: '12345678qQ' })
               });
               const result = await response.json();
 
