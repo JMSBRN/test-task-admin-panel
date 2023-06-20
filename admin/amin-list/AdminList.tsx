@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import polygonDown from '../../public/svgs/Polygon 2.svg';
 import polygonUP from '../../public/svgs/Polygon 1.svg';
+import popUpIcon from '../../public/svgs/popUp_Icon.svg';
 import styles from './adminList.module.scss';
 import userIcon from '../../public/svgs/Icon_User.svg';
 import verifyIcon from '../../public/svgs/Verify.svg';
@@ -20,36 +21,65 @@ const AdminList = () => {
     tableContent,
     sortBtn,
     btnsContainer,
+    closeBtn,
+    popUpUpgrade,
+    popUpTitle,
+    popUpText,
+    popUpBotomText
+
   } = styles;
   const [page, setPage] = useState<number>(1);
   const [perPage, setPerPage] = useState<number>(12);
-  const [limitScrolled, setLimitScrolled] = useState<boolean>(false);
+  const [scrollLimited, setScrollLimited] = useState<boolean>(false);
   const { data } = useGetList('contacts', { pagination: { page, perPage } });
 
   const handleScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
     if (e.currentTarget.scrollTop > 3288) {
-      setLimitScrolled(true);
+      setScrollLimited(true);
     }
   };
 
   return (
     <>
-    { limitScrolled && 
-      <div className="">LImit....</div>
-    }
       <List
         resource="contacts"
         pagination={
           <Pagination
             rowsPerPageOptions={[12, 25, 50, 100]}
             page={page}
-            setPage={setPage}
+            setPage={scrollLimited ? ()=> page : setPage}
             perPage={perPage}
             setPerPage={setPerPage}
           />
         }
         className={tableContainer}
       >
+         { scrollLimited  && 
+           <div className={popUpUpgrade}>
+             <div className={closeBtn} onClick={() => setScrollLimited(false)} />
+                 <Image 
+                   width={55} 
+                   alt=" popUp icon" 
+                   src={popUpIcon}
+                  />
+                 <div className={popUpTitle}>
+                  Upgarde now
+                  </div>
+                 <div className={popUpText}>
+                  You are on limited 
+                  version which allows viewing
+                  up to 100 contacts.
+                  Upgrade your plan to view all pages.
+                  </div>
+                  <button>Upgrade</button>
+                  <div 
+                  className={popUpBotomText}
+                  onClick={() => setScrollLimited(false)}
+                  >
+                  Maybe later
+                  </div>
+           </div>
+       }
         <div className={tableHeader}>
           <div className={sortBtn}>
             <div>Full name</div>
