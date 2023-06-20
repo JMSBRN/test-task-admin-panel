@@ -6,7 +6,7 @@ const handler = async (req:NextApiRequest, res: NextApiResponse) => {
         if(!req.body) {
             res.status(204).end();
         } else {
-            const { formData } = req.body;
+            //const { formData } = req.body;
             const response = await fetch('http://3.65.149.62/test-api/auth/login/', {
                 method: 'POST',
                 headers: { 

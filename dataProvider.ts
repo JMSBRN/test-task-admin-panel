@@ -25,8 +25,7 @@ const dataProvider: DataProvider  = {
             filter: JSON.stringify(params.filter),
         };
         
-        // const url = `${apiUrl}/${resource}?${stringify(query)}`;
-        const url = `${apiUrl}${resource}?range=${'[0, 11]'}`;
+        const url = `${apiUrl}${resource}?range=${query.range}`;
 
         return httpClient(url, options).then(({ headers, json }) => ({
             data: json,
