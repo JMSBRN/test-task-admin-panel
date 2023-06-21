@@ -26,7 +26,6 @@ const AdminList = () => {
     popUpTitle,
     popUpText,
     popUpBotomText,
-    paginationStyle
   } = styles;
   const [page, setPage] = useState<number>(1);
   const [perPage, setPerPage] = useState<number>(12);
@@ -147,13 +146,39 @@ const AdminList = () => {
           ))}
         </div>
         <Pagination
-            className={paginationStyle}
             rowsPerPageOptions={[12]}
             page={page}
             setPage={scrollLimited ? ()=> page : setPage}
             perPage={perPage}
             setPerPage={setPerPage}
             total={total}
+            sx={{
+              '.MuiToolbar-root': {
+                position: 'absolute',
+                left: '5px',
+                bottom: '20px',
+               },
+               '.MuiPagination-ul': {
+                 marginLeft: '21px',
+                 width: '300px',
+                 '& li': {
+                   margin: '-3px'
+                 },
+                 '& .MuiPaginationItem-previousNext': {
+                  width: '33px',
+                  height: '30px',
+                  border: '1px solid lightgrey',
+                  borderRadius: '5px',
+                 }
+               },
+               '.Mui-selected': {
+                width: '36px',
+                height: '34px',
+                border: '1px solid darkBlue',
+                borderRadius: '5px',
+                marginLeft: '21px'
+               }
+            }}
           />
       </div>
     </>
