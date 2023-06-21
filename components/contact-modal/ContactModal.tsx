@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+import { Contact } from '../interfaces';
 import Image from 'next/image';
 import styles from './customerModal.module.scss';
 import userIcon from '../../public/svgs/Icon_User.svg';
 
 interface CustomerModalProps {
   handleCloseModal: () => void;
+  contact: Contact;
 }
-const CustomerModal = ({ handleCloseModal }: CustomerModalProps) => {
+const ContactModal = ({ handleCloseModal, contact }: CustomerModalProps) => {
   const { 
     CustomerModalContiner,
     closeBtn,
@@ -19,6 +21,8 @@ const CustomerModal = ({ handleCloseModal }: CustomerModalProps) => {
    } =
     styles;
     const [customerNameRendered, setCustomerNameRendered] =useState<boolean>(false);
+    const { job_title , country , industry, description } = contact;
+
     const handleRenderCustomerName = () => {
         setCustomerNameRendered(!customerNameRendered);
     };
@@ -56,25 +60,23 @@ const CustomerModal = ({ handleCloseModal }: CustomerModalProps) => {
       <div className={mainContainer}>
         <div className={contentWrapper}>
           <div className={title}>job title</div>
-          <div className={content}>Software Engineer</div>
+          <div className={content}>{job_title}</div>
         </div>
         <div className={contentWrapper}>
           <div className={title}>Industry</div>
-          <div className={content}>Information Technology</div>
+          <div className={content}>{industry}</div>
         </div>
         <div className={contentWrapper}>
           <div className={title}>Location</div>
-          <div className={content}>Warsaw, Poland</div>
+          <div className={content}>{country}</div>
         </div>
         <div className={contentWrapper}>
           <div className={title}>Description</div>
-          <p >Lorem ipsum dolor sit amet consectetur adipisicing elit.
-             Numquam in quo facilis possimus suscipit veritatis
-              consequuntur nulla quisquam dolorum non!</p>
+          <p>{description}</p>
         </div>
       </div>
     </div>
   );
 };
 
-export default CustomerModal;
+export default ContactModal;

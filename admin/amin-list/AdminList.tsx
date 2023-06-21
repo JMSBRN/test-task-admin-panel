@@ -1,6 +1,7 @@
 import { Pagination, useGetList } from 'react-admin';
 import React, { useEffect, useState } from 'react';
-import CustomerModal from '../../components/customer-modal/CustomerModal';
+import { Contact } from '../../components/interfaces';
+import ContactModal from '../../components/contact-modal/ContactModal';
 import Image from 'next/image';
 import polygonDown from '../../public/svgs/Polygon 2.svg';
 import polygonUP from '../../public/svgs/Polygon 1.svg';
@@ -28,14 +29,16 @@ const AdminList = () => {
     popUpText,
     popUpBotomText,
     rowLayout,
-    customerName
+    contactName
   } = styles;
   const [page, setPage] = useState<number>(1);
   const [perPage, setPerPage] = useState<number>(12);
   const [scrollLimited, setScrollLimited] = useState<boolean>(false);
-  const [customerModalRendered, setCustomerModalRendered] = useState<boolean>(false);
-  const [renderedCustomerName, setRenderedCustomerName] = useState<boolean>(false);
+  const [contactModalRendered, setContactModalRendered] = useState<boolean>(false);
+  const [id, setId] = useState<string>('');
+
   const { data, total } = useGetList('contacts', { pagination: { page, perPage } });
+  const [contact , setContact] = useState({} as Contact);
 
   useEffect(() => {
     if(page > 5){
@@ -43,18 +46,28 @@ const AdminList = () => {
     }
   }, [page]);
 
-  const handleGetCustomerName = () => {
-    setCustomerModalRendered(true);
-    setRenderedCustomerName(true);
+  const handleGetContactName = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const id = e.currentTarget.id;
+
+     data?.forEach( el => {
+      if(el.id === id) {
+        setContact(el);
+        setId(el.id);
+      }
+
+    });
+     setContactModalRendered(true);
   };
+
   const handleCloseModal = () => {
-    setCustomerModalRendered(false);
+    setContactModalRendered(false);
   };
   
   return (
     <>
     {
-      customerModalRendered && <CustomerModal handleCloseModal={handleCloseModal} />
+      contactModalRendered &&
+       <ContactModal contact={contact} handleCloseModal={handleCloseModal} />
     }
       <div
         className={tableContainer}
@@ -139,10 +152,10 @@ const AdminList = () => {
             <div className={rowStyle} >
               <div className={tableButton}>
                {
-                renderedCustomerName ? (
-                  <div className={customerName}>Will Gibbons</div>
+                el.id === id ? (
+                  <div className={contactName}>{ el.name || 'No Name'}</div>
                 ) : (
-                  <button onClick={handleGetCustomerName}>
+                  <button id={el.id} onClick={handleGetContactName}>
                   <div className={imagesContainer}>
                     <Image
                       className={veriFyImage}
