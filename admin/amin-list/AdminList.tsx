@@ -27,11 +27,14 @@ const AdminList = () => {
     popUpTitle,
     popUpText,
     popUpBotomText,
+    rowLayout,
+    customerName
   } = styles;
   const [page, setPage] = useState<number>(1);
   const [perPage, setPerPage] = useState<number>(12);
   const [scrollLimited, setScrollLimited] = useState<boolean>(false);
   const [customerModalRendered, setCustomerModalRendered] = useState<boolean>(false);
+  const [renderedCustomerName, setRenderedCustomerName] = useState<boolean>(false);
   const { data, total } = useGetList('contacts', { pagination: { page, perPage } });
 
   useEffect(() => {
@@ -42,6 +45,7 @@ const AdminList = () => {
 
   const handleGetCustomerName = () => {
     setCustomerModalRendered(true);
+    setRenderedCustomerName(true);
   };
   const handleCloseModal = () => {
     setCustomerModalRendered(false);
@@ -131,9 +135,14 @@ const AdminList = () => {
         </div>
         <div className={tableStyle} >
           {data?.map((el) => (
-            <div className={rowStyle} key={el.id}>
+              <div key={el.id} className={rowLayout}>
+            <div className={rowStyle} >
               <div className={tableButton}>
-                <button onClick={handleGetCustomerName}>
+               {
+                renderedCustomerName ? (
+                  <div className={customerName}>Will Gibbons</div>
+                ) : (
+                  <button onClick={handleGetCustomerName}>
                   <div className={imagesContainer}>
                     <Image
                       className={veriFyImage}
@@ -150,11 +159,14 @@ const AdminList = () => {
                   </div>
                   <div className={getNameBtnText}>Get the name</div>
                 </button>
+                )
+               }
               </div>
               <div className={tableContent}>{el.job_title}</div>
               <div className={tableContent}>{el.industry}</div>
               <div className={tableContent}>{el.country}</div>
             </div>
+              </div>
           ))}
         </div>
         <Pagination

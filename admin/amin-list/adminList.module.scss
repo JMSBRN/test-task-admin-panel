@@ -47,6 +47,12 @@
     border-radius: 0 0 10px 10px;
     padding-bottom: 0px;
 }
+.rowLayout {
+    cursor: pointer;
+    & :hover {
+        background-color: rgb(223, 222, 255);
+    }
+}
 .rowStyle {
     width: 100%;
     height: auto;
@@ -64,6 +70,13 @@
         height: 100%;
         font-size: 14px;
         text-transform: capitalize;
+        @include flex(flex-start, center);
+    }
+    & .customerName {
+        width: 100%;
+        height: 50px;
+        font-size: 14px;
+        padding-left: 31px;
         @include flex(flex-start, center);
     }
 }
