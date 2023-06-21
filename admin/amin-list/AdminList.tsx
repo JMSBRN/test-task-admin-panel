@@ -1,5 +1,6 @@
 import { Pagination, useGetList } from 'react-admin';
 import React, { useEffect, useState } from 'react';
+import CustomerModal from '../../components/customer-modal/CustomerModal';
 import Image from 'next/image';
 import polygonDown from '../../public/svgs/Polygon 2.svg';
 import polygonUP from '../../public/svgs/Polygon 1.svg';
@@ -30,6 +31,7 @@ const AdminList = () => {
   const [page, setPage] = useState<number>(1);
   const [perPage, setPerPage] = useState<number>(12);
   const [scrollLimited, setScrollLimited] = useState<boolean>(false);
+  const [customerModalRendered, setCustomerModalRendered] = useState<boolean>(false);
   const { data, total } = useGetList('contacts', { pagination: { page, perPage } });
 
   useEffect(() => {
@@ -37,9 +39,19 @@ const AdminList = () => {
       setScrollLimited(true);
     }
   }, [page]);
+
+  const handleGetCustomerName = () => {
+    setCustomerModalRendered(true);
+  };
+  const handleCloseModal = () => {
+    setCustomerModalRendered(false);
+  };
   
   return (
     <>
+    {
+      customerModalRendered && <CustomerModal handleCloseModal={handleCloseModal} />
+    }
       <div
         className={tableContainer}
       >
@@ -121,7 +133,7 @@ const AdminList = () => {
           {data?.map((el) => (
             <div className={rowStyle} key={el.id}>
               <div className={tableButton}>
-                <button>
+                <button onClick={handleGetCustomerName}>
                   <div className={imagesContainer}>
                     <Image
                       className={veriFyImage}

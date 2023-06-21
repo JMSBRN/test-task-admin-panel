@@ -1,0 +1,83 @@
+@import 'mixins';
+
+.CustomerModalContiner {
+    position: absolute;
+    top: -78px;
+    bottom: 0;
+    right: 0;
+    width: 440px;
+    height: 900px;
+    background-color: white;
+    box-shadow: 0 0 20px grey;
+    z-index: 9;
+    & .closeBtn {
+        position: absolute;
+        top: 5px;
+        right: 424px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 2px solid rgb(137, 137, 137);
+        background-size: 60%;
+        background-repeat: no-repeat;
+        background-color: white;
+        background-position: center;
+        background-image: url('../../public//svgs//Icon_Close.svg');
+        cursor: pointer;
+        &:hover {
+            background-size: 80%;
+        }
+        &:active {
+            background-size: 20%;
+        }
+    }
+    & .topContainer{
+       margin: 38px auto 0 auto;
+       width: 410px;
+       height: 96px;
+       border: 1px solid lightgray;
+       border-radius:  5px 5px 0 0 ;
+       & button {
+         position: absolute;
+          top: 62px;
+          left: 32px;
+          width: 376px;
+          height: 46px;
+          border: none;
+          border-radius: 8px;
+          background-color: rgb(63, 47, 133);
+          color: white;
+           & img {
+            position: absolute;
+            top: 14px;
+            left: 110px;
+           }
+           & div {
+            position: absolute;
+            top: 15px;
+            left: 137px;
+            font-size: 14px;
+           }
+       }
+    }
+    & .mainContainer{
+        margin: 0 auto;
+        width: 410px;
+        height: 350px;
+        border-left: 1px solid lightgray;
+        border-right: 1px solid lightgray;
+        border-bottom: 1px solid lightgray;
+        border-radius: 0 0 5px 5px ;
+        display: grid;
+        grid-template-rows: repeat(4, 60px);
+        & .contentWrapper {
+            width: 100%;
+            height: auto;
+            min-height: 70px;
+            padding-left: 15px;
+            @include flex (flex-end, flex-start, column);
+            & .title {}
+            & .text {}
+        }
+    }
+}
