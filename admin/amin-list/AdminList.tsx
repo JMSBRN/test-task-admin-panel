@@ -1,5 +1,5 @@
-import { List, Pagination, useGetList } from 'react-admin';
-import React, { useState } from 'react';
+import { Pagination, useGetList } from 'react-admin';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import polygonDown from '../../public/svgs/Polygon 2.svg';
 import polygonUP from '../../public/svgs/Polygon 1.svg';
@@ -25,33 +25,23 @@ const AdminList = () => {
     popUpUpgrade,
     popUpTitle,
     popUpText,
-    popUpBotomText
-
+    popUpBotomText,
+    paginationStyle
   } = styles;
   const [page, setPage] = useState<number>(1);
   const [perPage, setPerPage] = useState<number>(12);
   const [scrollLimited, setScrollLimited] = useState<boolean>(false);
-  const { data } = useGetList('contacts', { pagination: { page, perPage } });
+  const { data, total } = useGetList('contacts', { pagination: { page, perPage } });
 
-  const handleScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
-    if (e.currentTarget.scrollTop > 3288) {
+  useEffect(() => {
+    if(page > 5){
       setScrollLimited(true);
     }
-  };
-
+  }, [page]);
+  
   return (
     <>
-      <List
-        resource="contacts"
-        pagination={
-          <Pagination
-            rowsPerPageOptions={[12, 25, 50, 100]}
-            page={page}
-            setPage={scrollLimited ? ()=> page : setPage}
-            perPage={perPage}
-            setPerPage={setPerPage}
-          />
-        }
+      <div
         className={tableContainer}
       >
          { scrollLimited  && 
@@ -128,7 +118,7 @@ const AdminList = () => {
             </div>
           </div>
         </div>
-        <div className={tableStyle} onScroll={handleScroll}>
+        <div className={tableStyle} >
           {data?.map((el) => (
             <div className={rowStyle} key={el.id}>
               <div className={tableButton}>
@@ -156,7 +146,16 @@ const AdminList = () => {
             </div>
           ))}
         </div>
-      </List>
+        <Pagination
+            className={paginationStyle}
+            rowsPerPageOptions={[12]}
+            page={page}
+            setPage={scrollLimited ? ()=> page : setPage}
+            perPage={perPage}
+            setPerPage={setPerPage}
+            total={total}
+          />
+      </div>
     </>
   );
 };
