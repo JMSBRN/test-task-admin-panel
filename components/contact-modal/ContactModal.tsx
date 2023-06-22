@@ -37,7 +37,7 @@ const ContactModal = ({ handleCloseModal, contact }: CustomerModalProps) => {
           className={customerName}
           onClick={handleRenderCustomerName}
           >
-            { contact.name || 'No Name' }
+            { contact.name || 'Will Gibbon' }
           </div>) : (
               <button onClick={handleRenderCustomerName}>
               <Image

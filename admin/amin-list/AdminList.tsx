@@ -59,6 +59,17 @@ const AdminList = () => {
      setContactModalRendered(true);
   };
 
+  const handleMouseOverGetContact = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const id = e.currentTarget.id;
+
+    data?.forEach( el => {
+      if(el.id === id) {
+        setContact(el);
+      }
+    });
+    setContactModalRendered(true);
+  };
+
   const handleCloseModal = () => {
     setContactModalRendered(false);
   };
@@ -148,12 +159,16 @@ const AdminList = () => {
         </div>
         <div className={tableStyle} >
           {data?.map((el) => (
-              <div key={el.id} className={rowLayout}>
+              <div 
+              id={el.id}
+              key={el.id}
+              className={rowLayout}
+              onMouseOver={handleMouseOverGetContact}>
             <div className={rowStyle} >
               <div className={tableButton}>
                {
                 el.id === id ? (
-                  <div className={contactName}>{ el.name || 'No Name'}</div>
+                  <div className={contactName}>{ el.name || 'Will Gibbons'}</div>
                 ) : (
                   <button id={el.id} onClick={handleGetContactName}>
                   <div className={imagesContainer}>
