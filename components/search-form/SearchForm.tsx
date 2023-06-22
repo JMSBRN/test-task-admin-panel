@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useGetList, useRefresh } from 'react-admin';
+import { Contact } from '../interfaces';
 import Image from 'next/image';
+import InputWithSelectField from '../input-with-select-field/InputWithSelectField';
 import { SearchFormData } from './interfaces';
-import industryIcon from '../../public/svgs/Icon_Industry.svg';
+//import industryIcon from '../../public/svgs/Icon_Industry.svg';
 import jobTitleIcon from '../../public/svgs/Icon_JobTitle.svg';
 import locationIcon from '../../public/svgs/Icon_Location.svg';
 import styles from './searchForm.module.scss';
@@ -11,8 +13,6 @@ const SearchForm = () => {
   const {
     searchForm,
     jobTitleStyle,
-    locationStyle,
-    industryStyle
   } = styles;
   const initFfomLocalFormData: SearchFormData =
    JSON.parse(window.localStorage.getItem('formData') || '{}');
@@ -56,26 +56,22 @@ const SearchForm = () => {
         placeholder="Search by job title"
         />
       </label>
-      <label className={locationStyle}>
-      <Image width={16} src={locationIcon} alt="drop" />
-        Location
-        <select name="country" onChange={handleChange}>
-          <option >{`${ formData.country || 'Choose Location'}`}</option>
-          { data?.map(el => (
-            <option key={el.id} value={el.country}>{el.country}</option>
-          ))}
-        </select>
-      </label>
-      <label className={industryStyle}>
-      <Image width={16} src={industryIcon} alt="plant" />
-        Industry
-        <select name="industry" onChange={handleChange} >
-        <option >{`${ formData.industry || 'Choose Location'}`}</option>
-        { data?.map(el => (
-            <option key={el.id} value={el.industry}>{el.industry}</option>
-          ))}
-        </select>
-      </label>
+      <InputWithSelectField
+        data={data as Contact[]}
+        labelIcon={locationIcon}
+        fieldName='country'
+        labelText='Country'
+        formData={formData}
+        setFormData={setFormData}
+      />
+      {/* <InputWithSelectField
+        data={data as Contact[]}
+        labelIcon={industryIcon}
+        fieldName='industry'
+        labelText='Industry'
+        formData={formData}
+        setFormData={setFormData}
+      /> */}
     </form>
   );
 };
