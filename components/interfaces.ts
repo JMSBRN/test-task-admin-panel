@@ -21,6 +21,7 @@ export interface Contact {
      github_url: string;
      twitter_url: string;
      description: string;
+     name?: string;
      nameRendered?: boolean;
 }
 

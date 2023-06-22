@@ -199,13 +199,14 @@ const AdminList = () => {
                  marginLeft: '21px',
                  width: '300px',
                  '& li': {
-                   margin: '-3px'
+                   marginLeft: '-5px',
                  },
                  '& .MuiPaginationItem-previousNext': {
                   width: '33px',
                   height: '30px',
                   border: '1px solid lightgrey',
                   borderRadius: '5px',
+                  marginLeft: '10px'
                  }
                },
                '.Mui-selected': {

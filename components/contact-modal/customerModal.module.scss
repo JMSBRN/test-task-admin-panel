@@ -79,14 +79,14 @@
         border-bottom: 1px solid lightgray;
         border-radius: 0 0 5px 5px ;
         display: grid;
-        grid-template-rows: 60px 60px 60px minmax(60px, 172px);
+        grid-template-rows: 60px 60px 60px auto;
         & .contentWrapper {
             margin-top: 20px;
             width: 100%;
             min-height: 80px;
-            padding-left: 15px;
+            padding: 15px;
             display: grid;
-            grid-template-rows: 25px 30px;
+            grid-template-rows: 25px minmax(30px, auto);
             & .title {
                 font-size: 14px;
                 color: grey;
@@ -95,6 +95,7 @@
                 width: 94%;
                 margin-top: -1px;
                 line-height: 22px;
+                padding: 0px;
             }
         }
     }

@@ -17,7 +17,8 @@ const ContactModal = ({ handleCloseModal, contact }: CustomerModalProps) => {
     contentWrapper,
     title,
     content,
-    customerName
+    customerName,
+    descriptionStyle
    } =
     styles;
     const [customerNameRendered, setCustomerNameRendered] =useState<boolean>(false);
@@ -36,7 +37,7 @@ const ContactModal = ({ handleCloseModal, contact }: CustomerModalProps) => {
           className={customerName}
           onClick={handleRenderCustomerName}
           >
-             Will Gibbons
+            { contact.name || 'No Name' }
           </div>) : (
               <button onClick={handleRenderCustomerName}>
               <Image
@@ -72,7 +73,9 @@ const ContactModal = ({ handleCloseModal, contact }: CustomerModalProps) => {
         </div>
         <div className={contentWrapper}>
           <div className={title}>Description</div>
-          <p>{description}</p>
+          <div className={descriptionStyle}>
+          {description}
+          </div>
         </div>
       </div>
     </div>
