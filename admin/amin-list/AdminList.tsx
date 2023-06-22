@@ -67,7 +67,6 @@ const AdminList = () => {
         setContact(el);
       }
     });
-    setContactModalRendered(true);
   };
 
   const handleCloseModal = () => {
@@ -163,7 +162,9 @@ const AdminList = () => {
               id={el.id}
               key={el.id}
               className={rowLayout}
-              onMouseOver={handleMouseOverGetContact}>
+              onMouseOver={handleMouseOverGetContact}
+              onClick={() => setContactModalRendered(true)}
+              >
             <div className={rowStyle} >
               <div className={tableButton}>
                {

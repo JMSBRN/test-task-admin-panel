@@ -1,5 +1,5 @@
 export interface SearchFormData {
-    jobTitle: string;
-    location: string;
+    job_title: string;
+    country: string;
     industry: string;
 }

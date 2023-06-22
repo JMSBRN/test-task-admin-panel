@@ -15,7 +15,7 @@ const options: Options = {
  };
 
 const dataProvider: DataProvider  = {
-    
+
     getList: async (resource, params) => {
         const { page, perPage } = params.pagination;
         const { field, order } = params.sort;
@@ -24,8 +24,9 @@ const dataProvider: DataProvider  = {
             range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
             filter: JSON.stringify(params.filter),
         };
-        
-        const url = `${apiUrl}${resource}?range=${query.range}`;
+         const filterData = window.localStorage.getItem('formData');
+
+        const url = `${apiUrl}${resource}?range=${query.range}&filter=${filterData}`;
 
         return httpClient(url, options).then(({ headers, json }) => ({
             data: json,
