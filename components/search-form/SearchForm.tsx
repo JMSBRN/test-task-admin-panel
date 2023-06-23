@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useGetList, useRefresh } from 'react-admin';
-import { Contact } from '../interfaces';
+import { ContactForInpuSelect } from '../interfaces';
 import Image from 'next/image';
 import InputWithSelectField from '../input-with-select-field/InputWithSelectField';
 import { SearchFormData } from './interfaces';
-//import industryIcon from '../../public/svgs/Icon_Industry.svg';
+import industryIcon from '../../public/svgs/Icon_Industry.svg';
 import jobTitleIcon from '../../public/svgs/Icon_JobTitle.svg';
 import locationIcon from '../../public/svgs/Icon_Location.svg';
 import styles from './searchForm.module.scss';
@@ -57,21 +57,21 @@ const SearchForm = () => {
         />
       </label>
       <InputWithSelectField
-        data={data as Contact[]}
+        data={data as ContactForInpuSelect[]}
         labelIcon={locationIcon}
         fieldName='country'
         labelText='Country'
         formData={formData}
         setFormData={setFormData}
       />
-      {/* <InputWithSelectField
-        data={data as Contact[]}
+      <InputWithSelectField
+        data={data as ContactForInpuSelect[]}
         labelIcon={industryIcon}
         fieldName='industry'
         labelText='Industry'
         formData={formData}
         setFormData={setFormData}
-      /> */}
+      />
     </form>
   );
 };

@@ -23,5 +23,9 @@ export interface Contact {
      description: string;
      name?: string;
      nameRendered?: boolean;
+     
 }
 
+export interface ContactForInpuSelect extends Contact {
+    [key: string]: any;
+}

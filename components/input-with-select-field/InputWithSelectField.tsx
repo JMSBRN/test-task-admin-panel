@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Contact } from '../interfaces';
+import { ContactForInpuSelect } from '../interfaces';
 import Image from 'next/image';
 import { SearchFormData } from '../search-form/interfaces';
 import styles from './inputWithSelectField.module.scss';
@@ -8,7 +8,7 @@ interface InputWithSelectFieldProps {
     labelText: string;
     labelIcon: string;
     fieldName: string;
-    data: Contact[];
+    data: ContactForInpuSelect[];
     formData: SearchFormData;
     setFormData: React.Dispatch<React.SetStateAction<SearchFormData>>;
 }
@@ -63,14 +63,14 @@ const InputWithSelectField = ({
         selectListRendered && <div>
           { 
             data?.filter(item => {
-              if(item['country'].toLowerCase().includes(inputValueForFilter)) {
+              if(item[fieldName].toLowerCase().includes(inputValueForFilter)) {
                 return item;             
               }
             }).map( el => (
               <div 
               key={el.id}
-              id={el['country']}
-              onClick={(e) => handleGetFilteredValue(e, 'country')}>{el['country']}</div>
+              id={el[fieldName]}
+              onClick={(e) => handleGetFilteredValue(e, 'country')}>{el[fieldName]}</div>
             ))
           }
         </div>
