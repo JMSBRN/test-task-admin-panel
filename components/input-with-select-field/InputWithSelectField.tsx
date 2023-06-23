@@ -27,6 +27,7 @@ const InputWithSelectField = ({
   const [selectListRendered, setSelectListRendered] = useState<boolean>(false);
   const [inputValueForFilter, setInputValueForFilter] = useState<string>('');
   const [sortChanged, setSortChanged] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>();
 
   const setFormDataToLocal = (formData: SearchFormData) => {
     // filter not working in api for country an industry ??
@@ -44,6 +45,7 @@ const InputWithSelectField = ({
     e.preventDefault();
     const value = e.target.value;
 
+    setInputValue(value);
     if (value && value.match('^[a-zA-Z]+$')) {
       setSelectListRendered(true);
     } else {
@@ -56,23 +58,30 @@ const InputWithSelectField = ({
     e: React.MouseEvent<HTMLDivElement>,
     fieldName: string
   ) => {
-    setFormData({ ...formData, [fieldName]: e.currentTarget.id });
+    const id = e.currentTarget.id;
+
+    setFormData({ ...formData, [fieldName]: id });
     setFormDataToLocal(formData);
-    setSelectListRendered(false);
+    setInputValue(id);
+  };
+
+  const handleSetSelectList = () => {
+   setSelectListRendered(!selectListRendered);
+   setSortChanged(!sortChanged);
   };
 
   return (
     <label className={InputStyle}>
       <Image width={16} src={labelIcon} alt="drop" />
       <span>{labelText}</span>
-      <button onClick={() => setSortChanged(!sortChanged)}>
+      <button onClick={handleSetSelectList}>
         {sortChanged ? (
           <Image width={8} alt="lolygon" src={polygonIconUp} />
         ) : (
           <Image width={8} alt="lolygon" src={polygonIconDown} />
         )}
       </button>
-      <input name={fieldName} type="text" onChange={handleChangeSelectValue} />
+      <input name={fieldName} value={inputValue} type="text" onChange={handleChangeSelectValue} />
       {selectListRendered && (
         <div className={inputListContainer}>
           <div className={inputList}>

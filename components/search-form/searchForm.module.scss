@@ -19,21 +19,42 @@
         word-spacing: -2px;
         font-weight: 600;
         font-size: 17px;
+        & span {
+            position: absolute;
+            top: 17px;
+            left: 48px;
+        }
         & input {
             margin-top: 0px;
-            background-image: url('../../public//svgs/Icon_Search.svg');
-            background-repeat: no-repeat;
-            background-position: 5.5% 60%;
+            padding-left: 6px;
+            font-size: 15px;
            &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
                 position: absolute;
                 left: 33px;
                 bottom: 6px;
                 letter-spacing: 0.9px;
               }
+        }
+        & .inputPlaceHolder {
+            height: auto;
+            width: 100px;
+            font-size: 16px;
+            letter-spacing: -0.1px;
+            font-weight: 200;
+            position: relative;
+            top: 40px;
+            left: 12px;
+        }
+        & .titleIconStyle {
+            position: relative;
+            top: 2px;
+            left: 9px;
 
         }
-        & img {
-            margin: 5px 9px 0 10px;
+        & .searchIconStyle {
+           position: relative;
+           top: 42px;
+           left: 6px;
         }
     }
     & .lineFirst, .lineSecond {

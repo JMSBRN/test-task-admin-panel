@@ -7,6 +7,7 @@ import { SearchFormData } from './interfaces';
 import industryIcon from '../../public/svgs/Icon_Industry.svg';
 import jobTitleIcon from '../../public/svgs/Icon_JobTitle.svg';
 import locationIcon from '../../public/svgs/Icon_Location.svg';
+import searchIcon from '../../public/svgs/Icon_Search.svg';
 import styles from './searchForm.module.scss';
 
 const SearchForm = () => {
@@ -14,13 +15,17 @@ const SearchForm = () => {
     searchForm,
     jobTitleStyle,
     lineFirst,
-    lineSecond
+    lineSecond,
+    titleIconStyle,
+    searchIconStyle,
+    inputPlaceHolder
   } = styles;
   const initFfomLocalFormData: SearchFormData =
    JSON.parse(window.localStorage.getItem('formData') || '{}');
   const [formData, setFormData] = useState<SearchFormData>(initFfomLocalFormData);
   const { data } = useGetList('contacts', { filter: formData });
   const refresh = useRefresh();
+  const [inputValue, setInputValue] = useState<string>();
 
   const setFormDataToLocal = (formData: SearchFormData) => {
     // filter not working in api for country an industry ??
@@ -33,9 +38,12 @@ const SearchForm = () => {
   
    const handleChange = (e: React.ChangeEvent< HTMLInputElement | HTMLSelectElement>) => {
         e.preventDefault();
+        const value = e.target.value;
+
         setFormData({ ...formData,
-          [e.target.name]: e.target.value
+          [e.target.name]: value
         });
+        setInputValue(value);
         setFormDataToLocal(formData);
         refresh();
       };
@@ -49,13 +57,26 @@ const SearchForm = () => {
   return (  
     <form className={searchForm} onSubmit={handleSubmit} >
       <label className={jobTitleStyle}>
-        <Image width={16} src={jobTitleIcon} alt="bag" />
-        job title
+        <Image className={titleIconStyle} width={16} src={jobTitleIcon} alt="bag" />
+        {
+          !inputValue &&
+          <><Image
+            className={searchIconStyle}
+            width={16}
+            height={16}
+            src={searchIcon}
+            alt="search icon in input" />
+            <span className={inputPlaceHolder}>
+            Search by job title
+              </span>
+              </>
+        }
+        <span>job title</span>
         <input 
         name='job_title'
+        value={inputValue}
         type="text"
         onChange={handleChange}
-        placeholder="Search by job title"
         />
       </label>
         <span className={lineFirst}></span>
