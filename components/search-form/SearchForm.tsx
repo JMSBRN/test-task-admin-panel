@@ -13,6 +13,8 @@ const SearchForm = () => {
   const {
     searchForm,
     jobTitleStyle,
+    lineFirst,
+    lineSecond
   } = styles;
   const initFfomLocalFormData: SearchFormData =
    JSON.parse(window.localStorage.getItem('formData') || '{}');
@@ -56,6 +58,7 @@ const SearchForm = () => {
         placeholder="Search by job title"
         />
       </label>
+        <span className={lineFirst}></span>
       <InputWithSelectField
         data={data as ContactForInpuSelect[]}
         labelIcon={locationIcon}
@@ -64,6 +67,7 @@ const SearchForm = () => {
         formData={formData}
         setFormData={setFormData}
       />
+        <span className={lineSecond}></span>
       <InputWithSelectField
         data={data as ContactForInpuSelect[]}
         labelIcon={industryIcon}
