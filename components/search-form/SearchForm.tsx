@@ -1,16 +1,21 @@
-import React, { useState } from 'react';
 import { useGetList, useRefresh } from 'react-admin';
 import { ContactForInpuSelect } from '../interfaces';
 import Image from 'next/image';
 import InputWithSelectField from '../input-with-select-field/InputWithSelectField';
+import React from 'react';
 import { SearchFormData } from './interfaces';
 import industryIcon from '../../public/svgs/Icon_Industry.svg';
 import jobTitleIcon from '../../public/svgs/Icon_JobTitle.svg';
 import locationIcon from '../../public/svgs/Icon_Location.svg';
 import searchIcon from '../../public/svgs/Icon_Search.svg';
+import setFormDataToLocal from '../../utils/localUtils';
 import styles from './searchForm.module.scss';
 
-const SearchForm = () => {
+interface SearchFormProps {
+  formData: SearchFormData;
+  setFormData: React.Dispatch<React.SetStateAction<SearchFormData>>;
+}
+const SearchForm = ({ formData, setFormData }: SearchFormProps) => {
   const {
     searchForm,
     jobTitleStyle,
@@ -20,31 +25,15 @@ const SearchForm = () => {
     searchIconStyle,
     inputPlaceHolder
   } = styles;
-  const initFfomLocalFormData: SearchFormData =
-   JSON.parse(window.localStorage.getItem('formData') || '{}');
-  const [formData, setFormData] = useState<SearchFormData>(initFfomLocalFormData);
   const { data } = useGetList('contacts', { filter: formData });
   const refresh = useRefresh();
-  const [inputValue, setInputValue] = useState<string>();
-
-  const setFormDataToLocal = (formData: SearchFormData) => {
-    // filter not working in api for country an industry ??
-    window.localStorage.setItem('formData', JSON.stringify({
-      job_title: formData.job_title,
-      country: '',
-      industry: ''
-    }));
-  };
   
    const handleChange = (e: React.ChangeEvent< HTMLInputElement | HTMLSelectElement>) => {
         e.preventDefault();
-        const value = e.target.value;
+        const newFormData = { ...formData, [e.target.name]: e.target.value };
 
-        setFormData({ ...formData,
-          [e.target.name]: value
-        });
-        setInputValue(value);
-        setFormDataToLocal(formData);
+        setFormData(newFormData);
+        setFormDataToLocal(newFormData);
         refresh();
       };
         
@@ -59,7 +48,7 @@ const SearchForm = () => {
       <label className={jobTitleStyle}>
         <Image className={titleIconStyle} width={16} src={jobTitleIcon} alt="bag" />
         {
-          !inputValue &&
+          !formData.job_title &&
           <><Image
             className={searchIconStyle}
             width={16}
@@ -74,7 +63,7 @@ const SearchForm = () => {
         <span>job title</span>
         <input 
         name='job_title'
-        value={inputValue}
+        value={formData.job_title}
         type="text"
         onChange={handleChange}
         />

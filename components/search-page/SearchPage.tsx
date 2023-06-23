@@ -1,6 +1,7 @@
+import React, { useState } from 'react';
 import Image from 'next/image';
-import React from 'react';
 import SearchForm from '../search-form/SearchForm';
+import { SearchFormData } from '../search-form/interfaces';
 import arrowIcon from '../../public/svgs/arrow_down.svg';
 import clockIcon from '../../public/svgs/Icon_History.svg';
 import stateMessageIcon from '../../public/welcome_images/Empty_Searches.png';
@@ -30,7 +31,29 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
     welcomeText,
     topSection,
     bottomText,
+    resetFilters,
+    countFilters,
+    countFiltersHidden,
+    resetFiltersHidden
   } = styles;
+
+  const initFfomLocalFormData: SearchFormData =
+  JSON.parse(window.localStorage.getItem('formData') || '{}');
+  const [formData, setFormData] = useState<SearchFormData>(initFfomLocalFormData);
+  const setCountFiltersHiddenClass = (condition: boolean) => {
+    if(condition) {
+      return countFiltersHidden;
+    } else {
+      return countFilters;
+    }
+  };
+  const setResetFiltersHiddenClass = (condition: boolean) => {
+    if(condition) {
+      return resetFiltersHidden;
+    } else {
+      return resetFilters;
+    }
+  };
 
   return (
     <div className={searchPageContainer}>
@@ -41,9 +64,13 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
       </div>
       <div className={leftSideContainer}>
         <div className={logo}>Logo</div>
-        <div className={formTitle}>Filters</div>
+        <div className={formTitle}>
+          Filters
+          <div className={setCountFiltersHiddenClass(!formData.job_title)}>1</div>
+          </div>
+        <div className={setResetFiltersHiddenClass(!formData.job_title)}>Clear filter</div>
         <div className={searchFormContainer}>
-          <SearchForm />
+          <SearchForm formData={formData} setFormData={setFormData} />
         </div>
       </div>
       <div className={centerContiner}>
