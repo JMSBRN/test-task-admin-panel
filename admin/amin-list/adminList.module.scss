@@ -1,4 +1,5 @@
 @import 'mixins';
+@import '_variables';
 
 .tableContainer {
     width: 98.5%;
@@ -9,8 +10,8 @@
 .tableHeader {
     width: 100%;
     height: 50px;
-    border-bottom: 0.1px solid lightgray;
-    background-color: rgb(168, 168, 168);
+    border-bottom: 0.1px solid $grey-color;
+    background-color: $grey-dark-color;
     border-radius: 5px 5px 0 0 ;
     padding-left: 5px;
     display: grid;
@@ -50,15 +51,15 @@
 .rowLayout {
     cursor: pointer;
     & :hover {
-        background-color: rgb(223, 222, 255);
+        background-color: $white-color;
     }
 }
 .rowStyle {
     width: 100%;
     height: auto;
-    border-left: 0.1px solid lightgray;
-    border-right: 0.1px solid lightgray;
-    border-bottom: 0.1px solid lightgray;
+    border-left: 0.1px solid $grey-color;
+    border-right: 0.1px solid $grey-color;
+    border-bottom: 0.1px solid $grey-color;
    display: grid;
    grid-template-columns: 231px 303px 285px 200px;
    grid-template-rows: 54.8px;
@@ -81,7 +82,7 @@
     }
 }
 .tableButton {
-    border-right: 0.1px solid lightgrey;
+    border-right: 0.1px solid $grey-color;
     @include flex(flex-start, center);
     & button {
         position: relative;
@@ -91,11 +92,11 @@
         height:40px;
         font-size: 14px;
         background-color: transparent;
-        border: .01px solid lightgray;
+        border: .01px solid $grey-color;
         border-radius: 5px;
         cursor: pointer;
         &:active {
-            border: 2px solid lightgray;
+            border: 2px solid $grey-color;
         }
     }
     & .imagesContainer {
@@ -125,10 +126,10 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    border: 2px solid rgb(137, 137, 137);
+    border: 2px solid $grey-color;
     background-size: 60%;
     background-repeat: no-repeat;
-    background-color: white;
+    background-color: $white-color;
     background-position: center;
     background-image: url('../../public//svgs//Icon_Close.svg');
     cursor: pointer;
@@ -146,7 +147,7 @@
     width: 384px;
     height: 394px;
     border-radius: 5px;
-    background: linear-gradient(rgb(179, 169, 255) 10px, white 40%);
+    background: linear-gradient($prime-color 10px, $white-color 40%);
     box-shadow:  0px 0px 50px rgb(201, 201, 201, 0.5);
     z-index: 5;
     
@@ -184,11 +185,11 @@
         height: 49px;
         border-radius: 6px;
         border: none;
-        background-color: rgb(54, 38, 167);
-        color: white;
+        background-color: $prime-color;
+        color: $white-color;
         cursor: pointer;
         &:hover {
-            border: 0.2px solid rgb(247, 246, 255);
+            border: 0.2px solid $grey-color;
         }
     }
     & .popUpBotomText {
@@ -200,10 +201,10 @@
         color: rgb(54, 38, 167);
         cursor: pointer;
         &:hover {
-            border: 0.2px solid rgb(54, 38, 167);
+            border: 0.2px solid $prime-color;
         }
         &:active {
-            border: 0.2px solid rgb(182, 179, 206);
+            border: 0.2px solid $grey-color;
         }
     }
 

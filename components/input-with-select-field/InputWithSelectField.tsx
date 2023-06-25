@@ -10,6 +10,7 @@ interface InputWithSelectFieldProps {
   labelText: string;
   labelIcon: string;
   fieldName: string;
+  textPlaceHolder:string;
   data: ContactForInpuSelect[];
   formData: SearchFormData;
   setFormData: React.Dispatch<React.SetStateAction<SearchFormData>>;
@@ -19,6 +20,7 @@ const InputWithSelectField = ({
   labelText,
   labelIcon,
   fieldName,
+  textPlaceHolder,
   data,
   formData,
   setFormData,
@@ -76,12 +78,18 @@ const InputWithSelectField = ({
       <span>{labelText}</span>
       <button onClick={handleSetSelectList}>
         {sortChanged ? (
-          <Image width={8} alt="lolygon" src={polygonIconUp} />
+          <Image width={6} alt="lolygon" src={polygonIconUp} />
         ) : (
-          <Image width={8} alt="lolygon" src={polygonIconDown} />
+          <Image width={6} alt="lolygon" src={polygonIconDown} />
         )}
       </button>
-      <input name={fieldName} value={inputValue} type="text" onChange={handleChangeSelectValue} />
+      <input 
+      name={fieldName}
+      value={inputValue}
+      type="text"
+      onChange={handleChangeSelectValue}
+      placeholder={textPlaceHolder}
+       />
       {selectListRendered && (
         <div className={inputListContainer}>
           <div className={inputList}>

@@ -74,7 +74,7 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
         </div>
       </div>
       <div className={centerContiner}>
-        { !table ? (
+        { table ? (
           <>
           <div className={welcomeMessage}>
             <Image src={welcomeMessageIcon} width={200} alt="chat messages" />
@@ -83,8 +83,8 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
             </div>
           </div><div className={resentSearches}>
               <div className={topSection}>
-                <Image src={clockIcon} width={20} alt="clock" />
-                <span>Resent searches</span>
+                <Image src={clockIcon} width={16} alt="clock" />
+                <span>Recent searches</span>
               </div>
               <Image
                 src={stateMessageIcon}

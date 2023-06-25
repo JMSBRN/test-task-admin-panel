@@ -1,4 +1,6 @@
 @import 'mixins';
+@import '_variables';
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;600;700&display=swap');
 
 .searchPageContainer {
     position: absolute;
@@ -8,7 +10,7 @@
     left: 0;
     width: 1440px;
     height: 900px;
-    background-color: rgb(255, 255, 255);
+    background-color: $white-color;
 }
 
 .topContainer {
@@ -16,28 +18,30 @@
     left: 252px;
     width: 1188px;
     height: 71px;
-    border-top: 0.5px solid grey;
-    border-right: 0.5px solid grey;
-    border-bottom: 0.5px solid grey;
+    border-top: 0.5px solid $grey-color;
+    border-right: 0.5px solid $grey-color;
+    border-bottom: 0.5px solid $grey-color;
 }
 
 .totalStyle {
     position: relative;
     top: 21px;
     left: 23px;
-    font-size: 28px;
-    font-weight: 500;
+    font-size: 24px;
+    font-weight: 700;
+    font-family: 'Mulish';
 }
 .elipse2M {
     position: relative;
-    top: -16px;
+    top: -12px;
     left: 90px;
-    width: 80px;
+    width: 78px;
     height: 30px;
     border-radius: 20px;
     font-size: 14px;
     @include flex (center, center);
-    background-color: lightgrey;
+    color: $prime-color;
+    background-color: $grey-color;
 }
 .elipseKM {
     position: absolute;
@@ -48,32 +52,33 @@
     border-radius: 2px;
     font-size: 14px;
     @include flex (center, center);
-    background-color: lightgrey;
+    background-color: $grey-color;
 }
 
 .leftSideContainer {
     position: absolute;
     width: 252px;
     height: 900px;
-    border: 0.5px solid grey;
+    border: 0.5px solid $grey-color;
 }
 
 .logo {
     position: relative;
-    top: 23px;
-    left: 22px;
+    top: 22px;
+    left: 23px;
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 1000;
     text-transform: uppercase;
+    color: $prime-color;
 }
 .formTitle {
     position: relative;
-    top: 70px;
-    left: 25px;
+    top: 68px;
+    left: 22px;
     width: 130px;
     height: auto;
-    font-size: 17px;
-    font-weight: 300;
+    font-size: 18px;
+    font-weight: 700;
     @include flex(flex-start, center);
     & .countFilters {
         width: 30px;
@@ -82,7 +87,7 @@
         margin-left: 8px;
         text-align: center;
         border-radius: 20px;
-        background-color: rgb(218, 218, 218);
+        background-color: $grey-color;
     }
     & .countFiltersHidden {
         width: 30px;
@@ -91,7 +96,7 @@
         margin-left: 8px;
         text-align: center;
         border-radius: 20px;
-        background-color: rgb(218, 218, 218);
+        background-color: $grey-color;
         visibility: hidden;
     }
 }
@@ -103,7 +108,7 @@
     color: darkblue;
     cursor: pointer;
     &:active {
-        color: lightgrey;
+        color: $grey-color;
     }
 }
 .resetFiltersHidden {
@@ -114,7 +119,7 @@
     color: darkblue;
     cursor: pointer;
     &:active {
-        color: lightgrey;
+        color: $grey-color;
     }
     visibility: hidden;
 }
@@ -124,8 +129,8 @@
     width: 252px;
     height: 313px;
     @include flex (center, center);
-    border-top: 0.5px solid grey;
-    border-bottom: 0.5px solid grey;
+    border-top: 0.5px solid $grey-color;
+    border-bottom: 0.5px solid $grey-color;
 }
 
 .centerContiner {
@@ -137,24 +142,25 @@
 }
 .arrowIconAndTextContainer {
     position: absolute;
-    top: 101px;
-    left: 25px;
+    top: 102px;
+    left: 24px;
     width: 190px;
     height: 20px;
     padding: 20px;
-    letter-spacing: -0.6px;
     @include flex (flex-start, center, column);
-
+    
     & div {
         margin-top: -8px;
-        font-weight: 300;
+        font-size: 14px;
+        font-weight: 700;
+        word-spacing: -2px;
         line-height: 19px;
     }
 
     & .arrowIconStyle {
         position: absolute;
-        left: 0;
-        top: 0;
+        left: 0px;
+        top: -1px;
     }
 }
 .welcomeMessage {
@@ -170,11 +176,13 @@
    }
    & .welcomeText {
       position: absolute;
-      top: 143px;
+      top: 145px;
+      left: 1px;
       bottom: 0;
-      font-size: 20px;
       text-align: center;
-      letter-spacing: -0.45px;
+      font-size: 18px;
+      font-weight: 700;
+      word-spacing: -2px;
       line-height: 25px;
    }
 }
@@ -185,11 +193,11 @@
     width: 488px;
     height: 200px;
     border-radius: 12px;
-    border: 0.5px solid grey;
+    border: 0.5px solid $grey-color;
     @include flex(center, center, column);
     & img {
         position: absolute;
-        top: 51px;
+        top: 53px;
         left: 203px;
     }
     & .topSection {
@@ -197,17 +205,19 @@
         top: 0;
         width: 488px;
         height: 38px;
-        border-bottom: 0.5px solid lightgray;
+        border-bottom: 0.5px solid $grey-color;
         & img {
             position: absolute;
-            top: 8px;
-            left: 13px;
+            top: 10px;
+            left: 15px;
         }
         & span {
             position: absolute;
-            top: 6px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: -0.15px;
+            top: 8px;
             left: 40px;
-            letter-spacing: -0.45px;
         }
     }
     & .bottomText {

@@ -1,20 +1,26 @@
+@import '_variables';
+
 .InputStyle {
     position: relative;
-    top: -4px;
+    top: -6px;
     & img {
       position: relative;
       top: -8px;
-      left: 10px;
+      left: 9px;
 
     }
     & span {
         position: relative;
-        top: -8px;
+        top: -7px;
         left: 18px;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0px;
     }
     & input {
-        font-size: 15px;
-        padding-left: 6px;
+        font-size: 14px;
+        padding-left: 7px;
+
     }
     & button {
         position: absolute;
@@ -26,9 +32,10 @@
 
         & img {
             position: absolute;
-            top: 10px;
-            left: 7px;
+            top: 11px;
+            left: 0px;
             cursor: pointer;
+            filter: invert(71%) sepia(11%) saturate(354%) hue-rotate(190deg) brightness(83%) contrast(85%);
         }
     }
  & .inputListContainer {
@@ -38,32 +45,32 @@
     width: 205px;
     height: 170px;
     padding: 9px 5px;
-    border: 1px solid rgb(197, 197, 197);
+    border: 1px solid $grey-color;
     border-radius: 5px;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0px 0px 10px rgb(192, 192, 192);
+    background-color: $white-color;
+    box-shadow: 0px 0px 10px $grey-color;
     z-index: 5;
      & .inputList {
         width: 100%;
         height: 100%;
-        background-color: rgb(255, 255, 255);
+        background-color: $white-color;
         overflow-x: hidden;
      }
      ::-webkit-scrollbar {
          width: 3px;
        }
        ::-webkit-scrollbar-track {
-         box-shadow: inset 0 0 5px grey; 
+         box-shadow: inset 0 0 5px $grey-color; 
        }
        ::-webkit-scrollbar-thumb {
-         background: rgb(123, 128, 133); 
+         background: $grey-color; 
          border-radius: 10px;
        }
        & .listItem {
         height: 32px;
         cursor: pointer;
         &:hover {
-            background-color: rgb(245, 245, 245);
+            background-color: $grey-color;
         }
        }
  }

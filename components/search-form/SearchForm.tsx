@@ -73,7 +73,8 @@ const SearchForm = ({ formData, setFormData }: SearchFormProps) => {
         data={data as ContactForInpuSelect[]}
         labelIcon={locationIcon}
         fieldName='country'
-        labelText='Country'
+        labelText='Location'
+        textPlaceHolder="Choose location"
         formData={formData}
         setFormData={setFormData}
       />
@@ -83,6 +84,7 @@ const SearchForm = ({ formData, setFormData }: SearchFormProps) => {
         labelIcon={industryIcon}
         fieldName='industry'
         labelText='Industry'
+        textPlaceHolder="Choose industry"
         formData={formData}
         setFormData={setFormData}
       />
