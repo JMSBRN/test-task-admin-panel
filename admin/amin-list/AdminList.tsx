@@ -123,7 +123,7 @@ const AdminList = () => {
           </div>
         </div>
         <div className={tableStyle}>
-          {data?.map((el) => (
+          { data?.map((el) => (
             <div
               id={el.id}
               key={el.id}
