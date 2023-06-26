@@ -1,7 +1,7 @@
 import AdminList from '../amin-list/AdminList';
-import NoResultsPage from '../../components/no-results-page/NoResultsPage';
+import NoResultsPage from '../../components/pages/no-results-page/NoResultsPage';
 import React from 'react';
-import SearchPage from '../../components/search-page/SearchPage';
+import SearchPage from '../../components/pages/search-page/SearchPage';
 import { useGetList } from 'react-admin';
 
 const Layout = () => {

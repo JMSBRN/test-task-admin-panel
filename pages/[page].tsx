@@ -1,5 +1,7 @@
-import Login from '../components/pages/login/Login';
+
+import Login from '../components/pages/login-page/Login';
 import React from 'react';
+import UpgradePage from '../components/pages/profile-page/ProfilePage';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
@@ -15,6 +17,8 @@ const Index = () => {
     return (
      <App />
     );
+    case 'profile': 
+    return <UpgradePage />;
     default:
       return <div>default</div>;
   }

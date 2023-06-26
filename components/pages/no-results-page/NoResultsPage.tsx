@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import noResultsImage from '../../public/images/No Results@3x.png';
+import noResultsImage from '../../../public/images/No Results@3x.png';
 import styles from './noResultsPage.module.scss';
 
 const NoResultsPage = () => {

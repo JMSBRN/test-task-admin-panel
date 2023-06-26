@@ -1,0 +1,123 @@
+@import 'mixins';
+@import '_variables';
+
+.mainContainer{
+    margin: 124px auto;
+    width: 100%;
+    height: 100%;
+    @include flex (center, flex-start);
+    & .backToSearchLink {
+        position: absolute;
+        top: 84px;
+        left: 117px;
+        text-decoration: none;
+    }
+}
+.leftSide{
+    width: 488px;
+    height: 253px;
+    margin-right: 35px;
+    border: 1px solid $grey-color;
+    border-radius: 5px;
+    display: block;
+    & .leftSideTitle {
+        font-size: 30px;
+        font-weight: 700;
+    }
+    & .topContainer {
+        width: 100%;
+        height: 30px;
+        padding: 0 6px;
+        border-bottom: 1px solid $grey-color;
+        @include flex (space-between, center);
+   
+        & .topContainerTitle{
+            font-size: 14px;
+            font-weight: 500;
+        }
+        & .logoutButton {
+            width:70px;
+            height: 20px;
+            text-decoration: none;
+        } 
+    }
+    & .proFileForm {
+        width: 100%;
+        height: 222px;
+        padding-top: 20px;
+        padding-left: 14px;
+        @include flex (space-around, center, column);
+        & .topFormSection {
+            width: 100%;
+            height: 100px;
+            @include flex (space-around, center);
+        }
+        & label {
+            font-weight: 700;
+        }
+        & input {
+            width: 220px;
+            height: 50px;
+            border-radius: 5px;
+            border: 1px solid $grey-color;
+            outline: none;
+            padding-left: 10px;
+        }
+        & .contactEmail, .contactPassword {
+            width: 100%;
+            height: 30px;
+            @include flex (space-between, center);
+            border-bottom: 1px solid $grey-color;
+            & a {
+                font-size: 12px;
+                font-weight: 700;
+                text-decoration: none;
+                margin-right: 10px;
+            }
+            & img {
+                margin-right: 5px;
+            }
+        }
+    }
+}
+.rightSide{
+    width: 700px;
+    margin-left: 80px;
+    padding: 4px;
+    height: auto;
+    & .rightSideTitle{
+        font-size: 20px;
+        font-weight: 900;
+    }
+    & .planContainer{
+        margin-top: 20px;
+        width: 700px;
+        height: 80px;
+        padding: 20px;
+        background-color: $grey-color;
+        border-radius: 5px;
+        @include flex (space-between, center);
+         & a {
+            width: 150px;
+            height: 50px;
+            font-size: 14px;
+            border-radius: 5px;
+            background-color: $prime-color;
+            text-decoration: none;
+            @include flex (center, center);
+            color: $white-color;
+            & img {
+                margin-right: 10px;
+            }
+         }
+        & .planTitlesContainer {
+          width: 400px;
+          height: auto;
+          & .planMainTitle {
+            font-size: 20px;
+            font-weight: 700;
+          }
+        }
+    }
+   
+}

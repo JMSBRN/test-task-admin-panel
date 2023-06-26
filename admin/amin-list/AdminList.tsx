@@ -6,6 +6,7 @@ import Image from 'next/image';
 import SortButton from '../../components/sort-button/SortButton';
 import popUpIcon from '../../public/svgs/popUp_Icon.svg';
 import styles from './adminList.module.scss';
+import { useRouter } from 'next/router';
 import userIcon from '../../public/svgs/Icon_User.svg';
 import verifyIcon from '../../public/svgs/Verify.svg';
 
@@ -42,6 +43,7 @@ const AdminList = () => {
     pagination: { page, perPage },
   });
   const [contact, setContact] = useState({} as Contact);
+  const { push } = useRouter();
 
   useEffect(() => {
     if (page > 5) {
@@ -95,7 +97,7 @@ const AdminList = () => {
               You are on limited version which allows viewing up to 100
               contacts. Upgrade your plan to view all pages.
             </div>
-            <button>Upgrade</button>
+            <button onClick={() => push('/profile')}>Upgrade</button>
             <div
               className={popUpBotomText}
               onClick={() => setScrollLimited(false)}

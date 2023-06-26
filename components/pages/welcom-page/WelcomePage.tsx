@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import React from 'react';
-import arrowIcon from '../../public/svgs/arrow_down.svg';
-import clockIcon from '../../public/svgs/Icon_History.svg';
-import stateMessageIcon from '../../public/welcome_images/Empty_Searches.png';
+import arrowIcon from '../../../public/svgs/arrow_down.svg';
+import clockIcon from '../../../public/svgs/Icon_History.svg';
+import stateMessageIcon from '../../../public/welcome_images/Empty_Searches.png';
 import styles from './welcomePage.module.scss';
-import welcomeMessageIcon from '../../public/welcome_images/Empty_State_1.png';
+import welcomeMessageIcon from '../../../public/welcome_images/Empty_State_1.png';
 
 const WelcomePage = () => {
     const {

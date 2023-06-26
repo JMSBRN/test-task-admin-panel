@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import SearchForm from '../search-form/SearchForm';
-import { SearchFormData } from '../search-form/interfaces';
+import SearchForm from '../../search-form/SearchForm';
+import { SearchFormData } from '../../search-form/interfaces';
 import WelcomePage from '../welcom-page/WelcomePage';
 import styles from './searchPage.module.scss';
 
