@@ -74,7 +74,7 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
         </div>
       </div>
       <div className={centerContiner}>
-        { table ? (
+        { !table ? (
           <>
           <div className={welcomeMessage}>
             <Image src={welcomeMessageIcon} width={200} alt="chat messages" />

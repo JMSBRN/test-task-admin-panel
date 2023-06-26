@@ -1,7 +1,7 @@
 @import 'mixins';
 @import '_variables';
 
-.CustomerModalContiner {
+.ContactModalContiner {
     position: absolute;
     top: -78px;
     bottom: 0;
@@ -38,7 +38,7 @@
        height: 96px;
        border: 1px solid $grey-color;
        border-radius:  5px 5px 0 0 ;
-       & .customerName {
+       & .contactName {
         width: 100%;
         height: 93px;
         font-size: 20px;
@@ -90,7 +90,7 @@
             grid-template-rows: 25px minmax(30px, auto);
             & .title {
                 font-size: 14px;
-                color: $grey-color;
+                color: $grey-dark-color;
             }
             & p {
                 width: 94%;

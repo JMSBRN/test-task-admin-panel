@@ -10,14 +10,14 @@ interface CustomerModalProps {
 }
 const ContactModal = ({ handleCloseModal, contact }: CustomerModalProps) => {
   const { 
-    CustomerModalContiner,
+    ContactModalContiner,
     closeBtn,
     topContainer,
     mainContainer,
     contentWrapper,
     title,
     content,
-    customerName,
+    contactName,
     descriptionStyle
    } =
     styles;
@@ -29,12 +29,12 @@ const ContactModal = ({ handleCloseModal, contact }: CustomerModalProps) => {
     };
 
   return (
-    <div className={CustomerModalContiner}>
+    <div className={ContactModalContiner}>
       <div className={closeBtn} onClick={handleCloseModal} />
       <div className={topContainer}>
         {
           customerNameRendered ? (<div 
-          className={customerName}
+          className={contactName}
           onClick={handleRenderCustomerName}
           >
             { contact.name || 'Will Gibbon' }
