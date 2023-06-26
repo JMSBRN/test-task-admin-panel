@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { User } from '../interfaces';
 import { VectorIcon } from './VectorIcon';
 import styles from './form.module.scss';
@@ -9,7 +9,31 @@ interface FormProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 const Form = ({ formData, handleSubmit, handleChange }: FormProps) => {
-  const { formStyle, vectorIcon, hidePswBtn } = styles;
+  const { 
+    formStyle,
+    vectorIcon,
+    hidePswBtn,
+    vectorIconTwo,
+    openEyeImagesStyle,
+    openEyeImagesStyleHidden,
+    eyeRadiusLine,
+    labelPsw
+   } = styles;
+  const [passwordRendered, setPasswordRendered] = useState<boolean>(false);
+
+  const setStyleForShowPswButton = () => {
+    if (passwordRendered) {
+      return openEyeImagesStyle;
+    } else {
+       return openEyeImagesStyleHidden;
+    }
+  
+  };
+
+const handleSetRenderedPsw = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  e.preventDefault();
+  setPasswordRendered(!passwordRendered);
+};
 
   return (
     <form className={formStyle} onSubmit={handleSubmit}>
@@ -23,9 +47,10 @@ const Form = ({ formData, handleSubmit, handleChange }: FormProps) => {
           onChange={handleChange}
         />
       </label>
-      <label>
+      <label className={labelPsw}>
         Password
         <>
+        { passwordRendered ? (
           <input
             name="password"
             value={formData.password || ''}
@@ -33,8 +58,23 @@ const Form = ({ formData, handleSubmit, handleChange }: FormProps) => {
             placeholder={`${!formData.password && 'Enter your password'}`}
             onChange={handleChange}
           />
-          <button className={hidePswBtn}>
+        ) : (
+          <input
+            name="password"
+            value={formData.password || ''}
+            type="password"
+            placeholder={`${!formData.password && 'Enter your password'}`}
+            onChange={handleChange}
+          />
+        )
+        }
+          <button className={hidePswBtn} onClick={handleSetRenderedPsw}>
             <VectorIcon className={vectorIcon} />
+            <div className={setStyleForShowPswButton()}>
+            <VectorIcon className={vectorIconTwo} />
+             <div></div>
+             <div className={eyeRadiusLine}></div>
+            </div>
           </button>
         </>
       </label>

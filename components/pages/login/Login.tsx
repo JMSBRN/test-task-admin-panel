@@ -15,10 +15,10 @@ const Login = () => {
     rightSide,
     mainTitle,
     secondTitle,
-    leftSideLogoBlock,
+    rightSideLogoBlock,
     logo,
-    secondTitleLeftSide,
-    secondTitleLeftSideLast
+    secondTitleRightSide,
+    secondTitleRightSideLast
   } = styles;
 
   const [formData, setFormData] = useState({} as User);
@@ -53,7 +53,7 @@ const Login = () => {
   return (
     <div className={layout}>
       <div className={mainContainer}>
-        <div className={rightSide}>
+        <div className={leftSide}>
           <div className={mainTitleContainer}>
             <div className={mainTitle}>Login to lorem ipsum</div>
             <div className={secondTitle}>
@@ -65,14 +65,14 @@ const Login = () => {
             <Form formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} />
           </div>
         </div>
-        <div className={leftSide}>
+        <div className={rightSide}>
          <LoginReg_Back />
-          <div className={leftSideLogoBlock}>
+          <div className={rightSideLogoBlock}>
             <div className={logo}>Logo</div>
-            <div className={secondTitleLeftSide}>
+            <div className={secondTitleRightSide}>
              Lorem ipsum dolor sit amet,
             </div>
-            <div className={secondTitleLeftSideLast}>
+            <div className={secondTitleRightSideLast}>
              consectetur adipiscing elit
             </div>
           </div>

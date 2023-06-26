@@ -16,7 +16,7 @@
     @include flex(center, center);
 }
 
-.rightSide {
+.leftSide {
     position: relative;
     top: 0;
     left: 0;
@@ -43,26 +43,27 @@
 }
 
 .mainTitle {
-    margin-top: 17px;
-    font-size: 33px;
-    font-weight: 700;
-    letter-spacing: -0.25px;
+    margin-top: 20px;
+    font-size: 32px;
+    font-weight: 800;
 }
 
 .secondTitle {
-    margin-top: 6px;
-    font-size: 16px;
-    font-weight: 100;
-    letter-spacing: -0.25px;
+    width: 370px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 2px;
+    line-height: 20px;
 }
 
-.leftSide {
+.rightSide {
     position: relative;
     width: 720px;
     height: 900px;
 }
 
-.leftSideLogoBlock {
+.rightSideLogoBlock {
     position: absolute;
     right: 182px;
     bottom: 95px;
@@ -70,21 +71,15 @@
     height: 100px;
 
     & .logo {
-        font-size: 28px;
+        margin-top: 4px;
+        margin-bottom: 17px;
+        font-size: 24px;
         text-transform: uppercase;
-        font-weight: 800;
-        letter-spacing: -2px;
-        margin-bottom: 13px;
+        font-weight: 1000;
     }
 
-    & .secondTitleLeftSide, .secondTitleLeftSideLast {
-        font-size: 30px;
-        margin-bottom: 7px;
-        font-weight: 900;
-        letter-spacing: 0.6px;
-    }
-    & .secondTitleLeftSideLast {
-        margin-top: -8px;
-        letter-spacing: 0.7px;
+    & .secondTitleRightSide, .secondTitleRightSideLast {
+        font-size: 32px;
+        font-weight: 800;
     }
 }
