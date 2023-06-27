@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import { Regex, RegexHelperMessages } from '../../constants';
 import { User } from '../interfaces';
 import { VectorIcon } from './VectorIcon';
-import styles from './form.module.scss';
+import styles from './LoginForm.module.scss';
 
 interface FormProps {
   formData: User;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
-const Form = ({ formData, handleSubmit, handleChange }: FormProps) => {
+const LoginForm = ({ formData, handleSubmit, handleChange }: FormProps) => {
   const { 
     formStyle,
     vectorIcon,
@@ -45,6 +46,10 @@ const handleSetRenderedPsw = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>
           type="text"
           placeholder={`${!formData.email && 'Enter your email'}`}
           onChange={handleChange}
+          required
+          pattern={Regex.EMAIL}
+          autoFocus
+          title="test@nyblecraft.com"
         />
       </label>
       <label className={labelPsw}>
@@ -57,6 +62,10 @@ const handleSetRenderedPsw = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>
             type="text"
             placeholder={`${!formData.password && 'Enter your password'}`}
             onChange={handleChange}
+            required
+            pattern={Regex.PASSWORD}
+            autoFocus
+            title={RegexHelperMessages.PASSWORD}
           />
         ) : (
           <input
@@ -65,6 +74,10 @@ const handleSetRenderedPsw = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>
             type="password"
             placeholder={`${!formData.password && 'Enter your password'}`}
             onChange={handleChange}
+            required
+            pattern={Regex.PASSWORD}
+            autoFocus
+            title={RegexHelperMessages.PASSWORD}
           />
         )
         }
@@ -83,4 +96,4 @@ const handleSetRenderedPsw = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   );
 };
 
-export default Form;
+export default LoginForm;

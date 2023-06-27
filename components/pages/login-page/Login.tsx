@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Form from '../../form/Form';
+import Form from '../../login-form/LoginForm';
 import { LoginReg_Back } from '../../LoginReg_Back/LoginReg_Back';
 import { User } from '../../interfaces';
 import styles from './login.module.scss';
