@@ -16,7 +16,7 @@ const NoResultsPage = () => {
     e.preventDefault();
     const clearedFilters = { job_title: '', country: '', industry: '' } as SearchFormData;
     
-    push('/2_1_First_Enter');
+    push('/admin');
     setFormDataToLocal(clearedFilters);
     refresh();
   };

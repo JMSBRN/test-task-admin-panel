@@ -5,11 +5,11 @@ const Index = () => {
   const { push } = useRouter();
 
   useEffect(() => {
-   push('/1_1_Login');
+   push('/login');
   }, [push]);
   
   return (
-   <div className="">index</div>
+   <div>index</div>
   );
 };
 

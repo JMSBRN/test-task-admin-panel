@@ -1,5 +1,6 @@
 
 import Login from '../components/pages/login-page/Login';
+import NotFound from '../components/pages/not-found/NotFound';
 import React from 'react';
 import UpgradePage from '../components/pages/profile-page/ProfilePage';
 import dynamic from 'next/dynamic';
@@ -9,9 +10,9 @@ const Index = () => {
   const { query } = useRouter();
 
   switch (query.page) {
-    case '1_1_Login':
+    case 'login':
       return <Login />;
-    case '2_1_First_Enter':
+    case 'admin':
     const App = dynamic(() => import('../admin/Admin'), { ssr: false });
 
     return (
@@ -20,7 +21,7 @@ const Index = () => {
     case 'profile': 
     return <UpgradePage />;
     default:
-      return <div>default</div>;
+      return <NotFound />;
   }
 };
 

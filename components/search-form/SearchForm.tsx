@@ -63,7 +63,7 @@ const SearchForm = ({ formData, setFormData }: SearchFormProps) => {
         <span>job title</span>
         <input 
         name='job_title'
-        value={formData.job_title}
+        value={formData.job_title || '' }
         type="text"
         onChange={handleChange}
         />

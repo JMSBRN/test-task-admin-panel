@@ -43,7 +43,7 @@ const Login = () => {
 
    if(result) {
      if (result.message === 'created') {
-       router.push('/2_1_First_Enter');
+       router.push('/admin');
        setFormData({ email: '', password: '' });        
      };
    }

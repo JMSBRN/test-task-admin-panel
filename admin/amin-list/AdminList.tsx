@@ -3,10 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { Contact } from '../../components/interfaces';
 import ContactModal from '../../components/contact-modal/ContactModal';
 import Image from 'next/image';
+import PopUpUpgrade from '../../components/popUp-upgrade/PopUpUpgrade';
 import SortButton from '../../components/sort-button/SortButton';
-import popUpIcon from '../../public/svgs/popUp_Icon.svg';
 import styles from './adminList.module.scss';
-import { useRouter } from 'next/router';
 import userIcon from '../../public/svgs/Icon_User.svg';
 import verifyIcon from '../../public/svgs/Verify.svg';
 
@@ -22,11 +21,6 @@ const AdminList = () => {
     veriFyImage,
     tableContent,
     sortBtn,
-    closeBtn,
-    popUpUpgrade,
-    popUpTitle,
-    popUpText,
-    popUpBotomText,
     rowLayout,
     contactName,
   } = styles;
@@ -43,7 +37,6 @@ const AdminList = () => {
     pagination: { page, perPage },
   });
   const [contact, setContact] = useState({} as Contact);
-  const { push } = useRouter();
 
   useEffect(() => {
     if (page > 5) {
@@ -89,22 +82,7 @@ const AdminList = () => {
       )}
       <div className={tableContainer}>
         {scrollLimited && (
-          <div className={popUpUpgrade}>
-            <div className={closeBtn} onClick={() => setScrollLimited(false)} />
-            <Image width={55} alt=" popUp icon" src={popUpIcon} />
-            <div className={popUpTitle}>Upgarde now</div>
-            <div className={popUpText}>
-              You are on limited version which allows viewing up to 100
-              contacts. Upgrade your plan to view all pages.
-            </div>
-            <button onClick={() => push('/profile')}>Upgrade</button>
-            <div
-              className={popUpBotomText}
-              onClick={() => setScrollLimited(false)}
-            >
-              Maybe later
-            </div>
-          </div>
+         <PopUpUpgrade setScrollLimited={setScrollLimited} />
         )}
         <div className={tableHeader}>
           <div className={sortBtn}>

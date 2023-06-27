@@ -6,3 +6,11 @@
         flex-direction: $flex-direction;
     }
 }
+
+  // responsive
+
+  @mixin respond-to($breakpoint) {
+    @media only screen and (max-width: $breakpoint) {
+      @content;
+    }
+  }
