@@ -37,7 +37,7 @@ const UpgradePage = () => {
       <div className={topSection}>
         <div className={logo}>Logo</div>
       </div>
-      <Link className={backToSearchLink} href={'/2_1_First_Enter'} >
+      <Link className={backToSearchLink} href={'/admin'} >
         <Image width={20} src={backToSearchIcon} alt="arrow to left" />
         Back to search</Link>
       <div className={leftSide}>
