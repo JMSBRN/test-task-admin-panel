@@ -10,6 +10,8 @@ import styles from './profilePage.module.scss';
 const UpgradePage = () => {
   const {
     mainContainer,
+    topSection,
+    logo,
     leftSide,
     rightSide,
     formContainer,
@@ -32,6 +34,9 @@ const UpgradePage = () => {
 
   return (
     <div className={mainContainer}>
+      <div className={topSection}>
+        <div className={logo}>Logo</div>
+      </div>
       <Link className={backToSearchLink} href={'/2_1_First_Enter'} >
         <Image width={20} src={backToSearchIcon} alt="arrow to left" />
         Back to search</Link>
