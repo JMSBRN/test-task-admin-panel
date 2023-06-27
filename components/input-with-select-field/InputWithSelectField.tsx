@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ContactForInpuSelect } from '../interfaces';
 import Image from 'next/image';
-import { SearchFormData } from '../search-form/interfaces';
+import { SearchFormDataForInputSelect } from '../search-form/interfaces';
 import polygonIconDown from '../../public/svgs/Polygon 2.svg';
 import polygonIconUp from '../../public/svgs/Polygon 1.svg';
+import setFormDataToLocal from '../../utils/localUtils';
 import styles from './inputWithSelectField.module.scss';
 
 interface InputWithSelectFieldProps {
@@ -12,8 +13,8 @@ interface InputWithSelectFieldProps {
   fieldName: string;
   textPlaceHolder:string;
   data: ContactForInpuSelect[];
-  formData: SearchFormData;
-  setFormData: React.Dispatch<React.SetStateAction<SearchFormData>>;
+  formData: SearchFormDataForInputSelect;
+  setFormData: React.Dispatch<React.SetStateAction<SearchFormDataForInputSelect>>;
 }
 
 const InputWithSelectField = ({
@@ -29,25 +30,16 @@ const InputWithSelectField = ({
   const [selectListRendered, setSelectListRendered] = useState<boolean>(false);
   const [inputValueForFilter, setInputValueForFilter] = useState<string>('');
   const [sortChanged, setSortChanged] = useState<boolean>(false);
-  const [inputValue, setInputValue] = useState<string>();
 
-  const setFormDataToLocal = (formData: SearchFormData) => {
-    // filter not working in api for country an industry ??
-    window.localStorage.setItem(
-      'formData',
-      JSON.stringify({
-        job_title: formData.job_title,
-        country: '',
-        industry: '',
-      })
-    );
-  };
-
+  useEffect(() => {
+    setFormDataToLocal(formData);
+  }, [formData]);
+  
   const handleChangeSelectValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const value = e.target.value;
-
-    setInputValue(value);
+    
+    setFormData({ ...formData, [fieldName]: value });
     if (value && value.match('^[a-zA-Z]+$')) {
       setSelectListRendered(true);
     } else {
@@ -63,8 +55,6 @@ const InputWithSelectField = ({
     const id = e.currentTarget.id;
 
     setFormData({ ...formData, [fieldName]: id });
-    setFormDataToLocal(formData);
-    setInputValue(id);
   };
 
   const handleSetSelectList = () => {
@@ -85,7 +75,7 @@ const InputWithSelectField = ({
       </button>
       <input 
       name={fieldName}
-      value={inputValue}
+      value={formData[fieldName]}
       type="text"
       onChange={handleChangeSelectValue}
       placeholder={textPlaceHolder}
@@ -106,7 +96,7 @@ const InputWithSelectField = ({
                   className={listItem}
                   key={el.id}
                   id={el[fieldName]}
-                  onClick={(e) => handleGetFilteredValue(e, 'country')}
+                  onClick={(e) => handleGetFilteredValue(e, fieldName)}
                 >
                   {el[fieldName]}
                 </div>

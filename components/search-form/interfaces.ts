@@ -3,3 +3,8 @@ export interface SearchFormData {
     country: string;
     industry: string;
 }
+
+export interface SearchFormDataForInputSelect extends SearchFormData {
+    [key: string]: any;
+}
+
