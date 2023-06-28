@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Form from '../../login-form/LoginForm';
+import { LoginFormData } from '../../interfaces';
 import { LoginReg_Back } from '../../LoginReg_Back/LoginReg_Back';
-import { User } from '../../interfaces';
 import styles from './login.module.scss';
 import { useRouter } from 'next/router';
 
@@ -18,41 +18,79 @@ const Login = () => {
     rightSideLogoBlock,
     logo,
     secondTitleRightSide,
-    secondTitleRightSideLast
+    secondTitleRightSideLast,
+    loadingStyle,
+    apiErrorStyle
   } = styles;
 
-  const [formData, setFormData] = useState({} as User);
+  const [formData, setFormData] = useState<LoginFormData>({ email: '', password: '' });
+  const [emailError, setEmailError] = useState<boolean>(false);
+  const [passwordError, setPasswordError] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [apiError, setApiError] = useState<string>('');
   const router = useRouter();
-  
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    setFormData({ ...formData, [e.target.name]: e.target.value });
- };
+    setApiError('');
+    const value = e.target.value;
 
- const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  const res = await fetch('/api/login/', {
-   method: 'POST',
-   headers: { 
-     'Content-Type': 'application/json',
-     'Authorization':'123'
-  },
-   body: JSON.stringify({ formData })
-  });
-  const result: { message: string } = await res.json();
+    if (e.target.name === 'email') {
+      const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-   if(result) {
-     if (result.message === 'created') {
-       router.push('/admin');
-       setFormData({ email: '', password: '' });        
-     };
-   }
+      setEmailError(!regexEmail.test(value));
+    } else if(e.target.name === 'password') {
+      const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+      
+      setPasswordError(!regexPassword.test(value));
+    }
+    if (!value) {
+      setEmailError(false);
+      setPasswordError(false);
+    }
+    setFormData({ ...formData, [e.target.name]: value });
+  };
 
- };
+  const handleSubmitInLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    setLoading(true);
+    setApiError('');
+    e.preventDefault();
+    if((!emailError && formData.email) && (!passwordError && formData.password)) {
+
+      const res = await fetch('/api/login/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: '123',
+        },
+        body: JSON.stringify({ formData }),
+      });
+      const result: { message: string } = await res.json();
+  
+      if (result) {
+        setLoading(false);
+        if (result.message === 'created') {
+          router.push('/admin');
+          setFormData({ email: '', password: '' });
+        } else  {
+           setApiError(result.message);
+        }
+
+      }
+    } else {
+      setLoading(false);
+      setApiError('all fields are required *');
+      setTimeout(() => {
+        setApiError('');
+      }, 5000);
+    }
+  };
 
   return (
     <div className={layout}>
       <div className={mainContainer}>
+        { loading && <div className={loadingStyle}>Loading...</div> }
+        <div className={apiErrorStyle}>{apiError}</div>
         <div className={leftSide}>
           <div className={mainTitleContainer}>
             <div className={mainTitle}>Login to lorem ipsum</div>
@@ -62,18 +100,24 @@ const Login = () => {
             </div>
           </div>
           <div className={formContainer}>
-            <Form formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} />
+            <Form
+              emailWithError={emailError}
+              passwordWithError={passwordError}
+              formData={formData}
+              handleChange={handleChange}
+              handleSubmit={handleSubmitInLogin}
+            />
           </div>
         </div>
         <div className={rightSide}>
-         <LoginReg_Back />
+          <LoginReg_Back />
           <div className={rightSideLogoBlock}>
             <div className={logo}>Logo</div>
             <div className={secondTitleRightSide}>
-             Lorem ipsum dolor sit amet,
+              Lorem ipsum dolor sit amet,
             </div>
             <div className={secondTitleRightSideLast}>
-             consectetur adipiscing elit
+              consectetur adipiscing elit
             </div>
           </div>
         </div>

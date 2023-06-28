@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Regex, RegexHelperMessages } from '../../constants';
 import { User } from '../interfaces';
 import { VectorIcon } from './VectorIcon';
 import styles from './LoginForm.module.scss';
@@ -8,8 +7,16 @@ interface FormProps {
   formData: User;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  emailWithError: boolean;
+  passwordWithError: boolean;
 }
-const LoginForm = ({ formData, handleSubmit, handleChange }: FormProps) => {
+const LoginForm = ({ 
+  formData,
+  handleSubmit,
+  handleChange,
+  emailWithError,
+  passwordWithError,
+ }: FormProps) => {
   const { 
     formStyle,
     vectorIcon,
@@ -18,79 +25,65 @@ const LoginForm = ({ formData, handleSubmit, handleChange }: FormProps) => {
     openEyeImagesStyle,
     openEyeImagesStyleHidden,
     eyeRadiusLine,
-    labelPsw
+    inputStyle,
+    inputStyleWithError,
+    hidden
    } = styles;
   const [passwordRendered, setPasswordRendered] = useState<boolean>(false);
 
-  const setStyleForShowPswButton = () => {
-    if (passwordRendered) {
-      return openEyeImagesStyle;
-    } else {
-       return openEyeImagesStyleHidden;
-    }
-  
+  const handleSetRenderedPsw = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    setPasswordRendered(!passwordRendered);
   };
-
-const handleSetRenderedPsw = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-  e.preventDefault();
-  setPasswordRendered(!passwordRendered);
-};
 
   return (
     <form className={formStyle} onSubmit={handleSubmit}>
-      <label>
-        Email
-        <input
-          name="email"
-          value={formData.email || ''}
-          type="text"
-          placeholder={`${!formData.email && 'Enter your email'}`}
-          onChange={handleChange}
-          required
-          pattern={Regex.EMAIL}
-          autoFocus
-          title="test@nyblecraft.com"
-        />
-      </label>
-      <label className={labelPsw}>
-        Password
-        <>
-        { passwordRendered ? (
+      <div>
+        <label>Email</label>
           <input
-            name="password"
-            value={formData.password || ''}
+            className={ emailWithError ? inputStyleWithError : inputStyle}
+            name="email"
+            value={formData.email || ''}
             type="text"
-            placeholder={`${!formData.password && 'Enter your password'}`}
+            placeholder={`${!formData.email && 'Enter your email'}`}
             onChange={handleChange}
-            required
-            pattern={Regex.PASSWORD}
-            autoFocus
-            title={RegexHelperMessages.PASSWORD}
           />
-        ) : (
-          <input
-            name="password"
-            value={formData.password || ''}
-            type="password"
-            placeholder={`${!formData.password && 'Enter your password'}`}
-            onChange={handleChange}
-            required
-            pattern={Regex.PASSWORD}
-            autoFocus
-            title={RegexHelperMessages.PASSWORD}
-          />
-        )
-        }
-          <button className={hidePswBtn} onClick={handleSetRenderedPsw}>
-            <VectorIcon className={vectorIcon} />
-            <div className={setStyleForShowPswButton()}>
-            <VectorIcon className={vectorIconTwo} />
-             <div></div>
-             <div className={eyeRadiusLine}></div>
-            </div>
-          </button>
-        </>
-      </label>
+          <span className={ emailWithError ? '' : hidden }>must be email format</span>
+      </div>
+      <div>
+        <label>Password</label>
+          <>
+          { passwordRendered ? (
+            <input
+              className={ passwordWithError ? inputStyleWithError : inputStyle }
+              name="password"
+              value={formData.password || ''}
+              type="text"
+              placeholder={`${!formData.password && 'Enter your password'}`}
+              onChange={handleChange}
+            />
+          ) : (
+            <input
+              className={ passwordWithError ? inputStyleWithError : inputStyle }
+              name="password"
+              value={formData.password || ''}
+              type="password"
+              placeholder={`${!formData.password && 'Enter your password'}`}
+              onChange={handleChange}
+            />
+          )
+          }
+            <button className={ hidePswBtn } onClick={ handleSetRenderedPsw }>
+              <VectorIcon className={vectorIcon} />
+              <div className={passwordRendered ? openEyeImagesStyle : openEyeImagesStyleHidden }>
+              <VectorIcon className={vectorIconTwo} />
+               <div></div>
+               <div className={eyeRadiusLine}></div>
+              </div>
+            </button>
+          </>
+          <span className={ passwordWithError ? '' : hidden }>min 8 digits, requred one leter</span>
+      </div>
       <input type="submit" value="Login" />
     </form>
   );
