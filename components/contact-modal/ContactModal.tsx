@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Contact } from '../interfaces';
+import { ContactInfo } from '../interfaces';
 import Image from 'next/image';
 import styles from './customerModal.module.scss';
 import userIcon from '../../public/svgs/Icon_User.svg';
 
 interface CustomerModalProps {
   handleCloseModal: () => void;
-  contact: Contact;
+  contact: ContactInfo;
 }
 const ContactModal = ({ handleCloseModal, contact }: CustomerModalProps) => {
   const { 
@@ -37,7 +37,7 @@ const ContactModal = ({ handleCloseModal, contact }: CustomerModalProps) => {
           className={contactName}
           onClick={handleRenderCustomerName}
           >
-            { contact.name || 'Will Gibbon' }
+            { contact.full_name || 'Will Gibbon' }
           </div>) : (
               <button onClick={handleRenderCustomerName}>
               <Image

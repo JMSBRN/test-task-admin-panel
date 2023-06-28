@@ -1,10 +1,11 @@
 import { Pagination, useGetList } from 'react-admin';
 import React, { useEffect, useState } from 'react';
-import { Contact } from '../../components/interfaces';
+import { ContactInfo } from '../../components/interfaces';
 import ContactModal from '../../components/contact-modal/ContactModal';
 import Image from 'next/image';
 import PopUpUpgrade from '../../components/popUp-upgrade/PopUpUpgrade';
 import SortButton from '../../components/sort-button/SortButton';
+import getContactInfo from '../../utils/apiUtils';
 import styles from './adminList.module.scss';
 import userIcon from '../../public/svgs/Icon_User.svg';
 import verifyIcon from '../../public/svgs/Verify.svg';
@@ -36,7 +37,7 @@ const AdminList = () => {
   const { data, total } = useGetList('contacts', {
     pagination: { page, perPage },
   });
-  const [contact, setContact] = useState({} as Contact);
+  const [contactInfo, setContactInfo] = useState<ContactInfo>({} as ContactInfo);
 
   useEffect(() => {
     if (page > 5) {
@@ -44,31 +45,40 @@ const AdminList = () => {
     }
   }, [page]);
 
-  const handleGetContactName = (
+  const handleGetContactName = async (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     const id = e.currentTarget.id;
 
     data?.forEach((el) => {
       if (el.id === id) {
-        setContact(el);
         setId(el.id);
       }
-
+      
       setContactNameRendered(!contactNameRendered);
     });
+    const contactInfo = await getContactInfo(id);
+
+      if(contactInfo) {
+        setContactInfo(contactInfo);
+      }
+
   };
 
-  const handleMouseOverGetContact = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
+  const handleClickGetContact = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const id = e.currentTarget.id;
 
-    data?.forEach((el) => {
-      if (el.id === id) {
-        setContact(el);
-      }
-    });
+    // data?.forEach((el) => {
+    //   if (el.id === id) {
+    //     setContactInfo(el);
+    //   }
+    // });
+
+    const contactInfo = await getContactInfo(id);
+
+    if(contactInfo) {
+      setContactInfo(contactInfo);
+    }
   };
 
   const handleCloseModal = () => {
@@ -78,7 +88,7 @@ const AdminList = () => {
   return (
     <>
       {contactModalRendered && (
-        <ContactModal contact={contact} handleCloseModal={handleCloseModal} />
+        <ContactModal contact={contactInfo} handleCloseModal={handleCloseModal} />
       )}
       <div className={tableContainer}>
         {scrollLimited && (
@@ -108,7 +118,7 @@ const AdminList = () => {
               id={el.id}
               key={el.id}
               className={rowLayout}
-              onMouseOver={handleMouseOverGetContact}
+              onClick={handleClickGetContact}
             >
               <div className={rowStyle}>
                 <div

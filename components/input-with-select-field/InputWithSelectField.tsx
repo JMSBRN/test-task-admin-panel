@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ContactForInpuSelect } from '../interfaces';
 import Image from 'next/image';
-import { SearchFormDataForInputSelect } from '../search-form/interfaces';
+import { SearchFormDataForInputSelect } from '../interfaces';
 import polygonIconDown from '../../public/svgs/Polygon 2.svg';
 import polygonIconUp from '../../public/svgs/Polygon 1.svg';
 import setFormDataToLocal from '../../utils/localUtils';

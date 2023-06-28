@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import SearchForm from '../../search-form/SearchForm';
-import { SearchFormData } from '../../search-form/interfaces';
+import { SearchFormData } from '../../interfaces';
 import WelcomePage from '../welcom-page/WelcomePage';
 import setFormDataToLocal from '../../../utils/localUtils';
 import styles from './searchPage.module.scss';

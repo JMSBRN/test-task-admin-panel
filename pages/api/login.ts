@@ -15,8 +15,7 @@ const handler = async (req:NextApiRequest, res: NextApiResponse) => {
                 body: JSON.stringify(formData)
               });
               const result = await response.json();
-
-               console.log(result);
+              
               if(result.accessToken) {
                  const { accessToken } = result;
                  

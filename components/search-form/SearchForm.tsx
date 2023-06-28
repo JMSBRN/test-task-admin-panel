@@ -3,7 +3,7 @@ import { ContactForInpuSelect } from '../interfaces';
 import Image from 'next/image';
 import InputWithSelectField from '../input-with-select-field/InputWithSelectField';
 import React from 'react';
-import { SearchFormData } from './interfaces';
+import { SearchFormData } from '../interfaces';
 import industryIcon from '../../public/svgs/Icon_Industry.svg';
 import jobTitleIcon from '../../public/svgs/Icon_JobTitle.svg';
 import locationIcon from '../../public/svgs/Icon_Location.svg';

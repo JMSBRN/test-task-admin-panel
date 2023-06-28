@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import { SearchFormData } from '../../search-form/interfaces';
+import { SearchFormData } from '../../interfaces';
 import noResultsImage from '../../../public/images/No Results@3x.png';
 import setFormDataToLocal from '../../../utils/localUtils';
 import styles from './noResultsPage.module.scss';

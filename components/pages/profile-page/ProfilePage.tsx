@@ -4,6 +4,7 @@ import React from 'react';
 import backToSearchIcon from '../../../public/svgs/Icon_Arrow_Back_to_search.svg';
 import changePlanIcon from '../../../public/svgs/change_plan.svg';
 import changeProfileDataIcon from '../../../public/svgs/Icon_Change_profile_data.svg';
+import { deleteCookie } from 'cookies-next';
 import logOutIcon from '../../../public/svgs/Icon_Logout.svg';
 import styles from './profilePage.module.scss';
 
@@ -32,6 +33,11 @@ const UpgradePage = () => {
     lineSecond
   } = styles;
 
+  const handleLogOut = () => {
+   window.localStorage.clear();
+   deleteCookie('token');
+  };
+
   return (
     <div className={mainContainer}>
       <div className={topSection}>
@@ -44,7 +50,7 @@ const UpgradePage = () => {
         <div className={formContainer}>
           <div className={topContainer}>
             <div className={topContainerTitle}>Account info</div>
-            <Link href={'/'} className={logoutButton} onClick={() => window.localStorage.clear()}>
+            <Link href={'/'} className={logoutButton} onClick={handleLogOut}>
               <Image width={16} src={logOutIcon} alt="" />
               Log out
             </Link>

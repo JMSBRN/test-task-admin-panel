@@ -1,4 +1,4 @@
-import { SearchFormData } from '../components/search-form/interfaces';
+import { SearchFormData } from '../components/interfaces';
 
 const setFormDataToLocal = (formData: SearchFormData) => {
     // filter not working in api for country an industry ??
