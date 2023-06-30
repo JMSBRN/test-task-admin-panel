@@ -40,6 +40,11 @@ interface Props {
 export const LoginReg_Back: FC<Props> = memo(function LoginReg_Back(
   props = {}
 ) {
+
+  const createRectangles = (items: number) => {
+    return (<>{Array(items).fill(<div className={classes.rectangle}/>)}</>);
+  };
+  
   return (
     <div
       className={`${resets.storybrainResets}
@@ -57,164 +62,72 @@ export const LoginReg_Back: FC<Props> = memo(function LoginReg_Back(
           className={`${props.classes?.frame9 || ''} ${classes.frame9}`}
         >
             <div className={classes.frame1}>
-              <div className={classes.rectangleFirst}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangleLast}></div>
+              <div className={classes.rectangleFirst}/>
+               {createRectangles(11)}
+              <div className={classes.rectangleLast}/>
             </div>
             <div className={classes.frame8}>
-              <div className={classes.rectangleFirst}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangleBackGround}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangleLast}></div>
+              <div className={classes.rectangleFirst}/>
+              {createRectangles(10)}
+              <div className={classes.rectangleBackGround}/>
+              <div className={classes.rectangle}/>
+              <div className={classes.rectangleLast}/>
             </div>
             <div className={classes.frame2}>
-              <div className={classes.rectangleFirst}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangleLast}></div>
+              <div className={classes.rectangleFirst}/>
+              {createRectangles(12)}
+              <div className={classes.rectangleLast}/>
             </div>
             <div className={classes.frame3}>
-              <div className={classes.rectangleFirst}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangleBackGround}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangleLast}></div>
+              <div className={classes.rectangleFirst}/>
+              {createRectangles(5)}
+              <div className={classes.rectangleBackGround}/>
+              {createRectangles(6)}
+              <div className={classes.rectangleLast}/>
             </div>
             <div className={classes.frame4}>
-              <div className={classes.rectangleFirst}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangleBackGround}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangleLast}></div>
+              <div className={classes.rectangleFirst}/>
+              {createRectangles(10)}
+              <div className={classes.rectangleBackGround}/>
+              <div className={classes.rectangle}/>
+              <div className={classes.rectangleLast}/>
             </div>
             <div className={classes.frame5}>
-              <div className={classes.rectangleFirst}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangleBackGround}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangleLast}></div>
+              <div className={classes.rectangleFirst}/>
+              {createRectangles(4)}
+              <div className={classes.rectangleBackGround}/>
+              {createRectangles(7)}
+              <div className={classes.rectangleLast}/>
             </div>
             <div className={classes.frame6}>
-              <div className={classes.rectangleFirst}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangleBackGround}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangleLast}></div>
+              <div className={classes.rectangleFirst}/>
+              {createRectangles(8)}
+              <div className={classes.rectangleBackGround}/>
+              {createRectangles(3)}
+              <div className={classes.rectangleLast}/>
             </div>
             <div className={classes.frame7}>
-              <div className={classes.rectangleFirst}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangleBackGround}></div>
-              <div className={classes.rectangleLast}></div>
+              <div className={classes.rectangleFirst}/>
+              {createRectangles(10)}
+              <div className={classes.rectangleBackGround}/>
+              <div className={classes.rectangleLast}/>
             </div>
             <div className={classes.frame92}>
-              <div className={classes.rectangleFirst}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangleBackGround}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangleBackGround}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangleLast}></div>
+              <div className={classes.rectangleFirst}/>
+              {createRectangles(5)}
+              <div className={classes.rectangle}/>
+              <div className={classes.rectangleBackGround}/>
+              <div className={classes.rectangle}/>
+              <div className={classes.rectangleBackGround}/>
+              {createRectangles(4)}
+              <div className={classes.rectangleLast}/>
             </div>
             <div className={classes.frame10}>
-              <div className={classes.rectangleFirst}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangleBackGround}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangle}></div>
-              <div className={classes.rectangleLast}></div>
+              <div className={classes.rectangleFirst}/>
+              <div className={classes.rectangle}/>
+              <div className={classes.rectangleBackGround}/>
+              {createRectangles(10)}
+              <div className={classes.rectangleLast}/>
             </div>
           </div>
       </div>

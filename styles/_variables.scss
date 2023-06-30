@@ -9,7 +9,25 @@ $error-color: rgb(246, 127, 127);
 
 // responsive 
 
-$breakpoint-small: 480px;
-$breakpoint-medium: 768px;
-$breakpoint-large: 1024px;
-
+$breakpoints: (
+    sm: (
+        min: 576px,
+        max: 575.98px,
+    ),
+    md: (
+        min: 768px,
+        max: 767.98px
+    ),
+    lg: (
+        min: 992px,
+        max: 991.98px
+    ),
+    xl: (
+        min: 1200px,
+        max: 1199.98px
+    ),
+    xxl: (
+      min: 1400px,
+      max: 1399.98px,
+    )
+);
