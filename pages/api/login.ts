@@ -17,9 +17,10 @@ const handler = async (req:NextApiRequest, res: NextApiResponse) => {
               const result = await response.json();
               
               if(result.accessToken) {
-                 const { accessToken } = result;
+                 const { accessToken, refreshToken } = result;
                  
                  setEncryptedDataToCookie('token', accessToken, req, res);
+                 setEncryptedDataToCookie('refreshToken', refreshToken, req, res);
                  res.status(201).end(JSON.stringify({ message: 'created' }));       
               } else {
                 res.json(result);

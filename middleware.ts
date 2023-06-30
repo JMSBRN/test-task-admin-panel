@@ -1,9 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
-export const middleware = (req: NextRequest) => {
-    const data = req.headers.get('Authorization');
-
-    console.log('authorization', data);
+export const middleware = () => {
     return NextResponse.next();
   };
   

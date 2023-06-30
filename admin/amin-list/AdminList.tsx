@@ -1,3 +1,4 @@
+import { NextApiRequest, NextApiResponse } from 'next';
 import { Pagination, useGetList } from 'react-admin';
 import React, { useEffect, useState } from 'react';
 import { ContactInfo } from '../../components/interfaces';
@@ -38,6 +39,8 @@ const AdminList = () => {
     pagination: { page, perPage },
   });
   const [contactInfo, setContactInfo] = useState<ContactInfo>({} as ContactInfo);
+  const req = {} as NextApiRequest;
+  const res = {} as NextApiResponse;
 
   useEffect(() => {
     if (page > 5) {
@@ -57,7 +60,7 @@ const AdminList = () => {
       
       setContactNameRendered(!contactNameRendered);
     });
-    const contactInfo = await getContactInfo(id);
+    const contactInfo = await getContactInfo(id, req, res);
 
       if(contactInfo) {
         setContactInfo(contactInfo);
@@ -74,7 +77,7 @@ const AdminList = () => {
     //   }
     // });
 
-    const contactInfo = await getContactInfo(id);
+    const contactInfo = await getContactInfo(id, req, res);
 
     if(contactInfo) {
       setContactInfo(contactInfo);

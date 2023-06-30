@@ -36,6 +36,7 @@ const UpgradePage = () => {
   const handleLogOut = () => {
    window.localStorage.clear();
    deleteCookie('token');
+   deleteCookie('refreshToken');
   };
 
   return (
