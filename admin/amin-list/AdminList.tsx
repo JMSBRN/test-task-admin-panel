@@ -17,7 +17,7 @@ const AdminList = () => {
     sortBtn
   } = styles;
   const [page, setPage] = useState<number>(1);
-  const [perPage, setPerPage] = useState<number>(25);
+  const [perPage, setPerPage] = useState<number>(100);
   const [scrollLimited, setScrollLimited] = useState<boolean>(false);
   const [contactNameRendered, setContactNameRendered] =
     useState<boolean>(false);
@@ -74,14 +74,9 @@ const AdminList = () => {
   const handleScrollTable = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
     const scrollTopValue = e.currentTarget.scrollTop;
 
-      if(scrollTopValue > 755) {
-        setPage(page + 1);
-      } else if(!scrollTopValue) {
-        if(page > 1) {
-          setPage(page - 1);
-        }
-      }
-  
+     if (scrollTopValue > 3280) {
+      setScrollLimited(true);
+     }
   };
 
   return (
@@ -125,7 +120,7 @@ const AdminList = () => {
           ))}
         </div>
         <Pagination
-          rowsPerPageOptions={[12]}
+          rowsPerPageOptions={[perPage]}
           page={page}
           setPage={scrollLimited ? () => page : setPage}
           perPage={perPage}
