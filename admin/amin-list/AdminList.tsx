@@ -33,7 +33,7 @@ const AdminList = () => {
   const res = {} as NextApiResponse;
 
   useEffect(() => {
-    if (page > 5) {
+    if (page > 1) {
       setScrollLimited(true);
     }
   }, [page]);
