@@ -1,0 +1,103 @@
+@import 'mixins';
+@import '_variables';
+
+.ContactModalContiner {
+    position: absolute;
+    top: -78px;
+    bottom: 0;
+    right: 0;
+    width: 440px;
+    height: 900px;
+    background-color: $white-color;
+    box-shadow: 0 0 20px $grey-color;
+    z-index: 9;
+    & .closeBtn {
+        position: absolute;
+        top: 5px;
+        right: 424px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 2px solid $grey-color;
+        background-size: 60%;
+        background-repeat: no-repeat;
+        background-color: $white-color;
+        background-position: center;
+        background-image: url('../../public//svgs//Icon_Close.svg');
+        cursor: pointer;
+        &:hover {
+            background-size: 80%;
+        }
+        &:active {
+            background-size: 20%;
+        }
+    }
+    & .topContainer{
+       margin: 38px auto 0 auto;
+       width: 410px;
+       height: 96px;
+       border: 1px solid $grey-color;
+       border-radius:  5px 5px 0 0 ;
+       & .contactName {
+        width: 100%;
+        height: 93px;
+        font-size: 20px;
+        font-weight: 900;
+        padding-left: 19px;
+        letter-spacing: 0.8px;
+        @include flex(flex-start, center);
+       }
+       & button {
+         position: absolute;
+          top: 62px;
+          left: 32px;
+          width: 376px;
+          height: 46px;
+          border: none;
+          border-radius: 8px;
+          background-color: $prime-color;
+          color: $white-color;
+          cursor: pointer;
+           & img {
+            position: absolute;
+            top: 14px;
+            left: 110px;
+           }
+           & div {
+            position: absolute;
+            top: 15px;
+            left: 137px;
+            font-size: 14px;
+           }
+       }
+    }
+    & .mainContainer{
+        margin: 0 auto;
+        width: 410px;
+        min-height: 350px;
+        border-left: 1px solid $grey-color;
+        border-right: 1px solid $grey-color;
+        border-bottom: 1px solid $grey-color;
+        border-radius: 0 0 5px 5px ;
+        display: grid;
+        grid-template-rows: 60px 60px 60px auto;
+        & .contentWrapper {
+            margin-top: 20px;
+            width: 100%;
+            min-height: 80px;
+            padding: 15px;
+            display: grid;
+            grid-template-rows: 25px minmax(30px, auto);
+            & .title {
+                font-size: 14px;
+                color: $grey-dark-color;
+            }
+            & p {
+                width: 94%;
+                margin-top: -1px;
+                line-height: 22px;
+                padding: 0px;
+            }
+        }
+    }
+}

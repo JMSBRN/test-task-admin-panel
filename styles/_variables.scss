@@ -1,0 +1,33 @@
+$prime-color: rgb(54, 38, 167);
+$prime-light-color: rgb(201, 193, 255);
+$black-color: rgb(21, 21, 21);
+$white-color: rgb(255, 255, 255);
+$grey-light-color: rgb(245, 246, 249);
+$grey-color: rgb(231, 232, 239);
+$grey-dark-color: rgb(145, 149, 164);
+$error-color: rgb(246, 127, 127);
+
+// responsive 
+
+$breakpoints: (
+    sm: (
+        min: 576px,
+        max: 575.98px,
+    ),
+    md: (
+        min: 768px,
+        max: 767.98px
+    ),
+    lg: (
+        min: 992px,
+        max: 991.98px
+    ),
+    xl: (
+        min: 1200px,
+        max: 1199.98px
+    ),
+    xxl: (
+      min: 1400px,
+      max: 1399.98px,
+    )
+);

@@ -1,0 +1,138 @@
+@import 'mixins';
+@import '_variables';
+
+.formStyle {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    padding-top: 19px;
+    grid-template-rows: 100px 176px;
+    & label {
+        position: relative;
+        top: -10px;
+        font-size: 14px;
+        font-weight: 700;
+    }
+    & .inputStyle, .inputStyleWithError {
+        width: 385px;
+        height: 46px;
+        padding-left: 14px;
+        font-size: 14px;
+        outline: none;
+        border: 0.1px solid $grey-color;
+        border-radius: 5px;
+
+        &::-webkit-input-placeholder {
+            /* WebKit browsers */
+            position: absolute;
+            top: 14px;
+            left: 16px;
+            font-size: 14px;
+            color: $grey-color;
+        }
+    }
+
+    &  .inputStyleWithError {
+        border: 0.5px solid $error-color;
+    }
+    & span {
+        color: $error-color;
+    }
+    & .hidden {
+        visibility: hidden;
+    }
+
+    & input[type="submit"] {
+        width: 385px;
+        height: 48px;
+        font-size: 14px;
+        border: none;
+        border-radius: 9px;
+        background-color: $prime-color;
+        color: $white-color;
+        cursor: pointer;
+
+        &:active {
+            background-color: $grey-color;
+        }
+    }
+
+}
+
+.hidePswBtn {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 151px;
+    right: 15px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    &:active {
+        border: 0.1px solid $grey-color;
+        border-radius: 5px;
+    }
+}
+
+.vectorIcon {
+    margin-top: 5px;
+    width: 20px;
+}
+
+.openEyeImagesStyle {
+
+    & .vectorIconTwo {
+        position: relative;
+        top: -25px;
+        left: 0;
+        transform: rotate(180deg);
+    }
+
+    & div {
+        position: relative;
+        top: -32px;
+        left: 7.5px;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background-color: $grey-dark-color;
+    }
+
+    & .eyeRadiusLine {
+        position: relative;
+        top: -38.6px;
+        left: 5.44px;
+        width: 9px;
+        height: 9px;
+        background-color: transparent;
+        border: 1px solid $grey-dark-color;
+    }
+}
+
+.openEyeImagesStyleHidden {
+    visibility: hidden;
+
+    & .vectorIconTwo {
+        position: relative;
+        top: -25px;
+        left: 0;
+        transform: rotate(180deg);
+    }
+
+    & div {
+        position: relative;
+        top: -31px;
+        left: 8px;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background-color: $grey-dark-color;
+    }
+
+    & span {
+        width: 10px;
+        height: 10px;
+        border: 1px sold $grey-dark-color;
+    }
+}

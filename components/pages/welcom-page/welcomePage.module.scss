@@ -1,0 +1,98 @@
+@import 'mixins';
+@import '_variables';
+
+
+.arrowIconAndTextContainer {
+    position: absolute;
+    top: 102px;
+    left: 24px;
+    width: 190px;
+    height: 20px;
+    padding: 20px;
+    @include flex (flex-start, center, column);
+    
+    & div {
+        margin-top: -8px;
+        font-size: 14px;
+        font-weight: 700;
+        word-spacing: -2px;
+        line-height: 19px;
+    }
+
+    & .arrowIconStyle {
+        position: absolute;
+        left: 0px;
+        top: -1px;
+    }
+}
+
+.welcomeMessage {
+    position: absolute;
+    top: 148px;
+    left: 410px;
+    width: 368px;
+    height: 193px;
+    & img {
+     position: absolute;
+     top: -3.2px;
+     left: 83px;
+    }
+    & .welcomeText {
+       position: absolute;
+       top: 145px;
+       left: 1px;
+       bottom: 0;
+       text-align: center;
+       font-size: 18px;
+       font-weight: 700;
+       word-spacing: -2px;
+       line-height: 25px;
+    }
+ }
+
+.resentSearches {
+    position: absolute;
+    top: 398px;
+    left: 350px;
+    width: 488px;
+    height: 200px;
+    border-radius: 12px;
+    border: 0.5px solid $grey-color;
+    @include flex(center, center, column);
+    & img {
+        position: absolute;
+        top: 53px;
+        left: 203px;
+    }
+    & .topSection {
+        position: absolute;
+        top: 0;
+        width: 488px;
+        height: 38px;
+        border-bottom: 0.5px solid $grey-color;
+        & img {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+        }
+        & span {
+            position: absolute;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: -0.15px;
+            top: 8px;
+            left: 40px;
+        }
+    }
+    & .bottomText {
+        position: absolute;
+        bottom: 0;
+        width: 200px;
+        height: 60px;
+        text-align: center;
+        font-weight: 300;
+        line-height: 19px;
+        letter-spacing: -0.09px;
+        @include flex(center, flex-start)
+    }
+}
