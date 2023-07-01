@@ -30,10 +30,10 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
   } = styles;
   const refresh = useRefresh();
 
-  const initFfomLocalFormData: SearchFormData = JSON.parse(
+  const initFormDataFromLocal: SearchFormData = JSON.parse(
     window.localStorage.getItem('formData') || '{}');
   const [formData, setFormData] = useState<SearchFormData>(
-    initFfomLocalFormData
+    initFormDataFromLocal
   );
   const activeFiltersCounter: number = Object.values(formData)
   .filter((e) => !!e === true)
