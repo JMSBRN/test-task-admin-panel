@@ -17,6 +17,13 @@ import classes from './LoginReg_Back.module.css';
 import { memo } from 'react';
 import resets from '../_resets.module.css';
 
+interface RectanglesProps {
+  items: number;
+}
+const Rectangles = (props: RectanglesProps) => {
+  return (<>{Array(props.items).fill(<div className={classes.rectangle}/>)}</>);
+};
+
 interface Props {
   className?: string;
   classes?: {
@@ -40,10 +47,6 @@ interface Props {
 export const LoginReg_Back: FC<Props> = memo(function LoginReg_Back(
   props = {}
 ) {
-
-  const createRectangles = (items: number) => {
-    return (<>{Array(items).fill(<div className={classes.rectangle}/>)}</>);
-  };
   
   return (
     <div
@@ -63,70 +66,70 @@ export const LoginReg_Back: FC<Props> = memo(function LoginReg_Back(
         >
             <div className={classes.frame1}>
               <div className={classes.rectangleFirst}/>
-               {createRectangles(11)}
+               <Rectangles items={11} />
               <div className={classes.rectangleLast}/>
             </div>
             <div className={classes.frame8}>
               <div className={classes.rectangleFirst}/>
-              {createRectangles(10)}
+              <Rectangles items={10} />
               <div className={classes.rectangleBackGround}/>
               <div className={classes.rectangle}/>
               <div className={classes.rectangleLast}/>
             </div>
             <div className={classes.frame2}>
               <div className={classes.rectangleFirst}/>
-              {createRectangles(12)}
+              <Rectangles items={12} />
               <div className={classes.rectangleLast}/>
             </div>
             <div className={classes.frame3}>
               <div className={classes.rectangleFirst}/>
-              {createRectangles(5)}
+              <Rectangles items={5} />
               <div className={classes.rectangleBackGround}/>
-              {createRectangles(6)}
+              <Rectangles items={6} />
               <div className={classes.rectangleLast}/>
             </div>
             <div className={classes.frame4}>
               <div className={classes.rectangleFirst}/>
-              {createRectangles(10)}
+              <Rectangles items={10} />
               <div className={classes.rectangleBackGround}/>
               <div className={classes.rectangle}/>
               <div className={classes.rectangleLast}/>
             </div>
             <div className={classes.frame5}>
               <div className={classes.rectangleFirst}/>
-              {createRectangles(4)}
+              <Rectangles items={4} />
               <div className={classes.rectangleBackGround}/>
-              {createRectangles(7)}
+              <Rectangles items={7} />
               <div className={classes.rectangleLast}/>
             </div>
             <div className={classes.frame6}>
               <div className={classes.rectangleFirst}/>
-              {createRectangles(8)}
+              <Rectangles items={8} />
               <div className={classes.rectangleBackGround}/>
-              {createRectangles(3)}
+              <Rectangles items={3} />
               <div className={classes.rectangleLast}/>
             </div>
             <div className={classes.frame7}>
               <div className={classes.rectangleFirst}/>
-              {createRectangles(10)}
+              <Rectangles items={10} />
               <div className={classes.rectangleBackGround}/>
               <div className={classes.rectangleLast}/>
             </div>
             <div className={classes.frame92}>
               <div className={classes.rectangleFirst}/>
-              {createRectangles(5)}
+              <Rectangles items={5} />
               <div className={classes.rectangle}/>
               <div className={classes.rectangleBackGround}/>
               <div className={classes.rectangle}/>
               <div className={classes.rectangleBackGround}/>
-              {createRectangles(4)}
+              <Rectangles items={4} />
               <div className={classes.rectangleLast}/>
             </div>
             <div className={classes.frame10}>
               <div className={classes.rectangleFirst}/>
               <div className={classes.rectangle}/>
               <div className={classes.rectangleBackGround}/>
-              {createRectangles(10)}
+              <Rectangles items={10} />
               <div className={classes.rectangleLast}/>
             </div>
           </div>

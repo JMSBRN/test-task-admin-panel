@@ -3,28 +3,18 @@ import { Pagination, useGetList } from 'react-admin';
 import React, { useEffect, useState } from 'react';
 import { ContactInfo } from '../../components/interfaces';
 import ContactModal from '../../components/contact-modal/ContactModal';
-import Image from 'next/image';
 import PopUpUpgrade from '../../components/popUp-upgrade/PopUpUpgrade';
 import SortButton from '../../components/sort-button/SortButton';
+import TableRow from '../../components/table-row/TableRow';
 import getContactInfo from '../../utils/apiUtils';
 import styles from './adminList.module.scss';
-import userIcon from '../../public/svgs/Icon_User.svg';
-import verifyIcon from '../../public/svgs/Verify.svg';
 
 const AdminList = () => {
   const {
     tableContainer,
     tableStyle,
     tableHeader,
-    rowStyle,
-    tableButton,
-    getNameBtnText,
-    imagesContainer,
-    veriFyImage,
-    tableContent,
-    sortBtn,
-    rowLayout,
-    contactName,
+    sortBtn
   } = styles;
   const [page, setPage] = useState<number>(1);
   const [perPage, setPerPage] = useState<number>(12);
@@ -70,13 +60,6 @@ const AdminList = () => {
 
   const handleClickGetContact = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const id = e.currentTarget.id;
-
-    // data?.forEach((el) => {
-    //   if (el.id === id) {
-    //     setContactInfo(el);
-    //   }
-    // });
-
     const contactInfo = await getContactInfo(id, req, res);
 
     if(contactInfo) {
@@ -117,62 +100,15 @@ const AdminList = () => {
         </div>
         <div className={tableStyle}>
           { data?.map((el) => (
-            <div
-              id={el.id}
-              key={el.id}
-              className={rowLayout}
-              onClick={handleClickGetContact}
-            >
-              <div className={rowStyle}>
-                <div
-                  id={el.id}
-                  className={tableButton}
-                  onClick={handleGetContactName}
-                >
-                  {el.id === id && contactNameRendered ? (
-                    <div className={contactName}>
-                      {el.name || 'Will Gibbons'}
-                    </div>
-                  ) : (
-                    <button>
-                      <div className={imagesContainer}>
-                        <Image
-                          className={veriFyImage}
-                          width={12}
-                          src={verifyIcon}
-                          alt="verify arrow in green bg"
-                        />
-                        <Image
-                          width={20}
-                          height={20}
-                          alt={'logo user with arrow'}
-                          src={userIcon}
-                        />
-                      </div>
-                      <div className={getNameBtnText}>Get the name</div>
-                    </button>
-                  )}
-                </div>
-                <div
-                  onClick={() => setContactModalRendered(true)}
-                  className={tableContent}
-                >
-                  {el.job_title}
-                </div>
-                <div
-                  onClick={() => setContactModalRendered(true)}
-                  className={tableContent}
-                >
-                  {el.industry}
-                </div>
-                <div
-                  onClick={() => setContactModalRendered(true)}
-                  className={tableContent}
-                >
-                  {el.country}
-                </div>
-              </div>
-            </div>
+         <TableRow
+           key={el.id}
+           el={el}
+           id={id}
+           contactNameRendered={contactNameRendered}
+           handleClickGetContact={handleClickGetContact}
+           handleGetContactName={handleGetContactName}
+           setContactModalRendered={setContactModalRendered}
+         />
           ))}
         </div>
         <Pagination
