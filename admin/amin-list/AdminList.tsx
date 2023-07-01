@@ -17,7 +17,7 @@ const AdminList = () => {
     sortBtn
   } = styles;
   const [page, setPage] = useState<number>(1);
-  const [perPage, setPerPage] = useState<number>(50);
+  const [perPage, setPerPage] = useState<number>(25);
   const [scrollLimited, setScrollLimited] = useState<boolean>(false);
   const [contactNameRendered, setContactNameRendered] =
     useState<boolean>(false);
@@ -71,6 +71,19 @@ const AdminList = () => {
     setContactModalRendered(false);
   };
 
+  const handleScrollTable = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+    const scrollTopValue = e.currentTarget.scrollTop;
+
+      if(scrollTopValue > 755) {
+        setPage(page + 1);
+      } else if(!scrollTopValue) {
+        if(page > 1) {
+          setPage(page - 1);
+        }
+      }
+  
+  };
+
   return (
     <>
       {contactModalRendered && (
@@ -98,7 +111,7 @@ const AdminList = () => {
             <SortButton />
           </div>
         </div>
-        <div className={tableStyle}>
+        <div className={tableStyle} onScroll={handleScrollTable}>
           { data?.map((el) => (
          <TableRow
            key={el.id}
