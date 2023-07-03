@@ -77,11 +77,12 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
         <div className={logo}>Logo</div>
         <div className={formTitle}>
           Filters
-          <div className={setCountFiltersHiddenClass(!activeFiltersCounter)}>{
-            activeFiltersCounter
+          <div className={
+            setCountFiltersHiddenClass(!activeFiltersCounter && !formData.job_title )}>{
+            activeFiltersCounter + (formData.job_title ? 1 : 0)
           }</div>
         </div>
-        <div className={setResetFiltersHiddenClass(!activeFiltersCounter)}>
+        <div className={setResetFiltersHiddenClass(!activeFiltersCounter && !formData.job_title)}>
           <Link href="#" onClick={handleClearFilters} >Clear filters</Link>
         </div>
         <div className={searchFormContainer}>
