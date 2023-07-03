@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { ContactForInpuSelect } from '../interfaces';
+import { Country } from '../interfaces';
 import Image from 'next/image';
 import { SearchFormDataForInputSelect } from '../interfaces';
+import { getDecryptedDataFromCookie } from '../../utils/secureCookiesUtils';
+import { getFetchDataForSelectList } from '../../utils/apiUtils';
 import polygonIconDown from '../../public/svgs/Polygon 2.svg';
 import polygonIconUp from '../../public/svgs/Polygon 1.svg';
 import setFormDataToLocal from '../../utils/localUtils';
@@ -12,7 +14,6 @@ interface InputWithSelectFieldProps {
   labelIcon: string;
   fieldName: string;
   textPlaceHolder:string;
-  data: ContactForInpuSelect[];
   formData: SearchFormDataForInputSelect;
   setFormData: React.Dispatch<React.SetStateAction<SearchFormDataForInputSelect>>;
 }
@@ -22,24 +23,25 @@ const InputWithSelectField = ({
   labelIcon,
   fieldName,
   textPlaceHolder,
-  data,
   formData,
   setFormData,
 }: InputWithSelectFieldProps) => {
   const { InputStyle, inputListContainer, inputList, listItem } = styles;
+  const [dataForSelectList, setDataForSelectList] = useState<Country[]>([]);
+  const [inputValue, setInputValue] = useState<string>('');
   const [selectListRendered, setSelectListRendered] = useState<boolean>(false);
   const [inputValueForFilter, setInputValueForFilter] = useState<string>('');
   const [sortChanged, setSortChanged] = useState<boolean>(false);
+  const token = getDecryptedDataFromCookie('token');
 
   useEffect(() => {
     setFormDataToLocal(formData);
   }, [formData]);
   
-  const handleChangeSelectValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeSelectValue = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const value = e.target.value;
-    
-    setFormData({ ...formData, [fieldName]: value });
+     
     if (value && value.match('^[a-zA-Z]+$')) {
       setSelectListRendered(true);
     } else {
@@ -52,14 +54,20 @@ const InputWithSelectField = ({
     e: React.MouseEvent<HTMLDivElement>,
     fieldName: string
   ) => {
-    const id = e.currentTarget.id;
+    const { id, name } = JSON.parse(e.currentTarget.id);
 
-    setFormData({ ...formData, [fieldName]: id });
+    setInputValue(name);
+    setFormData({ ...formData, [fieldName]: { id, name } });
   };
 
-  const handleSetSelectList = () => {
+  const handleSetSelectList = async () => {
    setSelectListRendered(!selectListRendered);
    setSortChanged(!sortChanged);
+   if(token) {
+     const result = await getFetchDataForSelectList(fieldName, token!);
+  
+     result &&  setDataForSelectList(result);
+   }
   };
 
   return (
@@ -75,7 +83,7 @@ const InputWithSelectField = ({
       </button>
       <input 
       name={fieldName}
-      value={formData[fieldName]}
+      value={inputValue}
       type="text"
       onChange={handleChangeSelectValue}
       placeholder={textPlaceHolder}
@@ -83,10 +91,10 @@ const InputWithSelectField = ({
       {selectListRendered && (
         <div className={inputListContainer}>
           <div className={inputList}>
-            {data
+            {dataForSelectList
               ?.filter((item) => {
                 if (
-                  item[fieldName].toLowerCase().includes(inputValueForFilter)
+                  item.name.toLowerCase().includes(inputValueForFilter)
                 ) {
                   return item;
                 }
@@ -95,10 +103,10 @@ const InputWithSelectField = ({
                 <div
                   className={listItem}
                   key={el.id}
-                  id={el[fieldName]}
+                  id={JSON.stringify({ id: el.id, name: el.name })}
                   onClick={(e) => handleGetFilteredValue(e, fieldName)}
                 >
-                  {el[fieldName]}
+                  {el.name}
                 </div>
               ))}
           </div>

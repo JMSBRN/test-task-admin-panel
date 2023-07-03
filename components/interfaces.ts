@@ -3,6 +3,20 @@ export interface User {
   password: string;
 }
 
+export interface Country {
+    id: string;
+    name: string;
+    iso2: string;
+    iso3: string;
+    emoji: string;
+    emojiu:string;
+}
+
+export interface Industry {
+    id: 'string';
+    name: 'string';
+}
+
 export interface LoginFormData extends User {}
 
 export interface Contact {
@@ -30,11 +44,14 @@ export interface Contact {
 export interface ContactForInpuSelect extends Contact {
   [key: string]: any;
 }
-
+export interface SelectListForm {
+  id: string;
+  name: string;
+}
 export interface SearchFormData {
   job_title: string;
-  country: string;
-  industry: string;
+  country: SelectListForm;
+  industry: SelectListForm;
 }
 
 export interface SearchFormDataForInputSelect extends SearchFormData {

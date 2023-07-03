@@ -36,4 +36,19 @@ const getContactInfo = async (id: string, req: NextApiRequest, res: NextApiRespo
   }
 };
 
-export default getContactInfo;
+const getFetchDataForSelectList = async (dataName: string, token: string) => {
+  const resFetch = await fetch(`/api/${dataName}/`,{
+    method: 'GET',
+    headers: { 'Content-Type':'application/json',
+                Authorization: token
+  }
+  });
+  const result =  await resFetch.json();
+
+  return result ;
+};
+
+export { 
+  getContactInfo,
+  getFetchDataForSelectList
+};

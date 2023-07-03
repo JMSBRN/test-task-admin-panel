@@ -12,10 +12,16 @@ const NoResultsPage = () => {
   const refresh = useRefresh();
   const { push } = useRouter();
 
-  const handleClearFilters = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleClearFilters = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     e.preventDefault();
-    const clearedFilters = { job_title: '', country: '', industry: '' } as SearchFormData;
-    
+    const clearedFilters = {
+      job_title: '',
+      country: { id: '', name: '' },
+      industry: { id: '', name: '' },
+    } as SearchFormData;
+
     push('/admin');
     setFormDataToLocal(clearedFilters);
     refresh();
@@ -33,7 +39,7 @@ const NoResultsPage = () => {
         <div className={secondeTitle}>
           We couldn’t find what you searched for. Please try again.
         </div>
-        <button onClick={handleClearFilters} >Clear filters</button>
+        <button onClick={handleClearFilters}>Clear filters</button>
       </div>
     </div>
   );

@@ -55,7 +55,11 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
   
   const handleClearFilters = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault();
-    const clearedFilters = { job_title: '', country: '', industry: '' } as SearchFormData;
+    const clearedFilters = {
+      job_title: '',
+      country: { id: '', name: '' },
+      industry: { id: '', name: '' },
+    } as SearchFormData;
 
     setFormData(clearedFilters);
     setFormDataToLocal(clearedFilters);

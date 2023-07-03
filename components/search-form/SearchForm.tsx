@@ -1,5 +1,3 @@
-import { useGetList, useRefresh } from 'react-admin';
-import { ContactForInpuSelect } from '../interfaces';
 import Image from 'next/image';
 import InputWithSelectField from '../input-with-select-field/InputWithSelectField';
 import React from 'react';
@@ -10,6 +8,7 @@ import locationIcon from '../../public/svgs/Icon_Location.svg';
 import searchIcon from '../../public/svgs/Icon_Search.svg';
 import setFormDataToLocal from '../../utils/localUtils';
 import styles from './searchForm.module.scss';
+import { useRefresh } from 'react-admin';
 
 interface SearchFormProps {
   formData: SearchFormData;
@@ -25,7 +24,6 @@ const SearchForm = ({ formData, setFormData }: SearchFormProps) => {
     searchIconStyle,
     inputPlaceHolder
   } = styles;
-  const { data } = useGetList('contacts', { filter: formData });
   const refresh = useRefresh();
   
    const handleChange = (e: React.ChangeEvent< HTMLInputElement | HTMLSelectElement>) => {
@@ -70,7 +68,6 @@ const SearchForm = ({ formData, setFormData }: SearchFormProps) => {
       </label>
         <span className={lineFirst}></span>
       <InputWithSelectField
-        data={data as ContactForInpuSelect[]}
         labelIcon={locationIcon}
         fieldName='country'
         labelText='Location'
@@ -80,7 +77,6 @@ const SearchForm = ({ formData, setFormData }: SearchFormProps) => {
       />
         <span className={lineSecond}></span>
       <InputWithSelectField
-        data={data as ContactForInpuSelect[]}
         labelIcon={industryIcon}
         fieldName='industry'
         labelText='Industry'

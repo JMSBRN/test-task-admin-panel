@@ -6,7 +6,7 @@ import ContactModal from '../../components/contact-modal/ContactModal';
 import PopUpUpgrade from '../../components/popUp-upgrade/PopUpUpgrade';
 import SortButton from '../../components/sort-button/SortButton';
 import TableRow from '../../components/table-row/TableRow';
-import getContactInfo from '../../utils/apiUtils';
+import { getContactInfo } from '../../utils/apiUtils';
 import styles from './adminList.module.scss';
 
 const AdminList = () => {
