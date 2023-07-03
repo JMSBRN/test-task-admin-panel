@@ -36,7 +36,7 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
     initFormDataFromLocal
   );
   const activeFiltersCounter: number = Object.values(formData)
-  .filter((e) => !!e === true)
+  .filter((e) => !!e.name === true)
     .length;
   const setCountFiltersHiddenClass = (condition: boolean) => {
     if (condition) {

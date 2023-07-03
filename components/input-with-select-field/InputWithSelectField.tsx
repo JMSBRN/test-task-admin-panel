@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Country } from '../interfaces';
 import Image from 'next/image';
 import { SearchFormDataForInputSelect } from '../interfaces';
@@ -8,6 +8,7 @@ import polygonIconDown from '../../public/svgs/Polygon 2.svg';
 import polygonIconUp from '../../public/svgs/Polygon 1.svg';
 import setFormDataToLocal from '../../utils/localUtils';
 import styles from './inputWithSelectField.module.scss';
+import { useRefresh } from 'react-admin';
 
 interface InputWithSelectFieldProps {
   labelText: string;
@@ -28,26 +29,40 @@ const InputWithSelectField = ({
 }: InputWithSelectFieldProps) => {
   const { InputStyle, inputListContainer, inputList, listItem } = styles;
   const [dataForSelectList, setDataForSelectList] = useState<Country[]>([]);
-  const [inputValue, setInputValue] = useState<string>('');
   const [selectListRendered, setSelectListRendered] = useState<boolean>(false);
   const [inputValueForFilter, setInputValueForFilter] = useState<string>('');
   const [sortChanged, setSortChanged] = useState<boolean>(false);
   const token = getDecryptedDataFromCookie('token');
+  const refresh = useRefresh();
+
+  const fetchSelectList = useCallback( async () => {
+    if(token) {
+      const result = await getFetchDataForSelectList(fieldName, token!);
+   
+      result &&  setDataForSelectList(result);
+    }
+  }, [fieldName, token]);
 
   useEffect(() => {
     setFormDataToLocal(formData);
   }, [formData]);
+
+  useEffect(() => {
+  fetchSelectList();
+  }, [fetchSelectList]);
   
   const handleChangeSelectValue = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const value = e.target.value;
-     
+
     if (value && value.match('^[a-zA-Z]+$')) {
       setSelectListRendered(true);
     } else {
       setSelectListRendered(false);
     }
     setInputValueForFilter(value.toLowerCase());
+    setFormData({ ...formData, [fieldName]: { name: value } });
+    refresh();
   };
 
   const handleGetFilteredValue = (
@@ -55,19 +70,14 @@ const InputWithSelectField = ({
     fieldName: string
   ) => {
     const { id, name } = JSON.parse(e.currentTarget.id);
-
-    setInputValue(name);
+    
     setFormData({ ...formData, [fieldName]: { id, name } });
   };
 
   const handleSetSelectList = async () => {
    setSelectListRendered(!selectListRendered);
    setSortChanged(!sortChanged);
-   if(token) {
-     const result = await getFetchDataForSelectList(fieldName, token!);
-  
-     result &&  setDataForSelectList(result);
-   }
+   await fetchSelectList();
   };
 
   return (
@@ -83,7 +93,7 @@ const InputWithSelectField = ({
       </button>
       <input 
       name={fieldName}
-      value={inputValue}
+      value={formData[fieldName].name}
       type="text"
       onChange={handleChangeSelectValue}
       placeholder={textPlaceHolder}
