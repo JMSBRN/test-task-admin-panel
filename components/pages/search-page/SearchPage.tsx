@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { selectFilter, setClearedFilters } from '../../../features/filters/filterSlice';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import Link from 'next/link';
 import SearchForm from '../../search-form/SearchForm';
 import { SearchFormData } from '../../interfaces';
@@ -29,12 +31,18 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
     resetFiltersHidden,
   } = styles;
   const refresh = useRefresh();
+  const { clearedFilters, filters } = useAppSelector(selectFilter);
+  const dispatch = useAppDispatch();
 
   const initFormDataFromLocal: SearchFormData = JSON.parse(
     window.localStorage.getItem('formData') || '{}');
   const [formData, setFormData] = useState<SearchFormData>(
     initFormDataFromLocal
   );
+
+  useEffect(() => {
+    setFormData(filters);
+  },[filters]);
   const activeFiltersCounter: number = Object.values(formData)
   .filter((e) => !!e.name === true)
     .length;
@@ -63,6 +71,7 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
 
     setFormData(clearedFilters);
     setFormDataToLocal(clearedFilters);
+    dispatch(setClearedFilters(true));
     refresh();
   };
   
@@ -78,11 +87,11 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
         <div className={formTitle}>
           Filters
           <div className={
-            setCountFiltersHiddenClass(!activeFiltersCounter && !formData.job_title )}>{
+            setCountFiltersHiddenClass(clearedFilters )}>{
             activeFiltersCounter + (formData.job_title ? 1 : 0)
           }</div>
         </div>
-        <div className={setResetFiltersHiddenClass(!activeFiltersCounter && !formData.job_title)}>
+        <div className={setResetFiltersHiddenClass(clearedFilters)}>
           <Link href="#" onClick={handleClearFilters} >Clear filters</Link>
         </div>
         <div className={searchFormContainer}>

@@ -1,16 +1,17 @@
+import { setClearedFilters, setFilters } from '../../../features/filters/filterSlice';
 import Image from 'next/image';
 import React from 'react';
 import { SearchFormData } from '../../interfaces';
 import noResultsImage from '../../../public/images/No Results@3x.png';
 import setFormDataToLocal from '../../../utils/localUtils';
 import styles from './noResultsPage.module.scss';
+import { useAppDispatch } from '../../../hooks/reduxHooks';
 import { useRefresh } from 'react-admin';
-import { useRouter } from 'next/router';
 
 const NoResultsPage = () => {
   const { mainContainer, messageContainer, mainTitle, secondeTitle } = styles;
   const refresh = useRefresh();
-  const { push } = useRouter();
+  const dispatch = useAppDispatch();
 
   const handleClearFilters = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -22,7 +23,8 @@ const NoResultsPage = () => {
       industry: { id: '', name: '' },
     } as SearchFormData;
 
-    push('/admin');
+    dispatch(setClearedFilters(true));
+    dispatch(setFilters(clearedFilters));
     setFormDataToLocal(clearedFilters);
     refresh();
   };
