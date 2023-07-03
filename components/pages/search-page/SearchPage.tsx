@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { selectFilter, setClearedFilters } from '../../../features/filters/filterSlice';
+import {
+  selectFilter,
+  setClearedFilters,
+} from '../../../features/filters/filterSlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
 import Link from 'next/link';
 import SearchForm from '../../search-form/SearchForm';
@@ -35,17 +38,18 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
   const dispatch = useAppDispatch();
 
   const initFormDataFromLocal: SearchFormData = JSON.parse(
-    window.localStorage.getItem('formData') || '{}');
+    window.localStorage.getItem('formData') || '{}'
+  );
   const [formData, setFormData] = useState<SearchFormData>(
     initFormDataFromLocal
   );
 
   useEffect(() => {
     setFormData(filters);
-  },[filters]);
-  const activeFiltersCounter: number = Object.values(formData)
-  .filter((e) => !!e.name === true)
-    .length;
+  }, [filters]);
+  const activeFiltersCounter: number = Object.values(formData).filter(
+    (e) => !!e.name === true
+  ).length;
   const setCountFiltersHiddenClass = (condition: boolean) => {
     if (condition) {
       return countFiltersHidden;
@@ -60,8 +64,10 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
       return resetFilters;
     }
   };
-  
-  const handleClearFilters = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+
+  const handleClearFilters = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
     e.preventDefault();
     const clearedFilters = {
       job_title: '',
@@ -74,7 +80,7 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
     dispatch(setClearedFilters(true));
     refresh();
   };
-  
+
   return (
     <div className={searchPageContainer}>
       <div className={topContainer}>
@@ -86,13 +92,22 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
         <div className={logo}>Logo</div>
         <div className={formTitle}>
           Filters
-          <div className={
-            setCountFiltersHiddenClass(clearedFilters )}>{
-            activeFiltersCounter + (formData.job_title ? 1 : 0)
-          }</div>
+          <div
+            className={setCountFiltersHiddenClass(
+              clearedFilters && !!!formData.job_title && !activeFiltersCounter
+            )}
+          >
+            {activeFiltersCounter + (formData.job_title ? 1 : 0)}
+          </div>
         </div>
-        <div className={setResetFiltersHiddenClass(clearedFilters)}>
-          <Link href="#" onClick={handleClearFilters} >Clear filters</Link>
+        <div
+          className={setResetFiltersHiddenClass(
+            clearedFilters && !!!formData.job_title && !activeFiltersCounter
+          )}
+        >
+          <Link href="#" onClick={handleClearFilters}>
+            Clear filters
+          </Link>
         </div>
         <div className={searchFormContainer}>
           <SearchForm formData={formData} setFormData={setFormData} />
