@@ -1,34 +1,36 @@
 @import 'mixins';
 @import '_variables';
 
-.mainContainer{
-    margin: 124px auto;
-    width: 100%;
-    max-width: 1128px;
-    height: 100%;
-    display: grid;
-    grid-template-columns: 436px 200px;
+.mainContainer {
+    margin: 0 auto;
+    position: relative;
+    width: 1440px;
+    height: 900px;
     & .topSection {
-        position: absolute;
-        top: 0;
-        left: 0;
         width: 100%;
-        height: 72px;
+        height: 47px;
         border-bottom: 1px solid $grey-color;
         & .logo {
-          position: relative;
-          top: 25px;
-          left: 24px;
+          margin-top: 25px;
+          margin-left: 24px;  
           font-size: 24px;
           font-weight: 900;
           text-transform: uppercase;
           color: $prime-color;
         }
+        & .kmButtonContainer {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            & button {
+                font-size: 12px;
+            }
+        }
     }
     & .backToSearchLink {
-        position: absolute;
-        top: 82px;
-        left: 116.6px;
+        position: relative;
+        top: 10px;
+        left: 116px;
         font-size: 14px;
         font-weight: 500;
         text-decoration: none;
@@ -36,161 +38,164 @@
         & img {
           position: relative;
           top: 5px;
-          left: -5px;
+          left: -4px;
         }
     }
 }
-.leftSide{
-    width: 490px;
-    height: 252px;
-    margin-right: 35px;
-    border: 1px solid $grey-color;
-    border-radius: 7px;
-    display: block;
-    & .lineFirst, .lineSecond {
-         margin: 0 auto;
-         position: relative;
-         top: 14px;
-         left: 0;
-         width: 455px;
-         border-bottom: 1px solid $grey-color;
-    }
-    & .lineSecond {
-        top: -2px;
-    }
-    & .topContainer {
-        width: 100%;
-        height: 46px;
-        padding-left: 19px;
-        border-bottom: 1px solid $grey-color;
-        @include flex (space-between, center);
-   
-        & .topContainerTitle{
-            position: relative;
-            top: -1px;
-            left: -1px;
-            margin-left: -2px;
-            font-size: 16px;
-            font-weight: 700;
+.leftRightSideContainer {
+    margin-top: 26px;
+    width: 100%;
+    height: auto;
+    @include flex (center, flex-start);
+    .leftSide{
+        width: 487px;
+        height: 252px;
+        border: 1px solid $grey-color;
+        border-radius: 7px;
+        display: block;
+        & .lineFirst, .lineSecond {
+             margin: 0 auto;
+             position: relative;
+             top: 16px;
+             left: 0;
+             width: 455px;
+             border-bottom: 1px solid $grey-color;
         }
-        & .logoutButton {
-            margin-right: 9px;
-            width: 88px;
-            height: 20px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 700;
-            @include flex (center, center);
-            & img {
-                margin-left: 2px;
-                margin-right: 8px;
-            }
-        } 
-    }
-    & .proFileForm {
-        width: 100%;
-        height: 222px;
-        & .topFormSection {
+        & .lineSecond {
+            top: 0px;
+        }
+        & .topContainer {
             width: 100%;
-            height: auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            justify-content: center;
-            padding-left: 16px;
-        }
-        & label {
-            font-size: 14px;
-            font-weight: 700;
-            margin-top: 16px;
-        }
-        & input {
-            margin-top: 9px;
-            width: 220px;
-            height: 50px;
-            border-radius: 5px;
-            border: 1px solid $grey-color;
-            outline: none;
-            padding-left: 16px;
-        }
-        & .contactEmail {
-            margin-top: 13px;
-        }
-        & .contactEmail, .contactPassword {
-            width: 100%;
-            height: 50px;
-            padding-left: 17px;
-            padding-right: 6px;
-            font-size: 14px;
-            font-weight: 700;
+            height: 49px;
+            padding-left: 19px;
+            border-bottom: 1px solid $grey-color;
             @include flex (space-between, center);
-            & a {
+       
+            & .topContainerTitle{
+                position: relative;
+                top: -1px;
+                left: -5px;
+                font-size: 16px;
+                font-weight: 700;
+            }
+            & .logoutButton {
+                margin-right: 9px;
+                width: 88px;
+                height: 20px;
+                text-decoration: none;
                 font-size: 14px;
                 font-weight: 700;
-                text-decoration: none;
-                margin-right: 10px;
+                @include flex (center, center);
+                & img {
+                    margin-left: 2px;
+                    margin-right: 8px;
+                }
+            } 
+        }
+        & .proFileForm {
+            width: 100%;
+            height: 222px;
+            & .topFormSection {
+                width: 100%;
+                height: auto;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                align-items: center;
+                justify-content: center;
+                padding-left: 13px;
             }
-            & img {
-               position: relative;
-               top: 3px;
-               left: -2px;
+            & label {
+                font-size: 14px;
+                font-weight: 700;
+                margin-top: 16px;
+            }
+            & input {
+                margin-top: 9px;
+                width: 220px;
+                height: 50px;
+                border-radius: 5px;
+                border: 1px solid $grey-color;
+                outline: none;
+                padding-left: 16px;
+            }
+            & .contactEmail {
+                margin-top: 12px;
+            }
+            & .contactEmail, .contactPassword {
+                width: 100%;
+                height: 50px;
+                padding-left: 13px;
+                padding-right: 6px;
+                font-size: 14px;
+                font-weight: 700;
+                @include flex (space-between, center);
+                & a {
+                    margin-right: 8px;
+                    font-size: 14px;
+                    font-weight: 700;
+                    text-decoration: none;
+                }
+                & img {
+                   position: relative;
+                   top: 3px;
+                   left: -4px;
+                }
+            }
+            & .contactPassword {
+               & div {
+                margin-top: -7px;
+                margin-left: 1px;
+               } 
+               & a {
+                margin-top: -7px;
+               }
             }
         }
-        & .contactPassword {
-           & div {
-            margin-top: -7px;
-           } 
-           & a {
-            margin-top: -7px;
-           }
-        }
     }
-}
-.rightSide{
-    width: 700px;
-    margin-left: 80px;
-    padding-left: 4px;
-    height: auto;
-    & .rightSideTitle{
-        font-size: 24px;
-        font-weight: 700;
-        margin-bottom: -3px;
-        margin-left: 2px;
-    }
-    & .planContainer{
-        margin-top: 20px;
-        width: 696px;
-        height: 80px;
-        padding: 0 16px;
-        margin-left: 1px;
-        background-color: $prime-light-color;
-        border-radius: 8px;
-        @include flex (space-between, center);
-         & a {
-            width: 156px;
-            height: 48px;
-            font-size: 14px;
-            border-radius: 7px;
-            background-color: $prime-color;
-            text-decoration: none;
-            @include flex (center, center);
-            color: $white-color;
-            & img {
-                margin-right: 10px;
-            }
-         }
-        & .planTitlesContainer {
-          width: 440px;
-          height: auto;
-          & .planMainTitle {
-            font-size: 18px;
+    .rightSide{
+        margin-left: 30px;
+        height: auto;
+        & .rightSideTitle{
+            font-size: 24px;
             font-weight: 700;
-          }
-          & .planSecondTitle {
-            margin-top: 5px;
-            font-size: 14px;
-          }
+            margin-bottom: -3px;
+            margin-left: 2px;
         }
+        & .planContainer{
+            margin-top: 20px;
+            width: 696px;
+            height: 80px;
+            padding: 0 16px;
+            margin-left: 1px;
+            background-color: $prime-light-color;
+            border-radius: 8px;
+            @include flex (space-between, center);
+             & a {
+                width: 156px;
+                height: 48px;
+                font-size: 14px;
+                border-radius: 7px;
+                background-color: $prime-color;
+                text-decoration: none;
+                @include flex (center, center);
+                color: $white-color;
+                & img {
+                    margin-right: 10px;
+                }
+             }
+            & .planTitlesContainer {
+              width: 440px;
+              height: auto;
+              & .planMainTitle {
+                font-size: 18px;
+                font-weight: 700;
+              }
+              & .planSecondTitle {
+                margin-top: 5px;
+                font-size: 14px;
+              }
+            }
+        }
+       
     }
-   
 }

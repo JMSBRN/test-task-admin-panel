@@ -1,0 +1,18 @@
+@import 'mixins';
+@import '_variables';
+
+.kmButton {
+    width: 30px;
+    height: 31px;
+    border-radius: 5px;
+    font-size: 14px;
+    text-decoration: none;
+    border: 0.5px solid $grey-color;
+    color: $grey-dark-color;
+    background-color: $grey-color;
+    cursor: pointer;
+    @include flex (center, center);
+    &:active {
+        border: 1px solid $grey-dark-color;
+    }
+} 

@@ -4,6 +4,7 @@ import {
   setClearedFilters,
 } from '../../../features/filters/filterSlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
+import KmButton from '../../km-button/KmButton';
 import Link from 'next/link';
 import SearchForm from '../../search-form/SearchForm';
 import { SearchFormData } from '../../interfaces';
@@ -27,7 +28,7 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
     formTitle,
     searchFormContainer,
     centerContiner,
-    elipseKM,
+    kmButtonContainer,
     resetFilters,
     countFilters,
     countFiltersHidden,
@@ -86,7 +87,9 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
       <div className={topContainer}>
         <div className={totalStyle}>Total</div>
         <div className={elipse2M}>{total}</div>
-        <div className={elipseKM}>KM</div>
+        <div className={kmButtonContainer}>
+          <KmButton />
+        </div>
       </div>
       <div className={leftSideContainer}>
         <div className={logo}>Logo</div>
