@@ -95,7 +95,6 @@ const Login = () => {
   };
 
   return (
-    <div className={layout}>
       <div className={mainContainer}>
         {loading && <div className={loadingStyle}>Loading...</div>}
         <div className={apiErrorStyle}>{apiError}</div>
@@ -118,19 +117,20 @@ const Login = () => {
           </div>
         </div>
         <div className={rightSide}>
+        <div className={layout}>
           <LoginReg_Back />
           <div className={rightSideLogoBlock}>
             <div className={logo}>Logo</div>
             <div className={secondTitleRightSide}>
-              Lorem ipsum dolor sit amet,
+              Lorem ipsum dolor sit amet
             </div>
             <div className={secondTitleRightSideLast}>
               consectetur adipiscing elit
             </div>
           </div>
+         </div>
         </div>
       </div>
-    </div>
   );
 };
 

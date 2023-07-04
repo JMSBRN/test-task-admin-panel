@@ -2,10 +2,16 @@
 @import '_variables';
 
 .layout {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100vh;
+    background-color: $prime-bg-color;
 }
+
 .mainContainer {
+    margin: 0 auto;
     position: absolute;
     top: 0;
     right: 0;
@@ -35,7 +41,7 @@
 .leftSide {
     position: relative;
     top: 0;
-    left: 0;
+    left: -3px;
     width: 720px;
     height: 900px;
     background-color: white;
@@ -80,11 +86,10 @@
 }
 
 .rightSideLogoBlock {
-    position: absolute;
-    right: 182px;
-    bottom: 95px;
     width: 450px;
     height: 100px;
+    margin-top: 708px;
+    margin-left: 88px;
 
     & .logo {
         margin-top: 4px;
