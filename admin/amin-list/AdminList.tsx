@@ -51,11 +51,10 @@ const AdminList = () => {
       setContactNameRendered(!contactNameRendered);
     });
     const contactInfo = await getContactInfo(id, req, res);
-
+    
       if(contactInfo) {
         setContactInfo(contactInfo);
       }
-
   };
 
   const handleClickGetContact = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {

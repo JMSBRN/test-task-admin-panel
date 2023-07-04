@@ -109,7 +109,7 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
           )}
         >
           <Link href="#" onClick={handleClearFilters}>
-            Clear filters
+            Clear filter
           </Link>
         </div>
         <div className={searchFormContainer}>

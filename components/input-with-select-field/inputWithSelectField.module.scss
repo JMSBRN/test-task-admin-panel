@@ -1,3 +1,4 @@
+@import 'mixins';
 @import '_variables';
 
 .InputStyle {
@@ -67,8 +68,12 @@
          border-radius: 10px;
        }
        & .listItem {
-        height: 32px;
+        height: auto;
+        min-height: 27px;
+        font-size: 14px;
+        text-transform: capitalize;
         cursor: pointer;
+        @include flex (flex-start, center);
         &:hover {
             background-color: $grey-color;
         }
