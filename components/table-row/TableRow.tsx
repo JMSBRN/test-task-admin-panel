@@ -1,3 +1,4 @@
+import { Contact } from '../interfaces';
 import Image from 'next/image';
 import React from 'react';
 import styles from './TableRow.module.scss';
@@ -5,7 +6,7 @@ import userIcon from '../../public/svgs/Icon_User.svg';
 import verifyIcon from '../../public/svgs/Verify.svg';
 
 interface TableRowProps {
-  el: any;
+  el: Contact;
   id: string;
   contactNameRendered: boolean;
   handleClickGetContact: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => Promise<void>;
@@ -31,6 +32,7 @@ const TableRow = ({
     rowLayout,
     contactName,
   } = styles;
+   const { country, iso3 } = el.country;
 
   return (
     <div
@@ -85,7 +87,7 @@ const TableRow = ({
         onClick={() => setContactModalRendered(true)}
         className={tableContent}
       >
-        {el.country}
+        { (country && iso3) &&`${ country }, ${ iso3 }`}
       </div>
     </div>
   </div>

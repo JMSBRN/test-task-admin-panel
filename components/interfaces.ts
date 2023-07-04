@@ -26,7 +26,10 @@ export interface Contact {
   industry: string;
   company: string;
   job_title: string;
-  country: string;
+  country: {
+    country: string;
+    iso3: string;
+  };
   linkedin_url: string;
   company_facebook_url: string;
   company_linkedin_url: string;

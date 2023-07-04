@@ -1,12 +1,13 @@
+import { Contact, ContactInfo, Country } from '../../components/interfaces';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Pagination, useGetList } from 'react-admin';
 import React, { useEffect, useState } from 'react';
-import { ContactInfo } from '../../components/interfaces';
+import { getContactInfo, getFetchDataForSelectList } from '../../utils/apiUtils';
 import ContactModal from '../../components/contact-modal/ContactModal';
 import PopUpUpgrade from '../../components/popUp-upgrade/PopUpUpgrade';
 import SortButton from '../../components/sort-button/SortButton';
 import TableRow from '../../components/table-row/TableRow';
-import { getContactInfo } from '../../utils/apiUtils';
+import { getDecryptedDataFromCookie } from '../../utils/secureCookiesUtils';
 import styles from './adminList.module.scss';
 
 const AdminList = () => {
@@ -28,6 +29,8 @@ const AdminList = () => {
   const { data, total } = useGetList('contacts', {
     pagination: { page, perPage },
   });
+
+  const [contacts, setContacts] = useState<Contact[]>([]);
   const [contactInfo, setContactInfo] = useState<ContactInfo>({} as ContactInfo);
   const req = {} as NextApiRequest;
   const res = {} as NextApiResponse;
@@ -37,6 +40,29 @@ const AdminList = () => {
       setScrollLimited(true);
     }
   }, [page]);
+
+  useEffect(() => {
+    const fetchFn =async () => {
+      const token = getDecryptedDataFromCookie('token');
+      const countries: Country[] = await getFetchDataForSelectList('country', token!);
+
+       if(countries && data) {
+        let newArr: any[] = [];
+
+        data?.forEach(el  => {
+          if(el.country) {
+            const  { iso3 } = countries.filter(c => c.name === el.country)[0];
+
+              newArr = [...data, el.country = { country: el.country, iso3 }];
+          }
+        });
+        setContacts(newArr);
+      }
+    };
+
+     fetchFn();
+     setContacts(data!);
+  },[data]);
 
   const handleGetContactName = async (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -106,7 +132,7 @@ const AdminList = () => {
           </div>
         </div>
         <div className={tableStyle} onScroll={handleScrollTable}>
-          { data?.map((el) => (
+          { contacts?.map((el) => (
          <TableRow
            key={el.id}
            el={el}
