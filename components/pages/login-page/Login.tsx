@@ -1,7 +1,8 @@
+import { LoginFormData, SearchFormData } from '../../interfaces';
 import React, { useState } from 'react';
 import Form from '../../login-form/LoginForm';
-import { LoginFormData } from '../../interfaces';
 import { LoginReg_Back } from '../../LoginReg_Back/LoginReg_Back';
+import setFormDataToLocal from '../../../utils/localUtils';
 import styles from './login.module.scss';
 import { useRouter } from 'next/router';
 
@@ -20,15 +21,23 @@ const Login = () => {
     secondTitleRightSide,
     secondTitleRightSideLast,
     loadingStyle,
-    apiErrorStyle
+    apiErrorStyle,
   } = styles;
 
-  const [formData, setFormData] = useState<LoginFormData>({ email: '', password: '' });
+  const [formData, setFormData] = useState<LoginFormData>({
+    email: '',
+    password: '',
+  });
   const [emailError, setEmailError] = useState<boolean>(false);
   const [passwordError, setPasswordError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [apiError, setApiError] = useState<string>('');
   const router = useRouter();
+  const clearedFilters = {
+    job_title: '',
+    country: { id: '', name: '' },
+    industry: { id: '', name: '' },
+  } as SearchFormData;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -39,9 +48,9 @@ const Login = () => {
       const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
       setEmailError(!regexEmail.test(value));
-    } else if(e.target.name === 'password') {
+    } else if (e.target.name === 'password') {
       const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-      
+
       setPasswordError(!regexPassword.test(value));
     }
     if (!value) {
@@ -55,8 +64,7 @@ const Login = () => {
     setLoading(true);
     setApiError('');
     e.preventDefault();
-    if((!emailError && formData.email) && (!passwordError && formData.password)) {
-
+    if (!emailError && formData.email && !passwordError && formData.password) {
       const res = await fetch('/api/login/', {
         method: 'POST',
         headers: {
@@ -66,16 +74,16 @@ const Login = () => {
         body: JSON.stringify({ formData }),
       });
       const result: { message: string } = await res.json();
-  
+
       if (result) {
         setLoading(false);
         if (result.message === 'created') {
           router.push('/admin');
           setFormData({ email: '', password: '' });
-        } else  {
-           setApiError(result.message);
+          setFormDataToLocal(clearedFilters);
+        } else {
+          setApiError(result.message);
         }
-
       }
     } else {
       setLoading(false);
@@ -89,7 +97,7 @@ const Login = () => {
   return (
     <div className={layout}>
       <div className={mainContainer}>
-        { loading && <div className={loadingStyle}>Loading...</div> }
+        {loading && <div className={loadingStyle}>Loading...</div>}
         <div className={apiErrorStyle}>{apiError}</div>
         <div className={leftSide}>
           <div className={mainTitleContainer}>
