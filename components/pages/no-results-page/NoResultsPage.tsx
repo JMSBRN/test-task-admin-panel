@@ -23,7 +23,7 @@ const NoResultsPage = () => {
       industry: { id: '', name: '' },
     } as SearchFormData;
 
-    dispatch(setClearedFilters(true));
+    dispatch(setClearedFilters(false));
     dispatch(setFilters(clearedFilters));
     setFormDataToLocal(clearedFilters);
     refresh();

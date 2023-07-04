@@ -77,7 +77,7 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
 
     setFormData(clearedFilters);
     setFormDataToLocal(clearedFilters);
-    dispatch(setClearedFilters(true));
+    dispatch(setClearedFilters(false));
     refresh();
   };
 
@@ -94,7 +94,7 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
           Filters
           <div
             className={setCountFiltersHiddenClass(
-              clearedFilters && !!!formData.job_title && !activeFiltersCounter
+              !clearedFilters && !activeFiltersCounter
             )}
           >
             {activeFiltersCounter + (formData.job_title ? 1 : 0)}
@@ -102,7 +102,7 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
         </div>
         <div
           className={setResetFiltersHiddenClass(
-            clearedFilters && !!!formData.job_title && !activeFiltersCounter
+            !clearedFilters && !activeFiltersCounter
           )}
         >
           <Link href="#" onClick={handleClearFilters}>

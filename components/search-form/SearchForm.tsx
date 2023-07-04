@@ -6,8 +6,10 @@ import industryIcon from '../../public/svgs/Icon_Industry.svg';
 import jobTitleIcon from '../../public/svgs/Icon_JobTitle.svg';
 import locationIcon from '../../public/svgs/Icon_Location.svg';
 import searchIcon from '../../public/svgs/Icon_Search.svg';
+import { setClearedFilters } from '../../features/filters/filterSlice';
 import setFormDataToLocal from '../../utils/localUtils';
 import styles from './searchForm.module.scss';
+import { useAppDispatch } from '../../hooks/reduxHooks';
 import { useRefresh } from 'react-admin';
 
 interface SearchFormProps {
@@ -25,11 +27,13 @@ const SearchForm = ({ formData, setFormData }: SearchFormProps) => {
     inputPlaceHolder
   } = styles;
   const refresh = useRefresh();
+  const dispatch = useAppDispatch();
   
    const handleChange = (e: React.ChangeEvent< HTMLInputElement | HTMLSelectElement>) => {
         e.preventDefault();
         const newFormData = { ...formData, [e.target.name]: e.target.value };
-
+        
+        dispatch(setClearedFilters(!!e.target.value));
         setFormData(newFormData);
         setFormDataToLocal(newFormData);
         refresh();
