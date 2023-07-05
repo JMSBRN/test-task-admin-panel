@@ -69,9 +69,9 @@ const InputWithSelectField = ({
     e: React.MouseEvent<HTMLDivElement>,
     fieldName: string
   ) => {
-    const { id, name } = JSON.parse(e.currentTarget.id);
+    const { id, name, iso3 } = JSON.parse(e.currentTarget.id);
     
-    setFormData({ ...formData, [fieldName]: { id, name } });
+    setFormData({ ...formData, [fieldName]: { id, name, iso3 } });
   };
 
   const handleSetSelectList = async () => {
@@ -93,7 +93,7 @@ const InputWithSelectField = ({
       </button>
       <input 
       name={fieldName}
-      value={formData[fieldName].name}
+      value={ formData[fieldName].iso3 || formData[fieldName].name }
       type="text"
       onChange={handleChangeSelectValue}
       placeholder={textPlaceHolder}
@@ -113,10 +113,10 @@ const InputWithSelectField = ({
                 <div
                   className={listItem}
                   key={el.id}
-                  id={JSON.stringify({ id: el.id, name: el.name })}
+                  id={JSON.stringify({ id: el.id, name: el.name, iso3: el.iso3 || '' })}
                   onClick={(e) => handleGetFilteredValue(e, fieldName)}
                 >
-                  {el.name}
+                  { el.iso3 ||  el.name }
                 </div>
               ))}
           </div>
