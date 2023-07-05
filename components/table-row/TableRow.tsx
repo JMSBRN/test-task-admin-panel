@@ -1,4 +1,4 @@
-import { Contact } from '../interfaces';
+import { Contact, ContactPersonalData } from '../interfaces';
 import Image from 'next/image';
 import React from 'react';
 import styles from './TableRow.module.scss';
@@ -8,6 +8,7 @@ import verifyIcon from '../../public/svgs/Verify.svg';
 interface TableRowProps {
   el: Contact;
   id: string;
+  personalData: ContactPersonalData;
   contactNameRendered: boolean;
   handleClickGetContact: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => Promise<void>;
   handleGetContactName: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => Promise<void>;
@@ -16,6 +17,7 @@ interface TableRowProps {
 const TableRow = ({
   el,
   id,
+  personalData,
   handleClickGetContact,
   handleGetContactName,
   contactNameRendered,
@@ -33,6 +35,7 @@ const TableRow = ({
     contactName,
   } = styles;
    const { country, iso3 } = el.country;
+   const { name, surname } = personalData;
 
   return (
     <div
@@ -49,7 +52,7 @@ const TableRow = ({
       >
         {el.id === id && contactNameRendered ? (
           <div className={contactName}>
-            {el.name || 'Will Gibbons'}
+            {`${name} ${surname}` || 'Will Gibbons'}
           </div>
         ) : (
           <button>

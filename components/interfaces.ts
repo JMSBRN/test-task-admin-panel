@@ -60,6 +60,10 @@ export interface SearchFormData {
 export interface SearchFormDataForInputSelect extends SearchFormData {
   [key: string]: any;
 }
+export interface ContactPersonalData {
+  name: string;
+  surname: string;
+}
 
 export interface ContactInfo {
   id: string;

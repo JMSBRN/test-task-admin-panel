@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getDecryptedDataFromCookie, setEncryptedDataToCookie } from './secureCookiesUtils';
+import { ContactPersonalData } from '../components/interfaces';
 
 const token = getDecryptedDataFromCookie('token');
 
@@ -51,9 +52,9 @@ const getFetchDataForSelectList = async (dataName: string, token: string) => {
 
 const getContactName = async (id: string) => {
    const res = await fetch('/api/contact-name/', {
-     method: 'GET',
+     method: 'POST',
      headers: { 'Content-Type':'application/json',
-     Authorization: JSON.stringify({ id, token })
+     Authorization: JSON.stringify({ token, id }),
   }
    });
    const result = await res.json();
@@ -64,9 +65,19 @@ const getContactName = async (id: string) => {
     return null;
    }
 };
+const setCamelCaseStringToObject = (str: string): ContactPersonalData | null => {
+  const arr = str.match(/[A-Z][^A-Z]*/g);
+
+  if(arr) {
+    return { name: arr[0], surname: arr[1] };
+  }
+   return null;
+};
 
 export { 
   getContactInfo,
   getFetchDataForSelectList,
-  getContactName
+  getContactName,
+  setCamelCaseStringToObject
 };
+

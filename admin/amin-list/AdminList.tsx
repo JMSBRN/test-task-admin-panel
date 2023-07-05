@@ -1,8 +1,13 @@
-import { Contact, ContactInfo, Country } from '../../components/interfaces';
+import { Contact, ContactInfo, ContactPersonalData, Country } from '../../components/interfaces';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Pagination, useGetList } from 'react-admin';
 import React, { useEffect, useState } from 'react';
-import { getContactInfo, getFetchDataForSelectList } from '../../utils/apiUtils';
+import { 
+  getContactInfo,
+  getContactName,
+  getFetchDataForSelectList,
+  setCamelCaseStringToObject
+ } from '../../utils/apiUtils';
 import ContactModal from '../../components/contact-modal/ContactModal';
 import PopUpUpgrade from '../../components/popUp-upgrade/PopUpUpgrade';
 import SortButton from '../../components/sort-button/SortButton';
@@ -32,6 +37,7 @@ const AdminList = () => {
 
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [contactInfo, setContactInfo] = useState<ContactInfo>({} as ContactInfo);
+  const [personalData, setPersonalData] = useState<ContactPersonalData>({} as ContactPersonalData);
   const req = {} as NextApiRequest;
   const res = {} as NextApiResponse;
 
@@ -76,11 +82,21 @@ const AdminList = () => {
       
       setContactNameRendered(!contactNameRendered);
     });
+    const apiContactName = await getContactName(id);
+
+    if(apiContactName)  {
+      const contactPersonalData = setCamelCaseStringToObject(apiContactName);
+      
+       if(contactPersonalData){
+         setPersonalData(contactPersonalData!);
+       }
+    }
     const contactInfo = await getContactInfo(id, req, res);
     
       if(contactInfo) {
         setContactInfo(contactInfo);
       }
+
   };
 
   const handleClickGetContact = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -137,6 +153,7 @@ const AdminList = () => {
            key={el.id+el.country.toString()}
            el={el}
            id={id}
+           personalData={personalData}
            contactNameRendered={contactNameRendered}
            handleClickGetContact={handleClickGetContact}
            handleGetContactName={handleGetContactName}

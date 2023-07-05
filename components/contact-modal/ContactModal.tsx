@@ -1,5 +1,9 @@
+import { ContactInfo, ContactPersonalData  } from '../interfaces';
 import React, { useState } from 'react';
-import { ContactInfo } from '../interfaces';
+import {
+  getContactName,
+  setCamelCaseStringToObject,
+} from '../../utils/apiUtils';
 import Image from 'next/image';
 import styles from './customerModal.module.scss';
 import userIcon from '../../public/svgs/Icon_User.svg';
@@ -9,7 +13,7 @@ interface CustomerModalProps {
   contact: ContactInfo;
 }
 const ContactModal = ({ handleCloseModal, contact }: CustomerModalProps) => {
-  const { 
+  const {
     ContactModalContiner,
     closeBtn,
     topContainer,
@@ -18,45 +22,53 @@ const ContactModal = ({ handleCloseModal, contact }: CustomerModalProps) => {
     title,
     content,
     contactName,
-    descriptionStyle
-   } =
-    styles;
-    const [customerNameRendered, setCustomerNameRendered] =useState<boolean>(false);
-    const { job_title , country , industry, description } = contact;
+    descriptionStyle,
+  } = styles;
+  const [customerNameRendered, setCustomerNameRendered] =
+    useState<boolean>(false);
+  const { id, job_title, country, industry, description } = contact;
+  const [personalData, setPersonalData] = useState<ContactPersonalData>(
+    {} as ContactPersonalData
+  );
 
-    const handleRenderCustomerName = () => {
-        setCustomerNameRendered(!customerNameRendered);
-    };
+  const handleRenderCustomerName = async () => {
+    setCustomerNameRendered(!customerNameRendered);
+    const apiContactName = await getContactName(id);
+
+    if (apiContactName) {
+      const contactPersonalData = setCamelCaseStringToObject(apiContactName);
+
+      if (contactPersonalData) {
+        setPersonalData(contactPersonalData!);
+      }
+    }
+  };
+  const { name, surname } = personalData;
 
   return (
     <div className={ContactModalContiner}>
       <div className={closeBtn} onClick={handleCloseModal} />
       <div className={topContainer}>
-        {
-          customerNameRendered ? (<div 
-          className={contactName}
-          onClick={handleRenderCustomerName}
-          >
-            { contact.full_name || 'Will Gibbon' }
-          </div>) : (
-              <button onClick={handleRenderCustomerName}>
-              <Image
-                width={20}
-                height={20}
-                alt={'logo user with arrow'}
-                src={userIcon}
-                style={{ filter: 
+        {customerNameRendered ? (
+          <div className={contactName} onClick={handleRenderCustomerName}>
+            {`${name || ''} ${surname || ''}` || 'Will Gibbon'}
+          </div>
+        ) : (
+          <button onClick={handleRenderCustomerName}>
+            <Image
+              width={20}
+              height={20}
+              alt={'logo user with arrow'}
+              src={userIcon}
+              style={{
+                filter:
                   // eslint-disable-next-line max-len
-                  'brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(334deg) brightness(105%) contrast(103%)'
-                 }}
-              />
-              <div>
-               Get access to name
-              </div>
-            </button>
-          )
-        }
-      
+                  'brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(334deg) brightness(105%) contrast(103%)',
+              }}
+            />
+            <div>Get access to name</div>
+          </button>
+        )}
       </div>
       <div className={mainContainer}>
         <div className={contentWrapper}>
@@ -73,9 +85,7 @@ const ContactModal = ({ handleCloseModal, contact }: CustomerModalProps) => {
         </div>
         <div className={contentWrapper}>
           <div className={title}>Description</div>
-          <div className={descriptionStyle}>
-          {description}
-          </div>
+          <div className={descriptionStyle}>{description}</div>
         </div>
       </div>
     </div>
