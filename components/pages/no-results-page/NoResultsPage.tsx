@@ -36,6 +36,7 @@ const NoResultsPage = () => {
           width={158}
           src={noResultsImage}
           alt="task paper with magnifying glass"
+          priority={true}
         />
         <div className={mainTitle}>No results found</div>
         <div className={secondeTitle}>

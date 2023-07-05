@@ -51,7 +51,7 @@ const AdminList = () => {
 
         data?.forEach(el  => {
           if(el.country) {
-            const  { iso3 } = countries.filter(c => c.name === el.country)[0];
+            const  { iso3 } = countries.filter(c => c.name === el.country)[0] || '';
 
               newArr = [...data, el.country = { country: el.country, iso3 }];
           }
@@ -132,9 +132,9 @@ const AdminList = () => {
           </div>
         </div>
         <div className={tableStyle} onScroll={handleScrollTable}>
-          { contacts?.map((el) => (
+          { contacts?.slice(0, contacts.length - 1).map((el) => (
          <TableRow
-           key={el.id}
+           key={el.id+el.country.toString()}
            el={el}
            id={id}
            contactNameRendered={contactNameRendered}

@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getDecryptedDataFromCookie, setEncryptedDataToCookie } from './secureCookiesUtils';
 
+const token = getDecryptedDataFromCookie('token');
+
 const getContactInfo = async (id: string, req: NextApiRequest, res: NextApiResponse) => {
-  const token = getDecryptedDataFromCookie('token');
   
   const fetchRes = await fetch('/api/contacts/', {
     method: 'POST',
@@ -48,7 +49,24 @@ const getFetchDataForSelectList = async (dataName: string, token: string) => {
   return result ;
 };
 
+const getContactName = async (id: string) => {
+   const res = await fetch('/api/contact-name/', {
+     method: 'GET',
+     headers: { 'Content-Type':'application/json',
+     Authorization: JSON.stringify({ id, token })
+  }
+   });
+   const result = await res.json();
+
+   if(result) {
+    return result;
+   } else {
+    return null;
+   }
+};
+
 export { 
   getContactInfo,
-  getFetchDataForSelectList
+  getFetchDataForSelectList,
+  getContactName
 };
