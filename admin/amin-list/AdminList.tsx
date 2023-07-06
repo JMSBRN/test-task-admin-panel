@@ -29,7 +29,7 @@ const AdminList = () => {
     useState<boolean>(false);
   const [contactModalRendered, setContactModalRendered] =
     useState<boolean>(false);
-  const [id, setId] = useState<string>('');
+  const [idForGetNameBtn, setIdForGetNameBtn] = useState<string>('');
 
   const { data, total } = useGetList('contacts', {
     pagination: { page, perPage },
@@ -37,7 +37,7 @@ const AdminList = () => {
 
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [contactInfo, setContactInfo] = useState<ContactInfo>({} as ContactInfo);
-  const [personalData, setPersonalData] = useState<ContactPersonalData>({} as ContactPersonalData);
+  const [personalData, setPersonalData] = useState<ContactPersonalData>({ name: '', surname: '' });
   const req = {} as NextApiRequest;
   const res = {} as NextApiResponse;
 
@@ -75,36 +75,24 @@ const AdminList = () => {
   ) => {
     const id = e.currentTarget.id;
 
-    data?.forEach((el) => {
-      if (el.id === id) {
-        setId(el.id);
-      }
-      
-      setContactNameRendered(!contactNameRendered);
+    data?.forEach((el) => {  
+      (el.id === id) &&  setIdForGetNameBtn(el.id);
     });
-    const apiContactName = await getContactName(id);
-
-    if(apiContactName)  {
-      const contactPersonalData = setCamelCaseStringToObject(apiContactName);
-      
-       if(contactPersonalData){
-         setPersonalData(contactPersonalData!);
-       }
-    }
-    const contactInfo = await getContactInfo(id, req, res);
-    
-      if(contactInfo) {
-        setContactInfo(contactInfo);
-      }
-
+    setContactNameRendered(!contactNameRendered);
   };
 
   const handleClickGetContact = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    setPersonalData({ name: '', surname: '' });
     const id = e.currentTarget.id;
     const contactInfo = await getContactInfo(id, req, res);
 
-    if(contactInfo) {
-      setContactInfo(contactInfo);
+    contactInfo && setContactInfo(contactInfo);
+    const apiContactName = await getContactName(id);
+    
+    if(apiContactName)  {
+      const contactPersonalData = setCamelCaseStringToObject(apiContactName);
+
+      contactPersonalData &&  setPersonalData(contactPersonalData);
     }
   };
 
@@ -123,7 +111,10 @@ const AdminList = () => {
   return (
     <>
       {contactModalRendered && (
-        <ContactModal contact={contactInfo} handleCloseModal={handleCloseModal} />
+        <ContactModal 
+        contact={contactInfo}
+        contactPersonalData={personalData}
+        handleCloseModal={handleCloseModal} />
       )}
       <div className={tableContainer}>
         {scrollLimited && (
@@ -152,7 +143,7 @@ const AdminList = () => {
          <TableRow
            key={el.id+el.country.toString()}
            el={el}
-           id={id}
+           id={idForGetNameBtn}
            personalData={personalData}
            contactNameRendered={contactNameRendered}
            handleClickGetContact={handleClickGetContact}

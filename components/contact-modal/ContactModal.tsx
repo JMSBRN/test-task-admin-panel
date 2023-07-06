@@ -1,9 +1,5 @@
 import { ContactInfo, ContactPersonalData  } from '../interfaces';
 import React, { useState } from 'react';
-import {
-  getContactName,
-  setCamelCaseStringToObject,
-} from '../../utils/apiUtils';
 import Image from 'next/image';
 import styles from './customerModal.module.scss';
 import userIcon from '../../public/svgs/Icon_User.svg';
@@ -11,8 +7,9 @@ import userIcon from '../../public/svgs/Icon_User.svg';
 interface CustomerModalProps {
   handleCloseModal: () => void;
   contact: ContactInfo;
+  contactPersonalData: ContactPersonalData;
 }
-const ContactModal = ({ handleCloseModal, contact }: CustomerModalProps) => {
+const ContactModal = ({ handleCloseModal, contact, contactPersonalData }: CustomerModalProps) => {
   const {
     ContactModalContiner,
     closeBtn,
@@ -26,24 +23,13 @@ const ContactModal = ({ handleCloseModal, contact }: CustomerModalProps) => {
   } = styles;
   const [customerNameRendered, setCustomerNameRendered] =
     useState<boolean>(false);
-  const { id, job_title, country, industry, description } = contact;
-  const [personalData, setPersonalData] = useState<ContactPersonalData>(
-    {} as ContactPersonalData
-  );
+  const { job_title, country, industry, description } = contact;
 
   const handleRenderCustomerName = async () => {
     setCustomerNameRendered(!customerNameRendered);
-    const apiContactName = await getContactName(id);
 
-    if (apiContactName) {
-      const contactPersonalData = setCamelCaseStringToObject(apiContactName);
-
-      if (contactPersonalData) {
-        setPersonalData(contactPersonalData!);
-      }
-    }
   };
-  const { name, surname } = personalData;
+  const { name, surname } = contactPersonalData;
 
   return (
     <div className={ContactModalContiner}>
@@ -51,7 +37,7 @@ const ContactModal = ({ handleCloseModal, contact }: CustomerModalProps) => {
       <div className={topContainer}>
         {customerNameRendered ? (
           <div className={contactName} onClick={handleRenderCustomerName}>
-            {`${name || ''} ${surname || ''}` || 'Will Gibbon'}
+            { contactPersonalData && `${name} ${surname}` || 'Will Gibbon'}
           </div>
         ) : (
           <button onClick={handleRenderCustomerName}>

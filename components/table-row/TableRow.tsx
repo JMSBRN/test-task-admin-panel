@@ -52,7 +52,7 @@ const TableRow = ({
       >
         {el.id === id && contactNameRendered ? (
           <div className={contactName}>
-            {`${name} ${surname}` || 'Will Gibbons'}
+            { personalData && `${name} ${surname}` || 'Will Gibbons' }
           </div>
         ) : (
           <button>
