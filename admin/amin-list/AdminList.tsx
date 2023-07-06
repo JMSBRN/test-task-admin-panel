@@ -74,15 +74,26 @@ const AdminList = () => {
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     const id = e.currentTarget.id;
+    
+    setPersonalData({ name: '', surname: '' });
+    setContactModalRendered(false);
 
     data?.forEach((el) => {  
       (el.id === id) &&  setIdForGetNameBtn(el.id);
     });
     setContactNameRendered(!contactNameRendered);
+    const apiContactName = await getContactName(id);
+    
+    if(apiContactName)  {
+      const contactPersonalData = setCamelCaseStringToObject(apiContactName);
+
+      contactPersonalData &&  setPersonalData(contactPersonalData);
+    }
   };
 
   const handleClickGetContact = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     setPersonalData({ name: '', surname: '' });
+    setContactNameRendered(false);
     const id = e.currentTarget.id;
     const contactInfo = await getContactInfo(id, req, res);
 

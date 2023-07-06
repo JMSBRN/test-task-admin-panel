@@ -37,12 +37,16 @@ const TableRow = ({
    const { country, iso3 } = el.country;
    const { name, surname } = personalData;
 
+   const handleClickContent = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    handleClickGetContact(e);
+    setContactModalRendered(true);
+   };
+
   return (
     <div
     id={el.id}
     key={el.id}
     className={rowLayout}
-    onClick={handleClickGetContact}
   >
     <div className={rowStyle}>
       <div
@@ -76,19 +80,22 @@ const TableRow = ({
         )}
       </div>
       <div
-        onClick={() => setContactModalRendered(true)}
+        id={el.id}
+        onClick={handleClickContent}
         className={tableContent}
       >
         {el.job_title}
       </div>
       <div
-        onClick={() => setContactModalRendered(true)}
+       id={el.id}
+        onClick={handleClickContent}
         className={tableContent}
       >
         {el.industry}
       </div>
       <div
-        onClick={() => setContactModalRendered(true)}
+       id={el.id}
+        onClick={handleClickContent}
         className={tableContent}
       >
         { (country && iso3) &&`${ country }, ${ iso3 }`}
