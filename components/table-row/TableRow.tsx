@@ -52,6 +52,7 @@ const TableRow = ({
       >
         {el.id === id && contactNameRendered ? (
           <div className={contactName}>
+          { !personalData.name &&  <span>loading...</span>  }
             { personalData && `${name} ${surname}` || 'Will Gibbons' }
           </div>
         ) : (

@@ -37,6 +37,7 @@ const ContactModal = ({ handleCloseModal, contact, contactPersonalData }: Custom
       <div className={topContainer}>
         {customerNameRendered ? (
           <div className={contactName} onClick={handleRenderCustomerName}>
+             { !contactPersonalData.name &&  <span>loading...</span>  }
             { contactPersonalData && `${name} ${surname}` || 'Will Gibbon'}
           </div>
         ) : (
