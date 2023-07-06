@@ -11,7 +11,8 @@ const Index = () => {
     Your are in Home Page.
     <br />
     <Link href={'/login'}>Go To Login Page</Link>
-
+     <div>
+      Credetntials for test login is: email: test@nyblecraft.com, password: 12345678qQ</div>
    </div>
   );
 };
