@@ -67,7 +67,6 @@ const AdminList = () => {
     };
 
      fetchFn();
-     setContacts(data!);
   },[data]);
 
   const handleGetContactName = async (
