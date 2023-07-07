@@ -79,6 +79,18 @@ const InputWithSelectField = ({
    setSortChanged(!sortChanged);
    await fetchSelectList();
   };
+  
+  const setItemFieldForFilter = (item: Country, inputValue: string) => {
+    const lowerInput = inputValue.toLowerCase();
+
+    if (item.iso3 && item.iso3.toLowerCase().includes(lowerInput)) {
+    return item;
+    }
+
+    if (item.name.toLowerCase().includes(lowerInput)) {
+    return item;
+    }
+    };
 
   return (
     <label className={InputStyle}>
@@ -103,11 +115,7 @@ const InputWithSelectField = ({
           <div className={inputList}>
             {dataForSelectList
               ?.filter((item) => {
-                if (
-                  item.name.toLowerCase().includes(inputValueForFilter)
-                ) {
-                  return item;
-                }
+                return setItemFieldForFilter(item, inputValueForFilter);
               })
               .map((el) => (
                 <div
