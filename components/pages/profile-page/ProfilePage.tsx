@@ -1,13 +1,17 @@
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import KmButton from '../../km-button/KmButton';
 import Link from 'next/link';
-import React from 'react';
+import { User } from '../../interfaces';
 import backToSearchIcon from '../../../public/svgs/Icon_Arrow_Back_to_search.svg';
 import changePlanIcon from '../../../public/svgs/change_plan.svg';
 import changeProfileDataIcon from '../../../public/svgs/Icon_Change_profile_data.svg';
 import { deleteCookie } from 'cookies-next';
+import { getDecryptedDataFromCookie } from '../../../utils/secureCookiesUtils';
 import logOutIcon from '../../../public/svgs/Icon_Logout.svg';
+import { logoutUser } from '../../../utils/apiUtils';
 import styles from './profilePage.module.scss';
+import { useRouter } from 'next/router';
 
 const UpgradePage = () => {
   const {
@@ -36,10 +40,29 @@ const UpgradePage = () => {
     kmButtonContainer
   } = styles;
 
-  const handleLogOut = () => {
-   window.localStorage.clear();
-   deleteCookie('token');
-   deleteCookie('refreshToken');
+  const { push } = useRouter();
+  const [user, setUser] = useState<User>({} as User);
+
+  useEffect(() => {
+    const user = getDecryptedDataFromCookie('user');
+    const parsedUser: string = JSON.parse(user!);
+
+    setUser(JSON.parse(parsedUser));   
+  }, []);
+  
+  const { id, firstName, lastName  } = user;
+
+  const handleLogOut = async() => {
+     if(id) {
+       const result = await logoutUser(id);
+
+       if(result!.message === 'Successful logout') {
+         window.localStorage.clear();
+         deleteCookie('token');
+         deleteCookie('refreshToken');
+         push('/');
+        } 
+     }
   };
 
   return (
@@ -58,20 +81,20 @@ const UpgradePage = () => {
             <div className={formContainer}>
               <div className={topContainer}>
                 <div className={topContainerTitle}>Account info</div>
-                <Link href={'/'} className={logoutButton} onClick={handleLogOut}>
+                <button className={logoutButton} onClick={handleLogOut}>
                   <Image width={16} src={logOutIcon} alt="" />
                   Log out
-                </Link>
+                </button>
               </div>
               <div className={proFileForm}>
                   <div className={topFormSection}>
                     <label >
                       First Name
-                      <input type="text" value={'John'} />
+                      <input type="text" defaultValue={firstName || 'John'} />
                     </label>
                     <label >
                       Last Name
-                      <input type="text" value={'Doe'} />
+                      <input type="text" defaultValue={lastName || 'Doe'} />
                     </label>
                   </div>
                     <div className={lineFirst}></div>

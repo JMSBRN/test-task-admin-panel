@@ -1,4 +1,4 @@
-import { LoginFormData, SearchFormData } from '../../interfaces';
+import { LoginUser, SearchFormData } from '../../interfaces';
 import React, { useState } from 'react';
 import Form from '../../login-form/LoginForm';
 import { LoginReg_Back } from '../../LoginReg_Back/LoginReg_Back';
@@ -24,7 +24,7 @@ const Login = () => {
     apiErrorStyle,
   } = styles;
 
-  const [formData, setFormData] = useState<LoginFormData>({
+  const [formData, setFormData] = useState<LoginUser>({
     email: '',
     password: '',
   });
@@ -32,7 +32,7 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [apiError, setApiError] = useState<string>('');
-  const router = useRouter();
+  const { push } = useRouter();
   const clearedFilters = {
     job_title: '',
     country: { id: '', name: '' },
@@ -65,7 +65,7 @@ const Login = () => {
     setApiError('');
     e.preventDefault();
     if (!emailError && formData.email && !passwordError && formData.password) {
-      const res = await fetch('/api/login/', {
+      const res = await fetch('/api/auth/login/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ const Login = () => {
       if (result) {
         setLoading(false);
         if (result.message === 'created') {
-          router.push('/admin');
+          push('/admin');
           setFormData({ email: '', password: '' });
           setFormDataToLocal(clearedFilters);
         } else {

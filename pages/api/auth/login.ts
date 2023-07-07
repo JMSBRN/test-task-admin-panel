@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { setEncryptedDataToCookie } from '../../utils/secureCookiesUtils';
+import { UserData } from '../../../components/interfaces';
+import { setEncryptedDataToCookie } from '../../../utils/secureCookiesUtils';
 
 const handler = async (req:NextApiRequest, res: NextApiResponse) => {
     if(req.method === 'POST'){
@@ -14,11 +15,12 @@ const handler = async (req:NextApiRequest, res: NextApiResponse) => {
                  },
                 body: JSON.stringify(formData)
               });
-              const result = await response.json();
+              const result: UserData = await response.json();
               
               if(result.accessToken) {
-                 const { accessToken, refreshToken } = result;
+                 const { user, accessToken, refreshToken } = result;
                  
+                 setEncryptedDataToCookie('user', JSON.stringify(user), req, res);
                  setEncryptedDataToCookie('token', accessToken, req, res);
                  setEncryptedDataToCookie('refreshToken', refreshToken, req, res);
                  res.status(201).end(JSON.stringify({ message: 'created' }));       

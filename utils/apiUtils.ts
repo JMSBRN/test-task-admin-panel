@@ -1,6 +1,6 @@
+import { ApiResult, ContactPersonalData } from '../components/interfaces';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getDecryptedDataFromCookie, setEncryptedDataToCookie } from './secureCookiesUtils';
-import { ContactPersonalData } from '../components/interfaces';
 
 const token = getDecryptedDataFromCookie('token');
 
@@ -74,10 +74,30 @@ const setCamelCaseStringToObject = (str: string): ContactPersonalData | null => 
    return null;
 };
 
+const logoutUser = async (id: string) => {
+  const token = getDecryptedDataFromCookie('token');
+
+   const response = await fetch('/api/auth/logout/',{
+    method: 'POST',
+    headers: { 'Content-Type':'application/json',
+    Authorization: JSON.stringify(token),
+    },
+    body: JSON.stringify(id)
+   });
+   const result: ApiResult = await response.json();
+
+    if(result) {
+      return result;
+    } else {
+      return null;
+    }
+};
+
 export { 
   getContactInfo,
   getFetchDataForSelectList,
   getContactName,
-  setCamelCaseStringToObject
+  setCamelCaseStringToObject,
+  logoutUser
 };
 

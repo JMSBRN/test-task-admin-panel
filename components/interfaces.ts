@@ -1,7 +1,3 @@
-export interface User {
-  email: string;
-  password: string;
-}
 
 export interface Country {
     id: string;
@@ -16,8 +12,6 @@ export interface Industry {
     id: 'string';
     name: 'string';
 }
-
-export interface LoginFormData extends User {}
 
 export interface Contact {
   id: string;
@@ -86,4 +80,30 @@ export interface ContactInfo {
   github_url: string;
   twitter_url: string;
   description: string;
+}
+
+export interface ApiResult {
+  statusCode: number;
+  message: string;
+}
+
+export interface LoginUser {
+  email: string;
+  password: string;
+}
+
+export interface User {
+  id: string,
+  createdAt: string,
+  updatedAt: string,
+  email: string,
+  firstName: string,
+  lastName: string
+  
+}
+
+export interface UserData {
+  refreshToken: string,
+  accessToken: string,
+  user: User
 }

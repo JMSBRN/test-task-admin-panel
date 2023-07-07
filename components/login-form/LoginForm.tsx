@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { User } from '../interfaces';
+import { LoginUser } from '../interfaces';
 import { VectorIcon } from './VectorIcon';
 import styles from './LoginForm.module.scss';
 
 interface FormProps {
-  formData: User;
+  formData: LoginUser;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   emailWithError: boolean;
