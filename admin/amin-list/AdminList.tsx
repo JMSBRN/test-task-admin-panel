@@ -8,7 +8,8 @@ import {
   getFetchDataForSelectList,
   setCamelCaseStringToObject
  } from '../../utils/apiUtils';
-import ContactModal from '../../components/contact-modal/ContactModal';
+ import ContactModal from '../../components/contact-modal/ContactModal';
+ import Loader from '../../components/loader/Loader';
 import PopUpUpgrade from '../../components/popUp-upgrade/PopUpUpgrade';
 import SortButton from '../../components/sort-button/SortButton';
 import TableRow from '../../components/table-row/TableRow';
@@ -20,7 +21,8 @@ const AdminList = () => {
     tableContainer,
     tableStyle,
     tableHeader,
-    sortBtn
+    sortBtn,
+    loaderStyle
   } = styles;
   const [page, setPage] = useState<number>(1);
   const [perPage, setPerPage] = useState<number>(100);
@@ -36,6 +38,7 @@ const AdminList = () => {
   });
 
   const [contacts, setContacts] = useState<Contact[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [contactInfo, setContactInfo] = useState<ContactInfo>({} as ContactInfo);
   const [personalData, setPersonalData] = useState<ContactPersonalData>({ name: '', surname: '' });
   const req = {} as NextApiRequest;
@@ -48,12 +51,15 @@ const AdminList = () => {
   }, [page]);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchFn =async () => {
       const token = getDecryptedDataFromCookie('token');
       const countries: Country[] = await getFetchDataForSelectList('country', token!);
 
        if(countries && data) {
         let newArr: any[] = [];
+        
+        setIsLoading(false);
 
         data?.forEach(el  => {
           if(el.country) {
@@ -147,6 +153,11 @@ const AdminList = () => {
             <div>Location</div>
             <SortButton />
           </div>
+          { isLoading &&  
+          <div className={loaderStyle}>
+              <Loader size='small'/>
+          </div>
+          }
         </div>
         <div className={tableStyle} onScroll={handleScrollTable}>
           { contacts?.slice(0, contacts.length - 1).map((el) => (

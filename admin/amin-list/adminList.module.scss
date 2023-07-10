@@ -29,6 +29,11 @@
         font-size: 14px;
         @include flex (space-around, center);
     }
+    & .loaderStyle {
+        position: absolute;
+        top: 25px;
+        right: 50px;
+    }
 }
 
 .tableStyle {
