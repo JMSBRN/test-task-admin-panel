@@ -10,16 +10,14 @@ const handler = async (req:NextApiRequest, res: NextApiResponse) => {
             const { formData } = req.body;
             const response = await fetch('http://3.65.149.62/test-api/auth/login/', {
                 method: 'POST',
-                headers: { 
-                    'Content-Type':'application/json'
-                 },
+                headers: { 'Content-Type':'application/json' },
                 body: JSON.stringify(formData)
               });
               const result: UserData = await response.json();
               
               if(result.accessToken) {
                  const { user, accessToken, refreshToken } = result;
-                 
+
                  setEncryptedDataToCookie('user', JSON.stringify(user), req, res);
                  setEncryptedDataToCookie('token', accessToken, req, res);
                  setEncryptedDataToCookie('refreshToken', refreshToken, req, res);
