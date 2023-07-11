@@ -4,11 +4,11 @@ import {
   setClearedFilters,
 } from '../../../features/filters/filterSlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks';
+import AdminList from '../../../admin/amin-list/AdminList';
 import KmButton from '../../km-button/KmButton';
 import Link from 'next/link';
 import SearchForm from '../../search-form/SearchForm';
 import { SearchFormData } from '../../interfaces';
-import WelcomePage from '../welcom-page/WelcomePage';
 import setFormDataToLocal from '../../../utils/localUtils';
 import styles from './searchPage.module.scss';
 import { useRefresh } from 'react-admin';
@@ -116,7 +116,7 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
           <SearchForm formData={formData} setFormData={setFormData} />
         </div>
       </div>
-      <div className={centerContiner}>{!table ? <WelcomePage /> : table}</div>
+      <div className={centerContiner}>{ clearedFilters ? <AdminList /> : table }</div>
     </div>
   );
 };
