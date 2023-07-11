@@ -48,6 +48,11 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
   useEffect(() => {
     setFormData(filters);
   }, [filters]);
+  useEffect(() => {
+    dispatch(setClearedFilters(Object.values(formData).filter(
+      (e) => !!e.name === true
+    ).length > 0));
+  },[dispatch, formData]);
   const activeFiltersCounter: number = Object.values(formData).filter(
     (e) => !!e.name === true
   ).length;
@@ -70,14 +75,14 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     e.preventDefault();
-    const clearedFilters = {
+    const currentClearedFilters = {
       job_title: '',
       country: { id: '', name: '' },
       industry: { id: '', name: '' },
     } as SearchFormData;
 
-    setFormData(clearedFilters);
-    setFormDataToLocal(clearedFilters);
+    setFormData(currentClearedFilters);
+    setFormDataToLocal(currentClearedFilters);
     dispatch(setClearedFilters(false));
     refresh();
   };
