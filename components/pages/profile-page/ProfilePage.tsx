@@ -44,13 +44,26 @@ const UpgradePage = () => {
   const [user, setUser] = useState<User>({} as User);
 
   useEffect(() => {
-    const user = getDecryptedDataFromCookie('user');
-    const parsedUser: string = JSON.parse(user!);
+    const fetchFn = async () => {
+     const parsedToken = JSON.parse(getDecryptedDataFromCookie('token') || '');
 
-    setUser(JSON.parse(parsedUser));   
-  }, []);
+      const resFetch = await fetch('/api/profile/', {
+       method: 'GET',
+       headers: { 'Content-Type': 'application/json',
+       'Authorization': `Bearer ${parsedToken!}`
+      },
+      });
+      const result: User = await resFetch.json();
+
+      if(result) {
+        setUser(result);
+      }
+     };
+     
+    fetchFn();
+  },[]);
   
-  const { id, firstName, lastName  } = user;
+  const { id, firstName, lastName, email  } = user;
 
   const handleLogOut = async() => {
      if(id) {
@@ -99,7 +112,7 @@ const UpgradePage = () => {
                   </div>
                     <div className={lineFirst}></div>
                   <div className={contactEmail}>
-                    john.doe@gmail.com
+                    {email}
                       <Link href={'#'} >
                       <Image width={16} src={changeProfileDataIcon} alt="" />
                       Change email</Link>
