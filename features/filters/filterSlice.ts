@@ -13,7 +13,7 @@ const clearedFilters: SearchFormData = {
   };
 const initialState: InitialStateFilters = {
     filters: clearedFilters,
-    clearedFilters: false
+    clearedFilters: true
 };
   
 const filterSlice = createSlice({
