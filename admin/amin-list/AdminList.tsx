@@ -8,8 +8,9 @@ import {
   getFetchDataForSelectList,
   setCamelCaseStringToObject
  } from '../../utils/apiUtils';
- import ContactModal from '../../components/contact-modal/ContactModal';
- import Loader from '../../components/loader/Loader';
+import ContactModal from '../../components/contact-modal/ContactModal';
+import Loader from '../../components/loader/Loader';
+import NoResultsPage from '../../components/pages/no-results-page/NoResultsPage';
 import PopUpUpgrade from '../../components/popUp-upgrade/PopUpUpgrade';
 import SortButton from '../../components/sort-button/SortButton';
 import TableRow from '../../components/table-row/TableRow';
@@ -126,6 +127,10 @@ const AdminList = () => {
 
   return (
     <>
+    { !total ? 
+      <NoResultsPage />
+      : (
+      <>
       {contactModalRendered && (
         <ContactModal 
         contact={contactInfo}
@@ -211,6 +216,9 @@ const AdminList = () => {
         />
       </div>
     </>
+     ) }
+    </>
+
   );
 };
 

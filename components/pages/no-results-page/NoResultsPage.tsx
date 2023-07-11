@@ -1,8 +1,8 @@
-import { setClearedFilters, setFilters } from '../../../features/filters/filterSlice';
 import Image from 'next/image';
 import React from 'react';
 import { SearchFormData } from '../../interfaces';
 import noResultsImage from '../../../public/images/No Results@3x.png';
+import { setFilters } from '../../../features/filters/filterSlice';
 import setFormDataToLocal from '../../../utils/localUtils';
 import styles from './noResultsPage.module.scss';
 import { useAppDispatch } from '../../../hooks/reduxHooks';
@@ -23,7 +23,6 @@ const NoResultsPage = () => {
       industry: { id: '', name: '' },
     } as SearchFormData;
 
-    dispatch(setClearedFilters(false));
     dispatch(setFilters(clearedFilters));
     setFormDataToLocal(clearedFilters);
     refresh();

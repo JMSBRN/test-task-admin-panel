@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   selectFilter,
   setClearedFilters,
@@ -35,7 +35,7 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
     resetFiltersHidden,
   } = styles;
   const refresh = useRefresh();
-  const { clearedFilters, filters } = useAppSelector(selectFilter);
+  const { filters } = useAppSelector(selectFilter);
   const dispatch = useAppDispatch();
   const [activeFilters, setActiveFilters] = useState<number>(0);
 
@@ -46,26 +46,23 @@ const SearchPage = ({ table, total }: SearchPageProps) => {
     initFormDataFromLocal
   );
 
-  interface ForCheckSaerchFormData extends SearchFormData {
-     [key: string]: any;
-  }
-   const checActiveFilters = (obj: ForCheckSaerchFormData) => {
-    let result = 0;
-// create an array of properties to check
-const properties = ['job_title', 'country', 'industry'];
+   const checActiveFilters = useCallback((formData: SearchFormData) => {
+    let count = 0;
 
-// loop through the object's own properties
-for (const property in obj) {
-if (obj.hasOwnProperty(property)) {
-// check if the property is in the array
-if (properties.includes(property)) {
-// increment the result by one if the value is truthy
-result += obj[property] ? 1 : 0;
-}
-}
-}
-return result;
-   };
+    if (formData.job_title.trim() !== '') {
+      count++;
+    }
+  
+    if (formData.country.name.trim() !== '') {
+      count++;
+    }
+
+    if (formData.industry.name.trim() !== '') {
+      count++;
+    }
+  
+    return count;
+   },[]);
 
   useEffect(() => {
     setFormData(filters);
@@ -73,11 +70,9 @@ return result;
   useEffect(() => {
     const result = checActiveFilters(formData);
 
-     console.log(result);
-
     setActiveFilters(result);
-    //dispatch(setClearedFilters(true));
-  },[activeFilters, dispatch, formData]);
+
+  },[activeFilters, checActiveFilters, formData]);
 
   const setCountFiltersHiddenClass = (condition: boolean) => {
     if (condition) {
@@ -125,7 +120,7 @@ return result;
           Filters
           <div
             className={setCountFiltersHiddenClass(
-              clearedFilters
+              !activeFilters
             )}
           >
             {activeFilters}
@@ -133,7 +128,7 @@ return result;
         </div>
         <div
           className={setResetFiltersHiddenClass(
-            clearedFilters
+            !activeFilters
           )}
         >
           <Link href="#" onClick={handleClearFilters}>
@@ -144,7 +139,7 @@ return result;
           <SearchForm formData={formData} setFormData={setFormData} />
         </div>
       </div>
-      <div className={centerContiner}>{ clearedFilters ? table : <AdminList /> }</div>
+      <div className={centerContiner}>{ !activeFilters ? table : <AdminList /> }</div>
     </div>
   );
 };
