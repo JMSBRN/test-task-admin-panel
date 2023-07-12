@@ -23,10 +23,10 @@
     @include flex(center, center);
 }
 
-.loadingStyle {
+.loaderContainer {
     position: absolute;
-    top: 500px;
-    left: 120px;
+    bottom: 15px;
+    left: 20px;
     color: $prime-color;
     z-index: 7;
 }

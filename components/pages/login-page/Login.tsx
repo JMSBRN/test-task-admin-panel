@@ -1,6 +1,7 @@
 import { LoginUser, SearchFormData } from '../../interfaces';
 import React, { useState } from 'react';
 import Form from '../../login-form/LoginForm';
+import Loader from '../../loader/Loader';
 import { LoginReg_Back } from '../../LoginReg_Back/LoginReg_Back';
 import setFormDataToLocal from '../../../utils/localUtils';
 import styles from './login.module.scss';
@@ -20,7 +21,7 @@ const Login = () => {
     logo,
     secondTitleRightSide,
     secondTitleRightSideLast,
-    loadingStyle,
+    loaderContainer,
     apiErrorStyle,
   } = styles;
 
@@ -68,16 +69,15 @@ const Login = () => {
       const res = await fetch('/api/auth/login/', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: '123',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({ formData }),
       });
       const result: { message: string } = await res.json();
 
       if (result) {
-        setLoading(false);
         if (result.message === 'created') {
+          setLoading(false);
           push('/admin');
           setFormData({ email: '', password: '' });
           setFormDataToLocal(clearedFilters);
@@ -96,7 +96,6 @@ const Login = () => {
 
   return (
       <div className={mainContainer}>
-        {loading && <div className={loadingStyle}>Loading...</div>}
         <div className={apiErrorStyle}>{apiError}</div>
         <div className={leftSide}>
           <div className={mainTitleContainer}>
@@ -114,6 +113,10 @@ const Login = () => {
               handleChange={handleChange}
               handleSubmit={handleSubmitInLogin}
             />
+            { loading && <div className={loaderContainer}>
+              <Loader size='small' />
+              </div>
+            }
           </div>
         </div>
         <div className={rightSide}>
