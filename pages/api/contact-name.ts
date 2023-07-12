@@ -6,23 +6,28 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   
       const authorization = req.headers['authorization'];
        const { token, id } = JSON.parse(authorization!);
-       const response = await fetch(
-         `http://3.65.149.62/test-api/contacts/${id}/open`,
-         {
-           method: 'POST',
-           headers:  {
-            Accept: '*/*',
-            Authorization: `Bearer ${JSON.parse(token)}`,
-          }
+
+       if(token) {
+         const response = await fetch(
+           `http://3.65.149.62/test-api/contacts/${id}/open`,
+           {
+             method: 'POST',
+             headers:  {
+              Accept: '*/*',
+              Authorization: `Bearer ${JSON.parse(token)}`,
+            }
+           }
+         );
+     
+         const result = await response.text();
+     
+         if (result) {
+           res.status(200).json(result);
+         } else {
+           res.status(404).json({ message: 'No Data' });
          }
-       );
-   
-       const result = await response.text();
-   
-       if (result) {
-         res.status(200).json(result);
        } else {
-         res.status(404).json({ message: 'No Data' });
+        res.status(401).redirect('/unauthorized');
        }
   } else {
     res.status(405).json({ message: 'method not allowed' });
