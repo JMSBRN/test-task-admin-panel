@@ -4,7 +4,7 @@
 
 .arrowIconAndTextContainer {
     position: absolute;
-    top: 102px;
+    top: 92px;
     left: 24px;
     width: 190px;
     height: 20px;
@@ -12,7 +12,7 @@
     @include flex (flex-start, center, column);
     
     & div {
-        margin-top: -8px;
+        margin-top: -5px;
         font-size: 14px;
         font-weight: 700;
         word-spacing: -2px;
@@ -34,12 +34,12 @@
     height: 193px;
     & img {
      position: absolute;
-     top: -3.2px;
+     top: -13px;
      left: 83px;
     }
     & .welcomeText {
        position: absolute;
-       top: 145px;
+       top: 134px;
        left: 1px;
        bottom: 0;
        text-align: center;
@@ -52,7 +52,7 @@
 
 .resentSearches {
     position: absolute;
-    top: 398px;
+    top: 387px;
     left: 350px;
     width: 488px;
     height: 200px;
@@ -86,13 +86,13 @@
     }
     & .bottomText {
         position: absolute;
-        bottom: 0;
-        width: 200px;
+        bottom: -3.5px;
+        width: 215px;
         height: 60px;
         text-align: center;
-        font-weight: 300;
+        font-size: 14px;
+        font-weight: 200;
         line-height: 19px;
-        letter-spacing: -0.09px;
         @include flex(center, flex-start)
     }
 }
