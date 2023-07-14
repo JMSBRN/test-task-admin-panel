@@ -16,6 +16,7 @@ import SortButton from '../../components/sort-button/SortButton';
 import TableRow from '../../components/table-row/TableRow';
 import { getDecryptedDataFromCookie } from '../../utils/secureCookiesUtils';
 import styles from './adminList.module.scss';
+import sxPaginationStyle from './sxStyleProps';
 
 const AdminList = () => {
   const {
@@ -34,7 +35,7 @@ const AdminList = () => {
     useState<boolean>(false);
   const [idForGetNameBtn, setIdForGetNameBtn] = useState<string>('');
 
-  const { data, total } = useGetList('contacts', {
+  const { data, total, isFetchedAfterMount } = useGetList('contacts', {
     pagination: { page, perPage },
   });
 
@@ -127,7 +128,7 @@ const AdminList = () => {
 
   return (
     <>
-    { !total ? 
+    { (!total && isFetchedAfterMount) ? 
       <NoResultsPage />
       : (
       <>
@@ -185,34 +186,7 @@ const AdminList = () => {
           perPage={perPage}
           setPerPage={setPerPage}
           total={total}
-          sx={{
-            '.MuiToolbar-root': {
-              position: 'absolute',
-              left: '5px',
-              bottom: '20px',
-            },
-            '.MuiPagination-ul': {
-              marginLeft: '21px',
-              width: '300px',
-              '& li': {
-                marginLeft: '-5px',
-              },
-              '& .MuiPaginationItem-previousNext': {
-                width: '33px',
-                height: '30px',
-                border: '1px solid lightgrey',
-                borderRadius: '5px',
-                marginLeft: '10px',
-              },
-            },
-            '.Mui-selected': {
-              width: '36px',
-              height: '34px',
-              border: '1px solid darkBlue',
-              borderRadius: '5px',
-              marginLeft: '21px',
-            },
-          }}
+          sx={sxPaginationStyle}
         />
       </div>
     </>

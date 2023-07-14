@@ -14,8 +14,8 @@ export interface LoaderProps {
     return '40px';
    };
   const Loader = styled.div<LoaderProps>`
-    border: 3px solid white; /* Light grey */
-    border-top: 3px solid rgb(54, 38, 167); /* Blue */
+    border: 2px solid white; /* Light grey */
+    border-top: 2px solid rgb(54, 38, 167); /* Blue */
     border-radius: 50%;
     width: ${(props) => setStyle(props)};
     height: ${(props) => setStyle(props)};
